@@ -13,9 +13,10 @@
     "build": "npm run build:css && quarto render"
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.0",
+    "autoprefixer": "^10.4.17",
+    "netlify-plugin-quarto": "^0.0.4",
     "postcss": "^8.4.35",
-    "autoprefixer": "^10.4.17"
+    "tailwindcss": "^3.4.0"
   },
   "author": "Emmanuel Paguiel BOUENDO",
   "license": "MIT"

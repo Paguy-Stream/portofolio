@@ -1,0 +1,122 @@
+---
+title: "Curriculum Vitae"
+format:
+  html:
+    toc: true
+  pdf:
+    toc: false
+---
+
+# Votre Nom
+
+**Data Scientist \| Analyste de Données**
+
+📧 votre.email\@exemple.com \| 📱 +33 6 XX XX XX XX\
+🌍 Paris, France \| 💼 [LinkedIn](https://linkedin.com/in/votre-profil) \| 🐙 [GitHub](https://github.com/votre-username)
+
+------------------------------------------------------------------------
+
+## 🎯 Profil Professionnel
+
+Data Scientist expérimenté avec X années d'expertise en analyse de données, machine learning et business intelligence. Spécialisé dans la transformation de données complexes en insights actionnables pour optimiser les performances business.
+
+------------------------------------------------------------------------
+
+## 💼 Expérience Professionnelle
+
+### Data Scientist Senior \| Entreprise A
+
+*Janvier 2023 - Présent \| Paris, France*
+
+-   Développement de modèles prédictifs augmentant les revenus de 15%
+-   Création de dashboards interactifs pour le suivi des KPI
+-   Encadrement d'une équipe de 3 data analysts
+-   **Technologies** : Python, SQL, Tableau, AWS
+
+### Analyste de Données \| Entreprise B
+
+*Mars 2021 - Décembre 2022 \| Lyon, France*
+
+-   Analyse des comportements clients et segmentation (50k+ utilisateurs)
+-   Optimisation des campagnes marketing (+25% de conversion)
+-   Automatisation des rapports mensuels (gain de 10h/semaine)
+-   **Technologies** : R, Power BI, Google Analytics
+
+------------------------------------------------------------------------
+
+## 🎓 Formation
+
+### Master Data Science & Intelligence Artificielle
+
+*Université XYZ \| 2020-2022* - Mention Très Bien (16.5/20) - Spécialisation : Machine Learning et Deep Learning
+
+### École d'Ingénieur - Spécialité Informatique
+
+*École ABC \| 2017-2020* - Diplôme d'ingénieur avec mention
+
+------------------------------------------------------------------------
+
+## 🛠️ Compétences Techniques
+
+### Langages de Programmation
+
+-   **Python** ⭐⭐⭐⭐⭐ (Pandas, NumPy, Scikit-learn, TensorFlow)
+-   **R** ⭐⭐⭐⭐ (tidyverse, ggplot2, Shiny)
+-   **SQL** ⭐⭐⭐⭐⭐ (PostgreSQL, MySQL, BigQuery)
+-   **JavaScript** ⭐⭐⭐ (D3.js, React)
+
+### Outils & Technologies
+
+-   **Visualisation** : Tableau, Power BI, Plotly, Matplotlib
+-   **Cloud** : AWS (S3, EC2, SageMaker), Google Cloud Platform
+-   **Bases de Données** : PostgreSQL, MongoDB, Redis
+-   **MLOps** : MLflow, Docker, Git, Jupyter
+
+### Statistiques & ML
+
+-   Statistiques descriptives et inférentielles
+-   Machine Learning supervisé et non-supervisé
+-   Deep Learning (CNN, RNN, Transformers)
+-   Séries temporelles et prévisions
+
+------------------------------------------------------------------------
+
+## 🏆 Projets Marquants
+
+### Système de Recommandation E-commerce
+
+Développement d'un moteur de recommandation personnalisé augmentant les ventes de 20%
+
+### Prédiction de Churn Client
+
+Modèle prédictif identifiant les clients à risque avec 87% de précision
+
+### Dashboard Temps Réel
+
+Interface de monitoring des KPI business avec mise à jour en temps réel
+
+------------------------------------------------------------------------
+
+## 📜 Certifications
+
+-   **AWS Certified Cloud Practitioner** (2023)
+-   **Google Analytics Individual Qualification** (2022)
+-   **Tableau Desktop Specialist** (2021)
+-   **Python for Data Science** - DataCamp (2020)
+
+------------------------------------------------------------------------
+
+## 🌍 Langues
+
+-   **Français** : Langue maternelle
+-   **Anglais** : Courant (TOEIC 950)
+-   **Espagnol** : Intermédiaire
+
+------------------------------------------------------------------------
+
+## 🎯 Centres d'Intérêt
+
+-   **Veille technologique** : IA, Machine Learning, nouvelles tendances tech
+-   **Open Source** : Contributeur actif sur GitHub
+-   **Sport** : Course à pied, natation
+-   **Musique** : Piano, concerts jazz

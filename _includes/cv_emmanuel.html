@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emmanuel Paguiel BOUENDO - Data Scientist</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --shadow: 0 10px 25px rgba(0,0,0,0.1);
+            --border-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Section */
+        .header {
+            background: var(--gradient);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="white" opacity="0.1"><path d="M0,0 C150,100 350,0 500,50 C650,100 850,0 1000,50 L1000,100 L0,100 Z"/></svg>') repeat-x;
+            background-size: 1000px 100px;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid white;
+            margin: 0 auto 20px;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: var(--primary-color);
+            box-shadow: var(--shadow);
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 40px;
+            margin-top: -50px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .content-section {
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar .content-section {
+            padding: 30px;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            font-size: 1.5rem;
+        }
+
+        /* Formation */
+        .formation-item {
+            background: var(--bg-light);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .formation-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .formation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .formation-title {
+            font-weight: 700;
+            color: var(--text-dark);
+            font-size: 1.1rem;
+        }
+
+        .formation-period {
+            background: var(--primary-color);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+
+        .formation-school {
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 5px;
+        }
+
+        .formation-location {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Experience */
+        .experience-item {
+            background: var(--bg-light);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            margin-bottom: 25px;
+            border-left: 4px solid var(--secondary-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .experience-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .job-title {
+            font-weight: 700;
+            color: var(--text-dark);
+            font-size: 1.2rem;
+        }
+
+        .job-period {
+            background: var(--secondary-color);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .company {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .job-description {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        .job-description ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .job-description li {
+            margin-bottom: 5px;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+        }
+
+        .skill-item {
+            background: var(--bg-light);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .skill-item i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .skill-item:hover i {
+            color: white;
+        }
+
+        /* Certifications */
+        .cert-item {
+            background: var(--bg-light);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .cert-item:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .cert-icon {
+            background: var(--accent-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Achievements */
+        .achievement-item {
+            background: linear-gradient(135deg, #fef3c7, #fbbf24);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 15px;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .achievement-title {
+            font-weight: 700;
+            color: #92400e;
+            margin-bottom: 5px;
+        }
+
+        .achievement-desc {
+            color: #a16207;
+            font-size: 0.9rem;
+        }
+
+        /* Philosophy Quote */
+        .quote {
+            background: var(--gradient);
+            color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            font-style: italic;
+            font-size: 1.1rem;
+            position: relative;
+        }
+
+        .quote::before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            opacity: 0.3;
+        }
+
+        /* Passions */
+        .passions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .passion-item {
+            background: var(--bg-light);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .passion-item:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .passion-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .passion-item:hover .passion-icon {
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .contact-info {
+                gap: 15px;
+            }
+
+            .formation-header,
+            .experience-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-section {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .btn-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-link:hover {
+            color: var(--primary-color);
+            transform: translateX(3px);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="profile-img">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h1>Emmanuel Paguiel BOUENDO</h1>
+                <p class="subtitle">Data Scientist & Économiste d'Entreprise</p>
+                <div class="contact-info">
+                    <a href="mailto:emmanuelpaguiel@gmail.com" class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        emmanuelpaguiel@gmail.com
+                    </a>
+                    <a href="https://www.linkedin.com/in/paguiel-emmanuel-bouendo-a0b430262/" class="contact-item" target="_blank">
+                        <i class="fab fa-linkedin"></i>
+                        LinkedIn
+                    </a>
+                    <a href="https://github.com/Paguy-Stream" class="contact-item" target="_blank">
+                        <i class="fab fa-github"></i>
+                        GitHub
+                    </a>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Tours, France
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="main-content">
+            <main>
+                <!-- À propos -->
+                <section class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-user-circle"></i>
+                        À propos de moi
+                    </h2>
+                    <p>Étudiant en Master "Économie de l'Entreprise et des Marchés" avec une spécialisation en Data Science, je me passionne pour la transformation des données en décisions stratégiques concrètes. Mon objectif est de développer des compétences solides en analyse de données complexes, modélisation économétrique et machine learning pour créer des solutions analytiques intuitives et percutantes.</p>
+                </section>
+
+                <!-- Formation -->
+                <section class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-graduation-cap"></i>
+                        Formation
+                    </h2>
+                    
+                    <div class="formation-item">
+                        <div class="formation-header">
+                            <div>
+                                <div class="formation-title">Master en Data Science / Économie</div>
+                                <div class="formation-school">Université de Tours</div>
+                            </div>
+                            <div class="formation-period">2024–2025</div>
+                        </div>
+                        <div class="formation-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Tours, France
+                        </div>
+                        <a href="https://www.univ-tours.fr/formations/master-droit-economie-gestion-mention-economie-de-lentreprise-et-des-marches#presentation" target="_blank" class="btn-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            En savoir plus
+                        </a>
+                    </div>
+
+                    <div class="formation-item">
+                        <div class="formation-header">
+                            <div>
+                                <div class="formation-title">Licence en Économie de l'entreprise</div>
+                                <div class="formation-school">Université de Tours</div>
+                            </div>
+                            <div class="formation-period">2023–2024</div>
+                        </div>
+                        <div class="formation-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Tours, France
+                        </div>
+                    </div>
+
+                    <div class="formation-item">
+                        <div class="formation-header">
+                            <div>
+                                <div class="formation-title">Master Économie et Organisation de l'entreprise</div>
+                                <div class="formation-school">Université Marien Ngouabi</div>
+                            </div>
+                            <div class="formation-period">2019–2021</div>
+                        </div>
+                        <div class="formation-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Brazzaville, Congo
+                        </div>
+                    </div>
+
+                    <div class="formation-item">
+                        <div class="formation-header">
+                            <div>
+                                <div class="formation-title">Licence professionnelle en Banque, Assurances et Finances</div>
+                                <div class="formation-school">Chambre de Commerce de Brazzaville</div>
+                            </div>
+                            <div class="formation-period">2015–2016</div>
+                        </div>
+                        <div class="formation-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Brazzaville, Congo
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Expérience -->
+                <section class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-briefcase"></i>
+                        Expérience Professionnelle
+                    </h2>
+
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <div>
+                                <div class="job-title">Conseiller Clientèle (Consultant)</div>
+                                <div class="company">Société Générale Congo</div>
+                            </div>
+                            <div class="job-period">2019-2022</div>
+                        </div>
+                        <div class="job-description">
+                            <ul>
+                                <li>Gestion et fidélisation d'un portefeuille clients particuliers et professionnels</li>
+                                <li>Vente de produits bancaires (crédit, épargne, assurance) avec une approche conseil</li>
+                                <li>Atteinte d'objectifs commerciaux avec des résultats supérieurs à la moyenne nationale</li>
+                                <li>Participation active aux campagnes "Better Together" et "Objectif Réussi"</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <div>
+                                <div class="job-title">Gestionnaire de Production IARD (Stage)</div>
+                                <div class="company">Net Conseils, Brazzaville</div>
+                            </div>
+                            <div class="job-period">2018-2019</div>
+                        </div>
+                        <div class="job-description">
+                            <ul>
+                                <li>Traitement des contrats d'assurance automobile et habitation</li>
+                                <li>Vérification des pièces justificatives et saisie des polices</li>
+                                <li>Appui à la gestion des sinistres et relation client en back-office</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <div>
+                                <div class="job-title">Middle Office Risques (Stage)</div>
+                                <div class="company">La Congolaise de Banque (LCB)</div>
+                            </div>
+                            <div class="job-period">2016-2017</div>
+                        </div>
+                        <div class="job-description">
+                            <ul>
+                                <li>Assistance dans l'analyse des dossiers de crédit et évaluation des risques clients</li>
+                                <li>Contrôle de conformité et respect des procédures internes</li>
+                                <li>Mise à jour des tableaux de bord des engagements</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Philosophie -->
+                <section class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-lightbulb"></i>
+                        Ma Philosophie
+                    </h2>
+                    <div class="quote">
+                        Les données racontent des histoires. Mon rôle est de les écouter, les comprendre et les traduire en actions concrètes qui créent de la valeur.
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <p>Je crois fermement que la data science doit servir l'humain avant tout, créer de la valeur tangible pour les organisations, être accessible et compréhensible par tous, tout en respectant l'éthique et la confidentialité.</p>
+                    </div>
+                </section>
+
+                <!-- Passions -->
+                <section class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-heart"></i>
+                        Mes Passions
+                    </h2>
+                    <div class="passions-grid">
+                        <div class="passion-item">
+                            <div class="passion-icon">📚</div>
+                            <h4>Veille Technologique</h4>
+                            <p>IA et nouvelles tendances tech</p>
+                        </div>
+                        <div class="passion-item">
+                            <div class="passion-icon">🌱</div>
+                            <h4>Open Source</h4>
+                            <p>Contributeur actif sur GitHub</p>
+                        </div>
+                        <div class="passion-item">
+                            <div class="passion-icon">🏃‍♂️</div>
+                            <h4>Sport</h4>
+                            <p>Course à pied et natation</p>
+                        </div>
+                        <div class="passion-item">
+                            <div class="passion-icon">🎵</div>
+                            <h4>Musique</h4>
+                            <p>Piano et découvertes artistiques</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <aside class="sidebar">
+                <!-- Compétences -->
+                <section class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-code"></i>
+                        Compétences
+                    </h2>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <i class="fas fa-chart-bar"></i>
+                            <div>Power BI</div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-r-project"></i>
+                            <div>R / R Shiny</div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-file-alt"></i>
+                            <div>Quarto</div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-brain"></i>
+                            <div>Machine Learning</div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-database"></i>
+                            <div>SQL</div>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-python"></i>
+                            <div>Python</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Certifications -->
+                <section class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-certificate"></i>
+                        Certifications
+                    </h2>
+                    <div class="cert-item">
+                        <div class="cert-icon">
+                            <i class="fab fa-google"></i>
+                        </div>
+                        <div>
+                            <strong>Google Data Analytics</strong><br>
+                            <small>Coursera</small>
+                        </div>
+                    </div>
+                    <div class="cert-item">
+                        <div class="cert-icon">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <div>
+                            <strong>Machine Learning</strong><br>
+                            <small>Stanford / Coursera</small>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Réalisations -->
+                <section class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-trophy"></i>
+                        Réalisations
+                    </h2>
+                    <div class="achievement-item">
+                        <div class="achievement-title">Diplôme de succès</div>
+                        <div class="achievement-desc">Société Générale Congo - Sélection pour le vivier de compétences</div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-title">+15% ouvertures de compte</div>
+                        <div class="achievement-desc">Challenge "Better Together"</div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-title">250 ouvertures / trimestre</div>
+                        <div class="achievement-desc">Challenge "Objectif Réussi"</div>
+                    </div>
+                </section>
+            </aside>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,369 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CrashAlert – Analyse des accidents routiers (2015–2024)</title>
+  <meta name="description" content="Analyse exploratoire des accidents corporels de la circulation en France, à partir des données officielles BAAC (ONISR).">
+  <link rel="stylesheet" href="../style.css" />
+
+  <style>
+    .back-link {
+      display: inline-block;
+      margin: 20px 0;
+      color: #11998e;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+    .btn-primary {
+      display: inline-block;
+      padding: 12px 24px;
+      background: white;
+      color: #11998e;
+      font-weight: bold;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: all 0.2s;
+      margin: 10px;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .btn-secondary {
+      display: inline-block;
+      padding: 12px 24px;
+      background: #6c757d;
+      color: white;
+      font-weight: bold;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: all 0.2s;
+      margin: 10px;
+    }
+    .btn-secondary:hover {
+      background: #5a6268;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .btn-github {
+      display: inline-block;
+      padding: 12px 24px;
+      background: #24292e;
+      color: white;
+      font-weight: bold;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: all 0.2s;
+      margin: 10px;
+    }
+    .btn-github:hover {
+      background: #1a1e22;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .tech-tag {
+      background: #e9ecef;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    .container {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+    .project-header {
+      background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .demo-section {
+      background: #ffffff;
+      border: 2px solid #e9ecef;
+      border-radius: 12px;
+      padding: 30px;
+      margin: 40px 0;
+    }
+    .demo-section h3 {
+      color: #1d4ed8;
+      margin-bottom: 15px;
+      font-size: 1.4rem;
+    }
+    .demo-section p {
+      color: #6c757d;
+      margin-bottom: 20px;
+    }
+    .gif-placeholder {
+      width: 100%;
+      height: 400px;
+      background: #f8f9fa;
+      border: 2px dashed #dee2e6;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6c757d;
+      font-style: italic;
+      margin-top: 20px;
+    }
+    .gif-container {
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin-top: 20px;
+    }
+    .gif-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+
+    .nav-links {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 1.1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .nav-links .back-link {
+      color: #4f46e5; /* violet élégant */
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: all 0.25s ease;
+      background: #f3f4f6;
+    }
+    
+    .nav-links .back-link:hover {
+      background: #4f46e5;
+      color: white;
+      transform: translateY(-2px);
+    }
+    
+    .nav-links .separator {
+      color: #9ca3af;
+      font-weight: 400;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Lien de retour -->
+  <div class="nav-links">
+    <a href="../index.html" class="back-link">← Accueil</a>
+    <a href="../projects.html" class="back-link">Tous les projets</a>
+  </div>
+
+  <!-- En-tête -->
+  <header class="project-header">
+    <h1>CrashAlert</h1>
+    <p class="subtitle">Analyse des accidents routiers en France (2015–2024)</p>
+    <div style="margin-top: 30px;">
+      <a href="https://paguystream.shinyapps.io/CrashCirculation/" target="_blank" rel="noopener" class="btn-primary">
+         Accéder à l'application
+      </a>
+      <a href="accidentologie.pdf" class="btn-secondary" target="_blank">
+        <i class="bi bi-eye"></i> Voir le PDF
+      </a>
+
+
+      <a href="accidentologie.pdf" download class="btn-secondary">
+        📄 Télécharger le PDF
+      </a>
+      <a href="https://github.com/Paguy-Stream" target="_blank" rel="noopener" class="btn-github">
+        <svg style="width: 20px; height: 20px; vertical-align: middle; margin-right: 8px;" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+        </svg>
+        Code source GitHub
+      </a>
+    </div>
+  </header>
+
+  <!-- Section 1 : Contexte & Objectif -->
+  <section class="container">
+  <h2>Contexte</h2>
+  <p>
+    La sécurité routière constitue un enjeu majeur de politique publique en France.
+    Depuis 2005, le Ministère de l'Intérieur publie chaque année la base BAAC, 
+    qui recense l'ensemble des accidents corporels survenus sur le territoire.
+  </p>
+
+  <p>
+    Ce projet vise à rendre ces données accessibles et interprétables à travers 
+    une application interactive, en se concentrant sur trois dimensions :
+  </p>
+
+  <ul>
+    <li>Où les accidents se produisent-ils, et avec quelle gravité ?</li>
+    <li>Quand ont-ils lieu (saisonnalité, heure, jour) ?</li>
+    <li>Dans quel contexte (infrastructure, météo, équipement, profil des usagers) ?</li>
+  </ul>
+
+  <p>
+    L'objectif n'est pas de proposer des mesures correctives, mais de mettre en lumière 
+    des régularités observables à partir d'une source officielle.
+  </p>
+</section>
+
+  <!-- Section 2 : Fonctionnalités -->
+  <section class = "container">
+    <h2>Fonctionnalités</h2>
+    <ul style="list-style: none; padding-left: 0;">
+      <li style="margin-bottom: 15px; display: flex; align-items: flex-start;">
+        <span style="margin-right: 10px; color: #1d4ed8;"></span>
+        <strong>Cartographie interactive</strong> : visualisation de près de 500 000 accidents géolocalisés, avec filtres par gravité, type de véhicule et période.
+      </li>
+      <li style="margin-bottom: 15px; display: flex; align-items: flex-start;">
+        <span style="margin-right: 10px; color: #1d4ed8;"></span>
+        <strong>Analyse thématique</strong> : exploration des liens entre accidents et infrastructure routière, conditions météorologiques, équipements de sécurité ou profil des usagers.
+      </li>
+      <li style="margin-bottom: 15px; display: flex; align-items: flex-start;">
+        <span style="margin-right: 10px; color: #1d4ed8;"></span>
+        <strong>Indicateurs agrégés</strong> : taux de mortalité, score de gravité par département, évolution temporelle.
+      </li>
+      <li style="margin-bottom: 15px; display: flex; align-items: flex-start;">
+        <span style="margin-right: 10px; color: #1d4ed8;"></span>
+        <strong>Export de données</strong> : possibilité de télécharger les résultats filtrés au format CSV.
+      </li>
+    </ul>
+  </section>
+
+  <!-- NOUVELLES SECTIONS DÉMONSTRATIONS -->
+  
+  <!-- Démo 1 : Cartographie interactive -->
+  <section class="container">
+    <div class="demo-section">
+      <h3> Cartographie interactive des accidents</h3>
+      <p>
+        Explorez la répartition géographique des accidents sur l'ensemble du territoire français. 
+        La carte permet de filtrer par année, gravité et type de véhicule pour identifier les zones à risque.
+      </p>
+      <!-- Remplacez le contenu de la div ci-dessous par votre GIF -->
+      <div class="gif-placeholder">
+        <div style="position:relative; width:100%; height:350px; overflow:hidden; border-radius:12px;">
+         <video autoplay loop muted playsinline style="width:100%; height:auto; display:block;">
+          <source src="cartographie.mp4" type="video/mp4">
+        </video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Démo 2 : Analyses temporelles -->
+  <section class="container">
+    <div class="demo-section">
+      <h3> Analyses temporelles et saisonnalité</h3>
+      <p>
+        Découvrez comment les accidents varient selon les heures de la journée, les jours de la semaine 
+        et les mois de l'année. Identifiez les périodes à risque accru.
+      </p>
+      <div class="gif-placeholder">
+        
+        <div style="position:relative; width:100%; height:350px; overflow:hidden; border-radius:12px;">
+          <video autoplay loop muted playsinline style="width:100%; height:auto; display:block;">
+            <source src="temporel.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Démo 3 : Tableaux de bord et indicateurs -->
+  <section class="container">
+    <div class="demo-section">
+      <h3> Tableaux de bord et indicateurs</h3>
+      <p>
+        Consultez les indicateurs synthétiques par département : taux de mortalité, score de gravité, 
+        évolution sur 10 ans. Des visualisations interactives pour comprendre les tendances.
+      </p>
+      <div class="gif-placeholder">
+        <div style="position:relative; width:100%; height:350px; overflow:hidden; border-radius:12px;"></div>
+          <video autoplay loop muted playsinline style="width:100%; height:auto; display:block;">
+            <source src="acceuil-original.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Démo 4 : Filtres et export de données -->
+  <section class="container">
+    <div class="demo-section">
+      <h3> Filtrage et export de données</h3>
+      <p>
+        Utilisez les filtres multiples pour affiner vos recherches selon vos critères spécifiques. 
+        Exportez ensuite les données filtrées au format CSV pour vos propres analyses.
+      </p>
+      <div class="gif-placeholder">
+        <div style="position:relative; width:100%; height:350px; overflow:hidden; border-radius:12px;">
+          <video autoplay loop muted playsinline style="width:100%; height:auto; display:block;">
+            <source src="export.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3 : Données & Sources -->
+  <section class="container" style="background: #f8f9fa; border-radius: 12px; padding: 30px;">
+    <h2>Données utilisées</h2>
+    <p>
+      L'analyse repose sur la <strong>Base de données des Accidents Corporels de la Circulation (BAAC)</strong>, 
+      publiée annuellement sur <a href="https://www.data.gouv.fr/fr/datasets/bases-de-donnees-annuelles-des-accidents-corporels-de-la-circulation-routiere-baac/" target="_blank" rel="noopener">data.gouv.fr</a>.
+    </p>
+    <p><strong>Période</strong> : 2015–2024.</p>
+    <p><strong>Structure</strong> : 4 fichiers par année (Caractéristiques, Lieux, Véhicules, Usagers), regroupés en un jeu de données unique.</p>
+  </section>
+
+  <!-- Section 4 : Technologies -->
+  <section class="container">
+    <h2>Technologies</h2>
+    <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px;">
+      <span class="tech-tag">R / Shiny</span>
+      <span class="tech-tag">Leaflet</span>
+      <span class="tech-tag">Plotly</span>
+      <span class="tech-tag">dplyr / tidyverse</span>
+      <span class="tech-tag">Open Data (BAAC)</span>
+    </div>
+  </section>
+
+  <!-- Section 5 : Accès -->
+  <section class="container" style="text-align: center;">
+    <h2>Accès à l'application et ressources</h2>
+    <p style="margin: 20px 0;">
+      L'outil est accessible en ligne et inclut une documentation détaillée dans l'onglet « À propos ».
+    </p>
+    <div style="margin: 30px 0;">
+      <a href="https://paguystream.shinyapps.io/CrashCirculation/" target="_blank" rel="noopener" class="btn-primary" style="background: #1d4ed8; color: white;">
+        🚀 Lancer l'application
+      </a>
+      <a href="accidentologie.pdf" download class="btn-secondary">
+        📄 Documentation PDF
+      </a>
+      <a href="https://github.com/Paguy-Stream" target="_blank" rel="noopener" class="btn-github">
+        💻 Voir sur GitHub
+      </a>
+    </div>
+  </section>
+
+  <!-- Pied de page -->
+  <footer style="text-align: center; padding: 40px 20px; color: #6c757d; font-size: 0.9em;">
+    <p>Créé par Emmanuel Bouendo – Université de Tours</p>
+    <p>Contact : <a href="mailto:emmanuelpaguiel@gmail.com.">emmanuelpaguiel@gmail.com</a></p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+project:
+  type: website
+  output-dir: _site
+  resources:
+    - image
+    - projects
+    - files
+    - porto
+    - diagrams
+    - css
+
+
+website:
+  title: "Emmanuel Paguiel BOUENDO"
+  description: "Portfolio professionnel et projets de Data Science"
+  navbar:
+    left:
+      - href: index.qmd
+        text: "Accueil"
+      - href: projects.qmd
+        text: "Projets"
+      - href: skills.qmd
+        text: "Compétences"
+      #- href: _includes/cv_emmanuel.html
+      #  text: "CV"
+      - href: about.qmd
+        text: "Parcours"
+      #- href: blog.qmd
+      #  text: "Blog"
+    right:
+      - icon: github
+        href: https://github.com/Paguy-Stream
+      - icon: linkedin
+        href: https://www.linkedin.com/in/emmanuel-paguiel-bouendo/
+      - icon: envelope
+        href: mailto:emmanuelpaguiel@gmail.com
+  
+format:
+  html:
+    theme: cosmo
+    css:
+      - styles.css
+      - styles/tailwind.css
+    toc: true
+    toc-location: right
+    code-fold: true
+    code-tools: true
+    smooth-scroll: true
+    include-after-body: _includes/footer.html
+
+   
+filters:
+  - shinylive
+
+execute:
+  freeze: auto

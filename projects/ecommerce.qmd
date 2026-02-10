@@ -1,0 +1,603 @@
+---
+title: "Modélisation Prédictive du Marketing Bancaire"
+page-layout: full
+toc: true
+toc-title: "Sommaire"
+format:
+  html:
+    include-in-header:
+      text: |
+        <style>
+        /* ===== VARIABLES ===== */
+        .project-detail {
+          --primary: #0d6efd;
+          --secondary: #00bcd4;
+          --accent: #6f42c1;
+          --success: #20c997;
+          --bg-light: #f8fafc;
+          --text-dark: #1e293b;
+          --text-muted: #64748b;
+          --border: #e2e8f0;
+          --radius: 16px;
+          --transition: all 0.3s ease;
+        }
+
+        .project-detail {
+          max-width: 900px;
+          margin: 0 auto;
+          padding: 2rem 1rem;
+        }
+
+        /* ===== BACK BUTTON ===== */
+        .back-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          color: var(--text-muted);
+          text-decoration: none;
+          font-size: 0.9rem;
+          margin-bottom: 2rem;
+          padding: 0.5rem 1rem;
+          border-radius: 25px;
+          background: var(--bg-light);
+          transition: var(--transition);
+        }
+
+        .back-link:hover {
+          color: var(--primary);
+          background: #e2e8f0;
+        }
+
+        /* ===== HERO ===== */
+        .project-hero {
+          background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+          border-radius: var(--radius);
+          padding: 3rem 2rem;
+          color: white;
+          margin-bottom: 2rem;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .project-hero::before {
+          content: '';
+          position: absolute;
+          top: -50%;
+          right: -20%;
+          width: 400px;
+          height: 400px;
+          background: rgba(255,255,255,0.1);
+          border-radius: 50%;
+        }
+
+        .project-hero .badge {
+          display: inline-block;
+          background: rgba(255,255,255,0.2);
+          padding: 0.4rem 1rem;
+          border-radius: 20px;
+          font-size: 0.8rem;
+          font-weight: 600;
+          margin-bottom: 1rem;
+        }
+
+        .project-hero h1 {
+          font-size: 2.2rem;
+          margin: 0 0 0.75rem 0;
+          position: relative;
+        }
+
+        .project-hero .subtitle {
+          font-size: 1.1rem;
+          opacity: 0.9;
+          margin: 0;
+          position: relative;
+        }
+
+        /* ===== ACTIONS ===== */
+        .project-actions {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.75rem;
+          margin-bottom: 2.5rem;
+        }
+
+        .action-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.75rem 1.25rem;
+          border-radius: 12px;
+          font-size: 0.9rem;
+          font-weight: 600;
+          text-decoration: none;
+          transition: var(--transition);
+        }
+
+        .btn-primary {
+          background: var(--primary);
+          color: white;
+        }
+
+        .btn-primary:hover {
+          background: #0b5ed7;
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(13, 110, 253, 0.3);
+        }
+
+        .btn-secondary {
+          background: var(--bg-light);
+          color: var(--text-dark);
+          border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+          border-color: var(--primary);
+          color: var(--primary);
+        }
+
+        .btn-download {
+          background: var(--success);
+          color: white;
+        }
+
+        .btn-download:hover {
+          background: #1aa179;
+          transform: translateY(-2px);
+        }
+
+        /* ===== METRICS ===== */
+        .metrics-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+          gap: 1rem;
+          margin-bottom: 2.5rem;
+        }
+
+        .metric-card {
+          background: white;
+          border: 1px solid var(--border);
+          border-radius: var(--radius);
+          padding: 1.25rem;
+          text-align: center;
+          transition: var(--transition);
+        }
+
+        .metric-card:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .metric-value {
+          font-size: 1.8rem;
+          font-weight: 700;
+          color: var(--primary);
+          margin-bottom: 0.25rem;
+        }
+
+        .metric-label {
+          font-size: 0.8rem;
+          color: var(--text-muted);
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+
+        /* ===== SECTIONS ===== */
+        .section {
+          margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+          font-size: 1.4rem;
+          font-weight: 700;
+          color: var(--text-dark);
+          margin: 0 0 1rem 0;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        .section-content {
+          color: var(--text-muted);
+          line-height: 1.7;
+        }
+
+        .section-content p {
+          margin: 0 0 1rem 0;
+        }
+
+        /* ===== TECH STACK ===== */
+        .tech-grid {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+        }
+
+        .tech-item {
+          background: var(--bg-light);
+          border: 1px solid var(--border);
+          padding: 0.5rem 1rem;
+          border-radius: 25px;
+          font-size: 0.85rem;
+          font-weight: 500;
+          color: var(--text-dark);
+          transition: var(--transition);
+        }
+
+        .tech-item:hover {
+          background: var(--primary);
+          color: white;
+          border-color: var(--primary);
+        }
+
+        /* ===== GALLERY ===== */
+        .gallery {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 1rem;
+          margin-top: 1rem;
+        }
+
+        .gallery-item {
+          border-radius: var(--radius);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+          overflow: hidden;
+          border: 1px solid var(--border);
+          transition: var(--transition);
+          background: var(--bg-light);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 200px;
+        }
+
+        .gallery-item:hover {
+          transform: scale(1.02);
+          box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .video-responsive {
+          width: 100%;
+          height: auto;
+          display: block;
+          border-radius: var(--radius);
+          object-fit: cover;
+        }
+
+        /* ===== TIMELINE ===== */
+        .timeline {
+          position: relative;
+          padding-left: 2rem;
+          margin-top: 1rem;
+        }
+
+        .timeline::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          width: 2px;
+          background: var(--border);
+        }
+
+        .timeline-item {
+          position: relative;
+          padding-bottom: 1.5rem;
+        }
+
+        .timeline-item::before {
+          content: '';
+          position: absolute;
+          left: -2rem;
+          top: 0.25rem;
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background: var(--primary);
+          border: 3px solid white;
+          box-shadow: 0 0 0 2px var(--primary);
+        }
+
+        .timeline-date {
+          font-size: 0.8rem;
+          color: var(--primary);
+          font-weight: 600;
+          margin-bottom: 0.25rem;
+        }
+
+        .timeline-title {
+          font-weight: 600;
+          color: var(--text-dark);
+          margin-bottom: 0.25rem;
+        }
+
+        .timeline-desc {
+          font-size: 0.9rem;
+          color: var(--text-muted);
+        }
+
+        /* ===== INSIGHTS GRID ===== */
+        .insights-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 1.5rem;
+          margin-top: 1.5rem;
+        }
+
+        .insight-card {
+          background: white;
+          border: 1px solid var(--border);
+          border-radius: var(--radius);
+          padding: 1.5rem;
+          transition: var(--transition);
+        }
+
+        .insight-card:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .insight-icon {
+          font-size: 2rem;
+          margin-bottom: 1rem;
+        }
+
+        .insight-title {
+          font-weight: 600;
+          color: var(--text-dark);
+          margin-bottom: 0.75rem;
+          font-size: 1.1rem;
+        }
+
+        .insight-content {
+          color: var(--text-muted);
+          font-size: 0.9rem;
+          line-height: 1.6;
+        }
+
+        /* ===== DATA HIGHLIGHTS ===== */
+        .data-highlights {
+          background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+          border-radius: var(--radius);
+          padding: 2rem;
+          margin: 2rem 0;
+        }
+
+        .highlight-item {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          margin-bottom: 1rem;
+          padding: 1rem;
+          background: white;
+          border-radius: var(--radius);
+          border-left: 4px solid var(--primary);
+        }
+
+        .highlight-value {
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: var(--primary);
+        }
+
+        .highlight-label {
+          color: var(--text-dark);
+          font-weight: 500;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+          .project-hero { padding: 2rem 1.5rem; }
+          .project-hero h1 { font-size: 1.6rem; }
+          .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+          .project-actions { flex-direction: column; }
+          .action-btn { justify-content: center; }
+          .insights-grid { grid-template-columns: 1fr; }
+        }
+        </style>
+---
+
+```{=html}
+
+<div class="project-detail">
+
+  <a href="../projects.html" class="back-link">← Retour aux projets</a>
+
+  <!-- HERO -->
+  <div class="project-hero">
+    <span class="badge">Marketing Bancaire</span>
+    <h1>Modélisation Prédictive du Marketing Bancaire</h1>
+    <p class="subtitle">Analyse d’une campagne de télémarketing au Portugal (2008–2010) combinant Random Forest, interprétation SHAP et segmentation client.</p>
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="project-actions">
+    <a href="https://github.com/Paguy-Stream/bank_analysis_app" class="action-btn btn-primary" target="_blank">
+      🐙 Code Source
+    </a>
+    <a href="https://emmanuelpaguiel.shinyapps.io/bank-marketing" class="action-btn btn-secondary" target="_blank">
+      🌐 Application Live
+    </a>
+    <a href="Marketing.pdf" class="action-btn btn-download" download>
+      📥 Rapport Technique (PDF)
+    </a>
+  </div>
+
+  <!-- METRICS CORRECTES -->
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-value">41 188</div>
+      <div class="metric-label">Clients</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">11.3%</div>
+      <div class="metric-label">Taux de conversion</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">0.945</div>
+      <div class="metric-label">AUC (Test)</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">4</div>
+      <div class="metric-label">Segments clients</div>
+    </div>
+  </div>
+
+  <!-- CONTEXTE -->
+  <div class="section">
+    <h2 class="section-title">Contexte & Objectifs</h2>
+    <div class="section-content">
+      <p>
+        Ce projet analyse une campagne de télémarketing menée par une banque portugaise entre 2008 et 2010, portant sur 41 188 contacts clients.
+        L’objectif est d’explorer les facteurs associés à la souscription à un dépôt à terme.
+      </p>
+      <p>
+        La démarche vise à :
+      </p>
+      <ul>
+        <li>Comparer plusieurs algorithmes de classification via le framework <code>tidymodels</code></li>
+        <li>Interpréter les décisions du modèle retenu à l’aide de l’analyse SHAP</li>
+        <li>Segmenter la clientèle par K-means pour identifier des profils homogènes</li>
+        <li>Concevoir un système de scoring intégré à l’application</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- MÉTHODOLOGIE -->
+  <div class="section">
+    <h2 class="section-title">Méthodologie</h2>
+    <div class="section-content">
+      <p>
+        Afin d’éviter les biais courants en modélisation prédictive, les étapes suivantes ont été respectées :
+      </p>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-title">Séparation initiale</div>
+          <div class="timeline-desc">Division train/test (80/20) réalisée avant tout traitement des données</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-title">Prétraitement sécurisé</div>
+          <div class="timeline-desc">Imputation, encodage et normalisation estimés uniquement sur l’échantillon d’entraînement</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-title">Rééquilibrage contrôlé</div>
+          <div class="timeline-desc">La méthode SMOTE a été appliquée uniquement au sein de chaque pli de validation croisée</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-title">Évaluation finale</div>
+          <div class="timeline-desc">Performance mesurée sur l’échantillon de test, jamais utilisé durant l’entraînement</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RÉSULTATS -->
+  <div class="section">
+    <h2 class="section-title">Résultats du modèle</h2>
+    <div class="insights-grid">
+      <div class="insight-card">
+        <div class="insight-title">Meilleur algorithme</div>
+        <div class="insight-content">Le Random Forest obtient la meilleure performance (AUC = 0.945), surpassant XGBoost, les SVM et les réseaux de neurones.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-title">Variables influentes</div>
+        <div class="insight-content">La durée de l’appel, le taux d’emploi local et l’indice de confiance des consommateurs sont les variables les plus discriminantes.</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-title">Segments clients</div>
+        <div class="insight-content">Quatre segments ont été identifiés, dont l’un présente un taux de conversion élevé (46 %) malgré un contexte économique défavorable.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCORING -->
+  <div class="section">
+    <h2 class="section-title">Système de scoring</h2>
+    <div class="section-content">
+      <p>
+        Un système de scoring a été conçu et intégré à l’application, permettant d’estimer la probabilité de conversion à partir des caractéristiques client saisies.
+      </p>
+      <ul>
+        <li>Calcul de la probabilité via le workflow entraîné</li>
+        <li>Affichage des contributions SHAP pour interprétabilité locale</li>
+        <li>Classification en catégories de priorité (très élevée à très faible)</li>
+        <li>Suggestions contextuelles (ex. : prolonger un appel court)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- VISUALISATIONS -->
+<div class="section">
+  <h2 class="section-title">Visualisations</h2>
+
+  <div class="gallery">
+
+    <div class="gallery-item">
+      <video autoplay loop muted playsinline class="video-responsive">
+        <source src="market.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="gallery-item">
+      <video autoplay loop muted playsinline class="video-responsive">
+        <source src="market02.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="gallery-item">
+      <video autoplay loop muted playsinline class="video-responsive">
+        <source src="market03.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="gallery-item">
+      <video autoplay loop muted playsinline class="video-responsive">
+        <source src="market04.mp4" type="video/mp4">
+      </video>
+    </div>
+
+  </div>
+</div>
+
+  <!-- TECH STACK -->
+  <div class="section">
+    <h2 class="section-title">Stack technologique</h2>
+    <div class="tech-grid">
+      <span class="tech-item">R 4.3+</span>
+      <span class="tech-item">tidymodels</span>
+      <span class="tech-item">ranger</span>
+      <span class="tech-item">fastshap</span>
+      <span class="tech-item">themis</span>
+      <span class="tech-item">ggplot2</span>
+      <span class="tech-item">patchwork</span>
+      <span class="tech-item">Shiny</span>
+    </div>
+  </div>
+
+  <!-- OBSERVATIONS -->
+  <div class="section">
+    <h2 class="section-title">Observations</h2>
+    <div class="section-content">
+      <ul>
+        <li>Le segment à fort potentiel se caractérise par des appels longs, un âge plus élevé et un contexte économique tendu</li>
+        <li>Un segment montre une sollicitation élevée (13 contacts en moyenne) mais une conversion faible (4 %)</li>
+        <li>Abaisser le seuil de décision de 0,5 à 0,1 permettrait théoriquement d’augmenter le profit simulé de 78 %</li>
+        <li>Les mois de juillet et septembre, ainsi que le canal cellulaire, sont associés à de meilleures performances</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CONCLUSION -->
+  <div class="section">
+    <h2 class="section-title">Conclusion</h2>
+    <div class="section-content">
+      <p>
+        Ce projet utilise la modélisation prédictive et l’analyse SHAP pour examiner les facteurs associés à la souscription lors d’une campagne de télémarketing.
+        Les résultats montrent que la probabilité de conversion dépend à la fois des caractéristiques individuelles, du contexte socio-économique local, et de la nature de l’interaction (durée, canal).
+      </p>
+    </div>
+  </div>
+
+</div>
+
+```

@@ -1,0 +1,236 @@
+---
+title: "Parcours Professionnel"
+page-layout: full
+toc: true
+toc-title: "Navigation"
+format:
+  html:
+    css: about-styles.css
+---
+
+```{=html}
+<div class="about-container">
+    
+  <!-- En-tête de profession -->
+  <div class="profession-header">
+    <div class="profession-badge">Mon parcours</div>
+    <h1 class="profession-title">Étudiant en Master Économiste d’Entreprise</h1>
+    <p class="profession-subtitle">Formation actuelle : économétrie, data science et modélisation statistique (Université de Tours).</p>
+  </div>
+
+  <div class="content-grid">
+    
+    <!-- CONTENU PRINCIPAL -->
+    <div class="main-content">
+      
+      <!-- ===== EXPERIENCE ===== -->
+      <section>
+        <h2 class="section-title">💼 Expérience Professionnelle</h2>
+        
+        <div class="timeline">
+          
+          <div class="timeline-item">
+            <div class="timeline-card">
+              <div class="timeline-header">
+                <div class="timeline-info">
+                  <h3 class="timeline-title">Conseiller Clientèle</h3>
+                  <p class="timeline-subtitle">Société Générale Congo</p>
+                  <div class="timeline-meta">
+                    <span>📍 Brazzaville</span>
+                    <span>📅 2019 – 2022</span>
+                  </div>
+                </div>
+              </div>
+              <div class="timeline-desc">
+                <ul>
+                  <li>Gestion d'un portefeuille clients stratégique (+250 comptes/trimestre)</li>
+                  <li>Analyse CRM pour identifier les opportunités de vente croisée</li>
+                  <li>Contribution aux campagnes nationales <em>Better Together</em> et <em>Objectif Réussi</em></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-card">
+              <div class="timeline-header">
+                <div class="timeline-info">
+                  <h3 class="timeline-title">Gestionnaire de Production IARD</h3>
+                  <p class="timeline-subtitle">Net Conseils</p>
+                  <div class="timeline-meta">
+                    <span>📍 Brazzaville</span>
+                    <span>📅 2018 – 2019</span>
+                    <span class="badge-stage">Stage</span>
+                  </div>
+                </div>
+              </div>
+              <div class="timeline-desc">
+                Gestion administrative des polices d'assurance et participation aux campagnes de prospection.
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-card">
+              <div class="timeline-header">
+                <div class="timeline-info">
+                  <h3 class="timeline-title">Middle Office Risques</h3>
+                  <p class="timeline-subtitle">La Congolaise de Banque</p>
+                  <div class="timeline-meta">
+                    <span>📍 Brazzaville</span>
+                    <span>📅 2016 – 2017</span>
+                    <span class="badge-stage">Stage</span>
+                  </div>
+                </div>
+              </div>
+              <div class="timeline-desc">
+                Analyse des dossiers de crédit, reporting sur les risques et suivi des indicateurs de performance.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===== REALISATIONS ===== -->
+      <section>
+        <h2 class="section-title">🏆 Réalisations</h2>
+        
+        <div class="achievements-grid">
+          
+          <div class="achievement-card">
+            <div class="achievement-icon">🎖️</div>
+            <h3 class="achievement-title">Diplôme de Succès</h3>
+            <p class="achievement-desc">Reconnaissance pour performance commerciale exceptionnelle</p>
+            <a href="files/DPM.pdf" class="achievement-link" target="_blank">📄 Voir le certificat</a>
+          </div>
+
+          <div class="achievement-card">
+            <div class="achievement-icon">🥇</div>
+            <h3 class="achievement-title">Better Together</h3>
+            <p class="achievement-desc">+15% des ouvertures de compte lors de la campagne nationale</p>
+            <a href="files/CH.pdf" class="achievement-link" target="_blank">📄 Voir le certificat</a>
+          </div>
+
+          <div class="achievement-card">
+            <div class="achievement-icon">🚀</div>
+            <h3 class="achievement-title">Objectif Réussi</h3>
+            <p class="achievement-desc">250 ouvertures de compte par trimestre</p>
+            <a href="files/certificat_objectif_reussi.pdf" class="achievement-link" target="_blank">📄 Voir le certificat</a>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      
+      <!-- ===== FORMATION ===== -->
+      <section class="sidebar-card">
+        <h2 class="section-title">🎓 Formation</h2>
+        
+        <div class="timeline">
+          
+          <div class="timeline-item">
+            <div class="timeline-card">
+              <div class="timeline-header">
+                <div class="timeline-info">
+                  <h3 class="timeline-title">Master Économiste d'Entreprise</h3>
+                  <p class="timeline-subtitle">Université de Tours</p>
+                  <div class="timeline-meta">
+                    <span>📍 Tours, France</span>
+                    <span>📅 2024 – 2026</span>
+                  </div>
+                </div>
+                <img src="image/logo.png" alt="Université de Tours" class="timeline-logo" onerror="this.style.display='none'">
+              </div>
+              <div class="timeline-desc">
+                Spécialisation Data Science appliquée à l'économie : Machine Learning, Économétrie avancée, Big Data.
+              </div>
+              <a href="https://www.univ-tours.fr/formations/master-droit-economie-gestion-mention-economie-de-lentreprise-et-des-marches" class="timeline-link" target="_blank">🔗 En savoir plus</a>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-card">
+              <div class="timeline-header">
+                <div class="timeline-info">
+                  <h3 class="timeline-title">Licence Économie de l'Entreprise</h3>
+                  <p class="timeline-subtitle">Université de Tours</p>
+                  <div class="timeline-meta">
+                    <span>📍 Tours, France</span>
+                    <span>📅 2023 – 2024</span>
+                  </div>
+                </div>
+                <img src="image/ut.jpg" alt="Université de Tours" class="timeline-logo" onerror="this.style.display='none'">
+              </div>
+              <a href="https://www.univ-tours.fr/formations/licence-droit-economie-gestion-mention-economie-parcours-economie-de-lentreprise" class="timeline-link" target="_blank">🔗 En savoir plus</a>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-card">
+              <div class="timeline-header">
+                <div class="timeline-info">
+                  <h3 class="timeline-title">Master Économie et Organisation</h3>
+                  <p class="timeline-subtitle">Université Marien Ngouabi</p>
+                  <div class="timeline-meta">
+                    <span>📍 Brazzaville, Congo</span>
+                    <span>📅 2019 – 2021</span>
+                  </div>
+                </div>
+                <img src="image/umng.png" alt="UMNG" class="timeline-logo" onerror="this.style.display='none'">
+              </div>
+              <a href="https://www.umng.kube-tech.com/?q=fr/node/77" class="timeline-link" target="_blank">🔗 En savoir plus</a>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-card">
+              <div class="timeline-header">
+                <div class="timeline-info">
+                  <h3 class="timeline-title">Licence Économie de l'Entreprise</h3>
+                  <p class="timeline-subtitle">Université Marien Ngouabi</p>
+                  <div class="timeline-meta">
+                    <span>📍 Brazzaville, Congo</span>
+                    <span>📅 2015 – 2018</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===== CERTIFICATIONS ===== -->
+      <!-- ===== FORMATION EN COURS / À VENIR ===== -->
+<section class="sidebar-card">
+  <h2 class="section-title">📚 Formation en cours</h2>
+  
+  <div class="certifications-grid">
+    <div class="cert-card">
+      <span class="cert-icon">📊</span>
+      <div class="cert-info">
+        <h4>Google Data Analytics</h4>
+        <p>Coursera • Google • En cours</p>
+      </div>
+    </div>
+    <div class="cert-card">
+      <span class="cert-icon">🤖</span>
+      <div class="cert-info">
+        <h4>Machine Learning (Stanford)</h4>
+        <p>Coursera • Andrew Ng • À venir</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+    </div>
+
+  </div>
+
+</div>
+```

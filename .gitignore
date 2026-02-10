@@ -1,0 +1,45 @@
+# --- Quarto build directories ---
+.quarto/
+_site/
+
+# --- RStudio / Jupyter / Python caches ---
+.Rproj.user/
+.Rhistory
+.RData
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+
+# --- OS-generated files ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Logs & temp files ---
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# --- Node / JS (si un jour tu ajoutes des scripts) ---
+node_modules/
+package-lock.json
+yarn.lock
+
+# --- Backup files created by editors ---
+*~
+*.orig
+
+# --- Large media backups (créés par ton script GIF → MP4) ---
+*-original.gif
+*-original.webp
+*-original.mp4
+
+# --- PDF générés automatiquement (si tu veux les ignorer) ---
+# *.pdf
+
+# --- VSCode ---
+.vscode/
+
+/.quarto/

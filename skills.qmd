@@ -1,0 +1,288 @@
+---
+title: "Compétences"
+page-layout: full
+toc: false
+format:
+  html:
+    css: skills-styles.css
+---
+
+```{=html}
+<div class="competences-container">
+  <div class="modal-backdrop" id="modalBackdrop"></div>
+  
+  <div class="competences-header">
+    <h2>🎯 Mes Domaines d'Expertise</h2>
+    <p>Cliquez sur une carte pour explorer les compétences en détail. Survolez les catégories pour voir le contenu.</p>
+  </div>
+
+  <div class="cards-grid" id="cardsGrid">
+    
+    <!-- CARTE 1 - CONNAISSANCES THÉORIQUES -->
+    <div class="comp-card" data-card="theorie">
+      <div class="card-bg">
+        <img src="image/lang.png" alt="Illustration compétences théoriques" />
+      </div>
+      <div class="card-overlay"></div>
+      <div class="card-body">
+        <div class="card-header">
+          <button class="back-btn" aria-label="Retour">←</button>
+          <span class="card-icon">📚</span>
+          <div>
+            <h3 class="card-title">CONNAISSANCES THÉORIQUES</h3>
+            <p class="card-subtitle">Économie, Mathématiques, Statistiques & Économétrie</p>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="subcategories">
+            <button class="subcat-card">
+              <div class="subcat-header">
+                <span class="subcat-toggle">▶</span>
+                <span class="subcat-icon">🌍</span>
+                <h4 class="subcat-title">Langues</h4>
+                <span class="subcat-count">3</span>
+              </div>
+              <div class="skills-container">
+                <span class="skill-chip">🇫🇷 Français (Natif)</span>
+                <span class="skill-chip">🇬🇧 Anglais (B2)</span>
+              </div>
+            </button>
+            <button class="subcat-card">
+              <div class="subcat-header">
+                <span class="subcat-toggle">▶</span>
+                <span class="subcat-icon">📊</span>
+                <h4 class="subcat-title">Économie</h4>
+                <span class="subcat-count">5</span>
+              </div>
+              <div class="skills-container">
+                <span class="skill-chip">Microéconomie</span>
+                <span class="skill-chip">Macroéconomie</span>
+                <span class="skill-chip">Économie industrielle</span>
+                <span class="skill-chip">Théorie des jeux</span>
+                <span class="skill-chip">Économie des plateformes</span>
+              </div>
+            </button>
+            <button class="subcat-card">
+              <div class="subcat-header">
+                <span class="subcat-toggle">▶</span>
+                <span class="subcat-icon">🔢</span>
+                <h4 class="subcat-title">Mathématiques</h4>
+                <span class="subcat-count">4</span>
+              </div>
+              <div class="skills-container">
+                <span class="skill-chip">Algèbre linéaire</span>
+                <span class="skill-chip">Analyse</span>
+                <span class="skill-chip">Optimisation</span>
+                <span class="skill-chip">Probabilités</span>
+              </div>
+            </button>
+            <button class="subcat-card">
+              <div class="subcat-header">
+                <span class="subcat-toggle">▶</span>
+                <span class="subcat-icon">📈</span>
+                <h4 class="subcat-title">Statistiques</h4>
+                <span class="subcat-count">5</span>
+              </div>
+              <div class="skills-container">
+                <span class="skill-chip">Tests d'hypothèses</span>
+                <span class="skill-chip">Régression</span>
+                <span class="skill-chip">Séries temporelles</span>
+                <span class="skill-chip">Inférence bayésienne</span>
+                <span class="skill-chip">Analyse multivariée</span>
+              </div>
+            </button>
+            <button class="subcat-card">
+              <div class="subcat-header">
+                <span class="subcat-toggle">▶</span>
+                <span class="subcat-icon">📉</span>
+                <h4 class="subcat-title">Économétrie</h4>
+                <span class="subcat-count">5</span>
+              </div>
+              <div class="skills-container">
+                <span class="skill-chip">Variables instrumentales</span>
+                <span class="skill-chip">Diff-in-Diff</span>
+                <span class="skill-chip">ARIMA / GARCH</span>
+                <span class="skill-chip">Panel Data</span>
+                <span class="skill-chip">RDD</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARTE 2 - MACHINE LEARNING -->
+    <div class="comp-card" data-card="ml">
+      <div class="card-bg">
+  <img src="image/lustre.png" alt="Illustration compétences théoriques" />
+</div>
+      <div class="card-overlay"></div>
+      <div class="card-body">
+        <div class="card-header">
+          <button class="back-btn" aria-label="Retour">←</button>
+          <span class="card-icon">🤖</span>
+          <div>
+            <h3 class="card-title">MACHINE LEARNING</h3>
+            <p class="card-subtitle">Modèles prédictifs et interprétation</p>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="subcategories">
+            <button class="subcat-card">
+              <div class="subcat-header">
+                <span class="subcat-toggle">▶</span>
+                <span class="subcat-icon">🎯</span>
+                <h4 class="subcat-title">Apprentissage Supervisé</h4>
+                <span class="subcat-count">5</span>
+              </div>
+              <div class="skills-container">
+                <span class="skill-chip">Régression logistique</span>
+                <span class="skill-chip">Random Forest</span>
+                <span class="skill-chip">XGBoost</span>
+                <span class="skill-chip">SVM</span>
+                <span class="skill-chip">K-NN</span>
+              </div>
+            </button>
+            <button class="subcat-card">
+              <div class="subcat-header">
+                <span class="subcat-toggle">▶</span>
+                <span class="subcat-icon">🔍</span>
+                <h4 class="subcat-title">Apprentissage Non Supervisé</h4>
+                <span class="subcat-count">2</span>
+              </div>
+              <div class="skills-container">
+                <span class="skill-chip">K-Means</span>
+                <span class="skill-chip">ACM (Analyse des Correspondances Multiples)</span>
+              </div>
+            </button>
+            <button class="subcat-card">
+              <div class="subcat-header">
+                <span class="subcat-toggle">▶</span>
+                <span class="subcat-icon">⚙️</span>
+                <h4 class="subcat-title">Frameworks & Outils</h4>
+                <span class="subcat-count">3</span>
+              </div>
+              <div class="skills-container">
+                <span class="skill-chip">Scikit-learn</span>
+                <span class="skill-chip">Tidymodels (R)</span>
+                <span class="skill-chip">SHAP (interprétation)</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARTE 3 - LANGAGES & OUTILS -->
+    <div class="comp-card" data-card="langages">
+      <div class="card-bg">
+  <img src="image/flat.png" alt="Technologies et outils" />
+</div>
+      <div class="card-overlay"></div>
+      <div class="card-body">
+        <div class="card-header">
+          <button class="back-btn" aria-label="Retour">←</button>
+          <span class="card-icon">💻</span>
+          <div>
+            <h3 class="card-title">TECHNOLOGIES & OUTILS</h3>
+            <p class="card-subtitle">Programmation, DataViz, Bases de données</p>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="subcategories">
+            <button class="subcat-card">
+              <div class="subcat-header">
+                <span class="subcat-toggle">▶</span>
+                <span class="subcat-icon">🐍</span>
+                <h4 class="subcat-title">Langages</h4>
+                <span class="subcat-count">3</span>
+              </div>
+              <div class="skills-container">
+                <span class="skill-chip">Python</span>
+                <span class="skill-chip">R</span>
+                <span class="skill-chip">SQL (MySQL, requêtes avancées)</span>
+              </div>
+            </button>
+            <button class="subcat-card">
+              <div class="subcat-header">
+                <span class="subcat-toggle">▶</span>
+                <span class="subcat-icon">📊</span>
+                <h4 class="subcat-title">Data Visualization</h4>
+                <span class="subcat-count">6</span>
+              </div>
+              <div class="skills-container">
+                <span class="skill-chip">Plotly / Dash</span>
+                <span class="skill-chip">ggplot2 (R)</span>
+                <span class="skill-chip">Matplotlib / Seaborn</span>
+                <span class="skill-chip">Highcharter (R)</span>
+                <span class="skill-chip">Leaflet (cartographie)</span>
+                <span class="skill-chip">Power BI</span>
+              </div>
+            </button>
+            <button class="subcat-card">
+              <div class="subcat-header">
+                <span class="subcat-toggle">▶</span>
+                <span class="subcat-icon">🗄️</span>
+                <h4 class="subcat-title">Bases de Données & Déploiement</h4>
+                <span class="subcat-count">4</span>
+              </div>
+              <div class="skills-container">
+                <span class="skill-chip">MySQL (vues, procédures, fonctions)</span>
+                <span class="skill-chip">Git / GitHub</span>
+                <span class="skill-chip">Streamlit</span>
+                <span class="skill-chip">Shiny (R)</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARTE 4 - SOFT SKILLS -->
+    <div class="comp-card" data-card="soft">
+      <div class="card-bg">
+  <img src="image/com.png" alt="Illustration compétences théoriques" />
+</div>
+      <div class="card-overlay"></div>
+      <div class="card-body">
+        <div class="card-header">
+          <button class="back-btn" aria-label="Retour">←</button>
+          <span class="card-icon">🗣️</span>
+          <div>
+            <h3 class="card-title">SOFT SKILLS</h3>
+            <p class="card-subtitle">Compétences transversales</p>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="subcategories">
+            <button class="subcat-card">
+              <div class="subcat-header">
+                <span class="subcat-toggle">▶</span>
+                <span class="subcat-icon">💡</span>
+                <h4 class="subcat-title">Aptitudes Professionnelles</h4>
+                <span class="subcat-count">5</span>
+              </div>
+              <div class="skills-container">
+                <span class="skill-chip">Analyse Critique</span>
+                <span class="skill-chip">Communication</span>
+                <span class="skill-chip">Rigueur Méthodologique</span>
+                <span class="skill-chip">Problem Solving</span>
+                <span class="skill-chip">Gestion de Projet</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <nav class="breadcrumb-nav" id="breadcrumb">
+    <a id="breadcrumbHome">🏠 Accueil</a>
+    <span class="sep">/</span>
+    <span class="current" id="breadcrumbCurrent"></span>
+  </nav>
+</div>
+
+<script src="skills-script.js"></script>
+```

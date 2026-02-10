@@ -1,0 +1,492 @@
+---
+title: ""
+page-layout: full
+toc: false
+format:
+  html:
+    include-in-header:
+      text: |
+        <style>
+        /* ===== VARIABLES ===== */
+        .projects-container {
+          --primary: #0d6efd;
+          --secondary: #00bcd4;
+          --accent: #6f42c1;
+          --success: #20c997;
+          --warning: #fd7e14;
+          --eco: #2d6a4f;
+          --bg-card: #ffffff;
+          --bg-light: #f8fafc;
+          --text-dark: #1e293b;
+          --text-muted: #64748b;
+          --border: #e2e8f0;
+          --radius: 16px;
+          --shadow-hover: 0 12px 40px rgba(0,0,0,0.15);
+          --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .projects-container {
+          max-width: 1100px;
+          margin: 0 auto;
+          padding: 2rem 1rem;
+        }
+
+        /* ===== HEADER ===== */
+        .projects-header {
+          text-align: center;
+          margin-bottom: 3rem;
+        }
+
+        .projects-header h1 {
+          font-size: 2.5rem;
+          margin: 0 0 0.75rem 0;
+          background: linear-gradient(135deg, var(--primary), var(--secondary));
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+        }
+
+        .projects-header p {
+          color: var(--text-muted);
+          font-size: 1.1rem;
+          max-width: 600px;
+          margin: 0 auto;
+        }
+
+        /* ===== FILTRES ===== */
+        .filter-tabs {
+          display: flex;
+          justify-content: center;
+          gap: 0.5rem;
+          margin-bottom: 2.5rem;
+          flex-wrap: wrap;
+        }
+
+        .filter-btn {
+          padding: 0.6rem 1.25rem;
+          border: 2px solid var(--border);
+          border-radius: 25px;
+          background: white;
+          color: var(--text-muted);
+          font-size: 0.85rem;
+          font-weight: 500;
+          cursor: pointer;
+          transition: var(--transition);
+        }
+
+        .filter-btn:hover { border-color: var(--primary); color: var(--primary); }
+        .filter-btn.active { background: var(--primary); border-color: var(--primary); color: white; }
+
+        /* ===== GRILLE PROJETS ===== */
+        .projects-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+          gap: 1.5rem;
+        }
+
+        /* ===== CARTE PROJET ===== */
+        .project-card {
+          background: var(--bg-card);
+          border: 1px solid var(--border);
+          border-radius: var(--radius);
+          overflow: hidden;
+          transition: var(--transition);
+          cursor: pointer;
+          text-decoration: none;
+          color: inherit;
+          display: block;
+        }
+
+        .project-card:hover {
+          transform: translateY(-6px);
+          box-shadow: var(--shadow-hover);
+          border-color: transparent;
+        }
+
+        .project-image {
+          height: 160px;
+          background-size: cover;
+          background-position: center;
+          position: relative;
+        }
+
+        .project-badge {
+          position: absolute;
+          top: 0.75rem;
+          left: 0.75rem;
+          padding: 0.3rem 0.7rem;
+          border-radius: 15px;
+          font-size: 0.7rem;
+          font-weight: 600;
+          text-transform: uppercase;
+        }
+
+        .badge-ml { background: var(--accent); color: white; }
+        .badge-viz { background: var(--secondary); color: white; }
+        .badge-data { background: var(--success); color: white; }
+        .badge-eco { background: var(--eco); color: white; }
+        .badge-python { background: #38bdf8; color: white; }
+
+        .project-status {
+          position: absolute;
+          top: 0.75rem;
+          right: 0.75rem;
+          padding: 0.25rem 0.5rem;
+          border-radius: 10px;
+          font-size: 0.65rem;
+          font-weight: 600;
+        }
+
+        .status-complete { background: #d1fae5; color: #065f46; }
+        .status-progress { background: #fef3c7; color: #92400e; }
+
+        .project-content {
+          padding: 1.25rem;
+        }
+
+        .project-title {
+          font-size: 1.1rem;
+          font-weight: 700;
+          color: var(--text-dark);
+          margin: 0 0 0.5rem 0;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        .project-desc {
+          color: var(--text-muted);
+          font-size: 0.85rem;
+          line-height: 1.5;
+          margin: 0 0 1rem 0;
+        }
+
+        .project-tech {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.35rem;
+        }
+
+        .tech-tag {
+          background: var(--bg-light);
+          color: var(--text-muted);
+          padding: 0.2rem 0.5rem;
+          border-radius: 6px;
+          font-size: 0.7rem;
+          font-weight: 500;
+        }
+
+        .view-more {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+          margin-top: 1rem;
+          padding-top: 1rem;
+          border-top: 1px solid var(--border);
+          color: var(--primary);
+          font-size: 0.85rem;
+          font-weight: 600;
+        }
+
+        .view-more .arrow {
+          transition: transform 0.3s;
+        }
+
+        .project-card:hover .view-more .arrow {
+          transform: translateX(5px);
+        }
+
+        /* ===== CTA ===== */
+        .cta-section {
+          margin-top: 4rem;
+          text-align: center;
+          padding: 3rem 2rem;
+          background: linear-gradient(135deg, var(--primary), var(--secondary));
+          border-radius: var(--radius);
+          color: white;
+        }
+
+        .cta-section h2 { font-size: 1.8rem; margin: 0 0 0.75rem 0; }
+        .cta-section p { opacity: 0.9; margin: 0 0 1.5rem 0; }
+
+        .cta-buttons { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+
+        .cta-btn {
+          padding: 0.75rem 1.5rem;
+          border-radius: 25px;
+          text-decoration: none;
+          font-weight: 600;
+          transition: var(--transition);
+        }
+
+        .cta-btn-white { background: white; color: var(--primary); }
+        .cta-btn-white:hover { transform: scale(1.05); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
+
+        /* Animation */
+        .project-card {
+          opacity: 0;
+          transform: translateY(20px);
+          animation: fadeInUp 0.5s ease forwards;
+        }
+        .project-card:nth-child(1) { animation-delay: 0.05s; }
+        .project-card:nth-child(2) { animation-delay: 0.1s; }
+        .project-card:nth-child(3) { animation-delay: 0.15s; }
+        .project-card:nth-child(4) { animation-delay: 0.2s; }
+        .project-card:nth-child(5) { animation-delay: 0.25s; }
+        .project-card:nth-child(6) { animation-delay: 0.3s; }
+        .project-card:nth-child(7) { animation-delay: 0.35s; }
+        .project-card:nth-child(8) { animation-delay: 0.4s; }
+        .project-card:nth-child(9) { animation-delay: 0.45s; }
+
+        @keyframes fadeInUp {
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        .project-card.hidden { display: none; }
+
+        @media (max-width: 768px) {
+          .projects-header h1 { font-size: 1.8rem; }
+          .projects-grid { grid-template-columns: 1fr; }
+          .filter-btn { padding: 0.5rem 0.9rem; font-size: 0.75rem; }
+        }
+        </style>
+---
+
+```{=html}
+<div class="projects-container">
+  
+  <div class="projects-header">
+    <h1>Projets</h1>
+    <p>Analyses croisant économie, statistique et apprentissage automatique</p>
+  </div>
+
+  <div class="filter-tabs">
+    <button class="filter-btn active" data-filter="all">Tous</button>
+    <button class="filter-btn" data-filter="ml">Machine Learning</button>
+    <button class="filter-btn" data-filter="viz">Visualisation</button>
+    <button class="filter-btn" data-filter="eco">Économie</button>
+    <button class="filter-btn" data-filter="data">Data Engineering</button>
+    <button class="filter-btn" data-filter="python">Python</button>
+  </div>
+
+  <div class="projects-grid" id="projectsGrid">
+
+    <!-- Projet 1: Marketing -->
+<a href="projects/ecommerce.html" class="project-card" data-category="ml">
+  <div class="project-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+    <span class="project-badge badge-ml">Machine Learning</span>
+    <span class="project-status status-complete">✓ Terminé</span>
+  </div>
+  <div class="project-content">
+    <h3 class="project-title">Modélisation Prédictive du Marketing Bancaire</h3>
+    <p class="project-desc">Analyse exploratoire d’une campagne de télémarketing bancaire au Portugal (2008–2010, 41 000 clients) pour comprendre quels profils sont les plus enclins à souscrire un dépôt à terme. Après comparaison de plusieurs algorithmes (logistique, arbre de décision, forêt aléatoire, etc.), le modèle Random Forest s’est distingué par sa performance (AUC = 0,944) et a été retenu pour estimer la propension à la souscription.</p>
+    <div class="project-tech">
+      <span class="tech-tag">R</span>
+      <span class="tech-tag">tidymodels</span>
+      <span class="tech-tag">SHAP</span>
+      <span class="tech-tag">K-Means</span>
+    </div>
+    <div class="view-more">Voir le projet <span class="arrow">→</span></div>
+  </div>
+</a>
+
+  <!-- Projet 2: CrashAlert -->
+<a href="projects/crashalert.html" target="_blank" rel="noopener" class="project-card" data-category="viz">
+  <div class="project-image" style="background-image: url('image/alerte.png'); background-size: cover; background-position: center;">
+    <span class="project-badge badge-viz">Analyse quantitative</span>
+    <span class="project-status status-complete">✓ Déployé</span>
+  </div>
+  <div class="project-content">
+    <h3 class="project-title">CrashAlert – Analyse des accidents corporels de la circulation (2015–2024)</h3>
+    <p class="project-desc">
+     Ce projet explore les facteurs associés aux accidents corporels de la circulation en France à partir des données officielles de la base BAAC (ONISR). L’application permet d’observer les variations géographiques, temporelles et contextuelles (infrastructure, conditions météorologiques, caractéristiques des usagers), ainsi que des indicateurs agrégés par territoire et période.
+    </p>
+    <div class="project-tech">
+      <span class="tech-tag">R Shiny</span>
+      <span class="tech-tag">Données BAAC</span>
+      <span class="tech-tag">Statistique descriptive</span>
+      <span class="tech-tag">Open Data</span>
+    </div>
+    <div class="view-more">Accéder à l'application <span class="arrow">→</span></div>
+  </div>
+</a>
+
+    <!-- Projet 3: Bonheur -->
+    <a href="porto/happy_prediction.qmd" class="project-card" data-category="ml">
+      <div class="project-image" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+        <span class="project-badge badge-ml">Machine Learning</span>
+        <span class="project-status status-complete">✓ Terminé</span>
+      </div>
+      <div class="project-content">
+        <h3 class="project-title">Évaluation Comparative des Modèles de Prédiction du Bonheur</h3>
+        <p class="project-desc">Ce projet explore les liens entre bien-être subjectif et variables socio-économiques à partir de données d’enquête. Plusieurs algorithmes de classification sont comparés afin d’évaluer leur capacité à capturer ces associations.</p>
+        <div class="project-tech">
+          <span class="tech-tag">R</span>
+          <span class="tech-tag">Random Forest</span>
+          <span class="tech-tag">SVM</span>
+          <span class="tech-tag">Validation croisée</span>
+        </div>
+        <div class="view-more">Voir le projet <span class="arrow">→</span></div>
+      </div>
+    </a>
+
+    <!-- Projet 4: CrimStream -->
+    <a href="https://www.data.gouv.fr/reuses/crimstream" class="project-card" data-category="viz">
+      <div class="project-image" style="background: linear-gradient(135deg, #fa709a, #fee140);">
+        <span class="project-badge badge-viz">Visualisation</span>
+        <span class="project-status status-complete">✓ Terminé</span>
+      </div>
+      <div class="project-content">
+        <h3 class="project-title">CrimStream Dashboard</h3>
+        <p class="project-desc">Ce projet explore la concentration et l’évolution des faits criminels au niveau local, en croisant trois dimensions : répartition géographique, typologie des infractions et évolution temporelle. L’application, construite à partir des données officielles du Ministère de l’Intérieur, est accessible en ligne et publiée sur data.gouv.fr.</p>
+        <div class="project-tech">
+          <span class="tech-tag">R Shiny</span>
+          <span class="tech-tag">ggplot2</span>
+          <span class="tech-tag">DT</span>
+        </div>
+        <div class="view-more">Voir le projet <span class="arrow">→</span></div>
+      </div>
+    </a>
+
+    <!-- Projet 5: Économie - Performance Sectorielle -->
+<a href="projects/performance-sectorielle.html" class="project-card" data-category="eco">
+  <div class="project-image" style="background: linear-gradient(135deg, #780000, #b43d3d);">
+    <span class="project-badge badge-eco">Économie</span>
+    <span class="project-status status-complete">✓ Terminé</span>
+  </div>
+  <div class="project-content">
+    <h3 class="project-title">Performance Sectorielle en Afrique</h3>
+    <p class="project-desc">Cette étude analyse les déterminants de la performance sectorielle en Afrique subsaharienne à partir d’un panel couvrant 11 pays et 12 secteurs sur la période 1970–2010. Elle examine à la fois la persistance des écarts de niveau et les facteurs associés à la croissance sectorielle.</p>
+    <div class="project-tech">
+      <span class="tech-tag">R</span>
+      <span class="tech-tag">Données de panel</span>
+      <span class="tech-tag">fixest / plm</span>
+    </div>
+    <div class="view-more">Voir le projet <span class="arrow">→</span></div>
+  </div>
+</a>
+
+   <!-- Projet 6: Économie - Marché du travail -->
+<a href="projects/emploi.html" class="project-card" data-category="eco">
+  <div class="project-image" style="background: linear-gradient(135deg, #1b4332, #52b788);">
+    <span class="project-badge badge-eco">Économie</span>
+    <span class="project-status status-complete">✓ Terminé</span>
+  </div>
+  <div class="project-content">
+    <h3 class="project-title">Déterminants de l'emploi non salarié</h3>
+    <p class="project-desc">
+      Ce mémoire analyse les facteurs structurels et conjoncturels associés à l’emploi non salarié en France en 2015. La démarche combine analyse descriptive, ACM (analyse des correspondances multiples), classification par K-means et modélisation probit, à partir de 198 234 observations issues de l’Enquête Emploi en Continu (EEC) de l’INSEE.
+    </p>
+    <div class="project-tech">
+      <span class="tech-tag">R</span>
+      <span class="tech-tag">ACM</span>
+      <span class="tech-tag">K-means</span>
+      <span class="tech-tag">Probit</span>
+      <span class="tech-tag">EEC 2015</span>
+    </div>
+    <div class="view-more">Voir le mémoire <span class="arrow">→</span></div>
+  </div>
+</a>
+
+    <!-- Projet 7: Modélisation de Risque en Assurance Automobile -->
+    <a href="projects/Gestion_de_portefeuille.pdf" class="project-card" data-category="eco">
+      <div class="project-image" style="background: linear-gradient(135deg, #a8edea, #fed6e3);">
+        <span class="project-badge badge-eco">Économie</span>
+        <span class="project-status status-progress">🔄 En cours</span>
+      </div>
+      <div class="project-content">
+        <h3 class="project-title">Modélisation actuarielle en assurance automobile</h3>
+        <p class="project-desc"> Analyse actuarielle appliquée à un portefeuille d’assurance automobile, avec modélisation de la fréquence et de la sévérité des sinistres à l’aide de GLM (Binomial Négatif, loi log-normale). </p>
+        <div class="project-tech">
+          <span class="tech-tag">R</span>
+          <span class="tech-tag">GLM</span>
+          <span class="tech-tag">Actuariat</span>
+          <span class="tech-tag">freMTPL2</span>
+          <span class="tech-tag">Économétrie</span>
+        </div>
+        <div class="view-more">Voir le projet <span class="arrow">→</span></div>
+      </div>
+    </a>
+
+    <!-- Projet 8: SQL - Bases de Données -->
+<a href="files/portfolio_sql_chinook.html" class="project-card" data-category="data">
+  <div class="project-image" style="background: linear-gradient(135deg, #0f3460, #e94560);">
+    <span class="project-badge badge-data">Data</span>
+    <span class="project-status status-complete">✓ Terminé</span>
+  </div>
+  <div class="project-content">
+    <h3 class="project-title">SQL - Base Musicale</h3>
+    <p class="project-desc">
+      Ce projet met en œuvre des techniques de requêtage et de modélisation sur une base de données musicale (inspirée de Chinook). Il comprend la création de vues, l’utilisation de CTE, le développement de procédures stockées et de fonctions personnalisées, ainsi que des agrégations multi-niveaux pour le reporting automatisé notamment l’analyse des ventes par pays et la segmentation des clients.
+    </p>
+    <div class="project-tech">
+      <span class="tech-tag">MySQL</span>
+      <span class="tech-tag">Vues SQL</span>
+      <span class="tech-tag">CTE</span>
+      <span class="tech-tag">Procédures</span>
+      <span class="tech-tag">Fonctions</span>
+      <span class="tech-tag">Agrégations</span>
+    </div>
+    <div class="view-more">Voir le projet <span class="arrow">→</span></div>
+  </div>
+</a>
+
+<!-- Projet 9: Optimisation - Programmation Linéaire -->
+<a href="projects/Devoir_Optimisation.html" class="project-card" data-category="python">
+  <div class="project-image" style="background: linear-gradient(135deg, #0ea5e9, #0284c7);">
+    <span class="project-badge badge-python">Python</span>
+    <span class="project-status status-complete">✓ Terminé</span>
+  </div>
+  <div class="project-content">
+    <h3 class="project-title">Optimisation de Production</h3>
+    <p class="project-desc">
+      Ce projet applique la programmation linéaire à un problème classique d’allocation de ressources : la maximisation du profit dans la production de canapés. Sous contraintes de temps, de matériaux et de capacité de marché, l’analyse détermine la combinaison optimale de produits, accompagnée d’une analyse de sensibilité et d’une visualisation de la région réalisable.
+    </p>
+    <div class="project-tech">
+      <span class="tech-tag">Python</span>
+      <span class="tech-tag">NumPy</span>
+      <span class="tech-tag">SciPy</span>
+      <span class="tech-tag">Programmation linéaire</span>
+      <span class="tech-tag">Optimisation</span>
+      <span class="tech-tag">Matplotlib</span>
+    </div>
+    <div class="view-more">Voir le projet <span class="arrow">→</span></div>
+  </div>
+</a>
+
+  </div>
+
+  <div class="cta-section">
+    <h2>Contact</h2>
+    <p>Pour échanger sur mes travaux ou mon parcours</p>
+    <div class="cta-buttons">
+      <a href="mailto:emmanuelpaguiel@gmail.com" class="cta-btn cta-btn-white">📧 Me contacter</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function() {
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const projects = document.querySelectorAll('.project-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      const filter = this.dataset.filter;
+
+      projects.forEach(project => {
+        if (filter === 'all' || project.dataset.category === filter) {
+          project.classList.remove('hidden');
+        } else {
+          project.classList.add('hidden');
+        }
+      });
+    });
+  });
+})();
+</script>
+```

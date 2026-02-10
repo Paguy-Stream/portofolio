@@ -1,0 +1,215 @@
+library(shiny)
+
+library(DT)
+
+library(plotly)
+
+library(dplyr)
+
+library(vroom)
+
+# Interface utilisateur
+
+ui \<- fluidPage(
+
+titlePanel("Analyse Dynamique des Données"),
+
+sidebarLayout(
+
+sidebarPanel( width = 3,
+
+fileInput("file", "Importer un fichier CSV", accept = c(".csv")), actionButton("show_stats", "Afficher les statistiques"),
+
+hr(),
+
+```         
+  h4("Analyse KPI"),
+  selectInput("kpi_column", "Variable numérique pour les KPI :", choices = NULL),
+  hr(),
+  
+  h4("Détection d'Anomalies"),
+  checkboxInput("show_anomalies", "Activer la détection d'anomalies", value = FALSE),
+  radioButtons("anomaly_method", "Méthode de détection :", 
+               choices = c("Z-score" = "zscore", "IQR" = "iqr"), 
+               selected = "zscore")
+),
+
+mainPanel(
+  width = 9,
+  fluidRow(
+    column(4, div(class = "custom-value-box blue", 
+                  div(class = "value", textOutput("mean_value")), 
+                  div(class = "subtitle", "Moyenne"))),
+    column(4, div(class = "custom-value-box green", 
+                  div(class = "value", textOutput("median_value")), 
+                  div(class = "subtitle", "Médiane"))),
+    column(4, div(class = "custom-value-box orange", 
+                  div(class = "value", textOutput("total_value")), 
+                  div(class = "subtitle", "Total")))
+  ),
+  
+  div(class = "flex-container",
+      div(class = "flex-item",
+          div(class = "panel panel-info",
+              div(class = "panel-heading", h3("Table des Données Brutes")),
+              div(class = "panel-body", DTOutput("data_table"))
+          )
+      ),
+      div(class = "flex-item",
+          div(class = "panel panel-warning",
+              div(class = "panel-heading", h3("Statistiques Descriptives")),
+              div(class = "panel-body", verbatimTextOutput("stats_output"))
+          )
+      )
+  ),
+  
+  div(class = "graph-container",
+      lapply(1:2, function(i) {
+        div(class = "flex-item",
+            div(class = "panel panel-primary",
+                div(class = "panel-heading", h3(paste("Graphique", i))),
+                div(class = "panel-body",
+                    div(class = "select-flex",
+                        selectInput(paste0("graph_type", i), "Type de graphique :", 
+                                    choices = c("Scatter" = "scatter", "Barres" = "bar", 
+                                                "Ligne" = "line", "Camembert" = "pie", 
+                                                "Histogramme" = "histogram")),
+                        selectInput(paste0("x_var", i), "Variable X :", choices = NULL),
+                        selectInput(paste0("y_var", i), "Variable Y :", choices = NULL)
+                    ),
+                    plotlyOutput(paste0("graph", i), height = "400px")
+                )
+            )
+        )
+      })
+  )
+)
+```
+
+) )
+
+# Serveur
+
+server \<- function(input, output, session) { data \<- reactiveVal(NULL)
+
+\# Observer pour mettre à jour les choix de colonnes observeEvent(data(), { req(data()) numeric_columns \<- names(data())\[sapply(data(), is.numeric)\] updateSelectInput(session, "kpi_column", choices = numeric_columns)
+
+```         
+for (i in 1:2) {
+  updateSelectInput(session, paste0("x_var", i), choices = names(data()))
+  updateSelectInput(session, paste0("y_var", i), choices = names(data()))
+}
+```
+
+})
+
+\# Importer les données observeEvent(input$file, {
+    req(input$file) tryCatch({ imported_data \<- vroom::vroom(input$file$datapath, show_col_types = FALSE) data(imported_data) showNotification("Données importées avec succès.", type = "message") }, error = function(e) { showNotification(paste("Erreur lors de l'importation:", e\$message), type = "error") }) })
+
+\# Afficher les statistiques descriptives observeEvent(input$show_stats, {
+    output$stats_output \<- renderPrint({ req(data()) summary(data()) }) })
+
+\# Calculer et afficher les KPI output$mean_value <- renderText({
+    req(data(), input$kpi_column) column \<- data()\[\[input\$kpi_column\]\] if (is.numeric(column)) { format(round(mean(column, na.rm = TRUE), 2), nsmall = 2) } else { "NA" } })
+
+output$median_value <- renderText({
+    req(data(), input$kpi_column) column \<- data()\[\[input\$kpi_column\]\] if (is.numeric(column)) { format(round(median(column, na.rm = TRUE), 2), nsmall = 2) } else { "NA" } })
+
+output$total_value <- renderText({
+    req(data(), input$kpi_column) column \<- data()\[\[input\$kpi_column\]\] if (is.numeric(column)) { format(round(sum(column, na.rm = TRUE), 2), nsmall = 2) } else { "NA" } })
+
+\# Fonction pour générer les graphiques render_graph_plotly \<- function(graph_type_input, x_var_input, y_var_input) { renderPlotly({ req(data(), input\[\[graph_type_input\]\], input\[\[y_var_input\]\])
+
+```         
+  graph_data <- data()
+  y_var_name <- input[[y_var_input]]
+  x_var_name <- input[[x_var_input]]
+  
+  if (is.null(y_var_name)) return(NULL)
+  
+  tryCatch({
+    p <- NULL
+    if (input[[graph_type_input]] == "scatter") {
+      p <- plot_ly(graph_data, x = ~get(x_var_name), y = ~get(y_var_name), 
+                   type = "scatter", mode = "markers")
+    } else if (input[[graph_type_input]] == "bar") {
+      p <- plot_ly(graph_data, x = ~get(x_var_name), y = ~get(y_var_name), 
+                   type = "bar")
+    } else if (input[[graph_type_input]] == "line") {
+      p <- plot_ly(graph_data, x = ~get(x_var_name), y = ~get(y_var_name), 
+                   type = "scatter", mode = "lines")
+    } else if (input[[graph_type_input]] == "pie") {
+      p <- plot_ly(graph_data, labels = ~get(x_var_name), values = ~get(y_var_name), 
+                   type = "pie")
+    } else if (input[[graph_type_input]] == "histogram") {
+      p <- plot_ly(graph_data, x = ~get(y_var_name), type = "histogram")
+    } else {
+      return(NULL)
+    }
+    
+    # Ajout des anomalies au graphique si activé
+    if (input$show_anomalies && !is.null(input$kpi_column) && 
+        input$kpi_column == y_var_name && is.numeric(graph_data[[y_var_name]])) {
+      anomalies <- detect_anomalies(graph_data[[y_var_name]], method = input$anomaly_method)
+      anomaly_points <- graph_data[anomalies, ]
+      
+      if (nrow(anomaly_points) > 0) {
+        p <- p %>%
+          add_trace(data = anomaly_points,
+                    x = ~get(x_var_name), y = ~get(y_var_name),
+                    type = "scatter", mode = "markers",
+                    marker = list(color = 'red', size = 10, symbol = 'x'),
+                    name = "Anomalies")
+      }
+    }
+    
+    p %>% layout(title = paste(input[[graph_type_input]], "de", y_var_name))
+  }, error = function(e) {
+    showNotification(paste("Erreur dans le graphique:", e$message), type = "error")
+    NULL
+  })
+})
+```
+
+}
+
+\# Initialiser les graphiques output$graph1 <- render_graph_plotly("graph_type1", "x_var1", "y_var1")
+  output$graph2 \<- render_graph_plotly("graph_type2", "x_var2", "y_var2")
+
+\# Fonction de détection d'anomalies detect_anomalies \<- function(vec, method = "zscore", threshold = 3) { if (!is.numeric(vec)) return(rep(FALSE, length(vec)))
+
+```         
+if (method == "zscore") {
+  z_scores <- abs(scale(vec, center = TRUE, scale = TRUE))
+  return(as.vector(z_scores > threshold))
+} else if (method == "iqr") {
+  Q1 <- quantile(vec, 0.25, na.rm = TRUE)
+  Q3 <- quantile(vec, 0.75, na.rm = TRUE)
+  IQR_val <- Q3 - Q1
+  return(vec < (Q1 - 1.5 * IQR_val) | vec > (Q3 + 1.5 * IQR_val))
+} else {
+  return(rep(FALSE, length(vec)))
+}
+```
+
+}
+
+\# Table avec anomalies output\$data_table \<- renderDT({ req(data()) dat \<- data()
+
+```         
+if (input$show_anomalies && !is.null(input$kpi_column) && 
+    is.numeric(dat[[input$kpi_column]])) {
+  anomalies <- detect_anomalies(dat[[input$kpi_column]], method = input$anomaly_method)
+  dat$Anomalie <- ifelse(anomalies, "⚠️", "")
+  
+  datatable(dat, options = list(pageLength = 10, scrollX = TRUE)) %>%
+    formatStyle("Anomalie", target = "row",
+                backgroundColor = styleEqual("⚠️", "#ffcccc"))
+} else {
+  datatable(dat, options = list(pageLength = 10, scrollX = TRUE))
+}
+```
+
+}) }
+
+shinyApp(ui, server)

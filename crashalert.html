@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CrashAlert – Analyse Interactive des Accidents Routiers (2015–2024)</title>
+  <meta name="description" content="Plateforme open source d’analyse des accidents corporels de la circulation en France, basée sur les données officielles BAAC (ONISR).">
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <!-- En-tête -->
+  <header class="project-header" style="background: linear-gradient(135deg, #11998e, #38ef7d); color: white; padding: 60px 20px; text-align: center;">
+    <h1>🚗 CrashAlert</h1>
+    <p class="subtitle">Analyse interactive des accidents routiers en France (2015–2024)</p>
+    <a href="https://paguystream.shinyapps.io/CrashCirculation/" target="_blank" rel="noopener" class="btn-primary" style="display: inline-block; margin-top: 20px; padding: 12px 24px; background: white; color: #11998e; font-weight: bold; border-radius: 30px; text-decoration: none;">
+      🔍 Accéder à l’application
+    </a>
+  </header>
+
+  <!-- Section 1 : Contexte & Objectif -->
+  <section class="container" style="max-width: 900px; margin: 60px auto; padding: 0 20px;">
+    <h2>Contexte</h2>
+    <p>
+      Chaque année, plus de <strong>3 000 personnes perdent la vie</strong> sur les routes françaises. 
+      Les données existent — collectées par les forces de l’ordre et publiées en open data par le Ministère de l’Intérieur — 
+      mais restent complexes à exploiter pour les non-spécialistes.
+    </p>
+    <p>
+      <strong>CrashAlert</strong> transforme ces données brutes en une plateforme décisionnelle intuitive, 
+      destinée aux chercheurs, élus locaux, associations de sécurité routière et citoyens engagés.
+    </p>
+  </section>
+
+  <!-- Section 2 : Fonctionnalités -->
+  <section class="container" style="max-width: 900px; margin: 60px auto; padding: 0 20px;">
+    <h2>Fonctionnalités clés</h2>
+    <ul style="list-style: none; padding-left: 0;">
+      <li style="margin-bottom: 15px; display: flex; align-items: flex-start;">
+        <span style="margin-right: 10px; color: #3498db;">📍</span>
+        <strong>Cartographie interactive</strong> : 500k+ accidents géolocalisés avec filtres (gravité, véhicule, période).
+      </li>
+      <li style="margin-bottom: 15px; display: flex; align-items: flex-start;">
+        <span style="margin-right: 10px; color: #3498db;">📊</span>
+        <strong>Analyse thématique</strong> : infrastructure routière, conditions météo, équipements de sécurité, vulnérabilité des usagers.
+      </li>
+      <li style="margin-bottom: 15px; display: flex; align-items: flex-start;">
+        <span style="margin-right: 10px; color: #3498db;">🤖</span>
+        <strong>Insights générés par IA</strong> : tendances, risques critiques, recommandations actionnables.
+      </li>
+      <li style="margin-bottom: 15px; display: flex; align-items: flex-start;">
+        <span style="margin-right: 10px; color: #3498db;">📥</span>
+        <strong>Export automatisé</strong> : rapports PDF, données CSV/Excel.
+      </li>
+    </ul>
+  </section>
+
+  <!-- Section 3 : Données & Sources -->
+  <section class="container" style="max-width: 900px; margin: 60px auto; padding: 0 20px; background: #f8f9fa; border-radius: 12px; padding: 30px;">
+    <h2>Données utilisées</h2>
+    <p>
+      CrashAlert repose sur la <strong>Base de données des Accidents Corporels de la Circulation (BAAC)</strong>, 
+      publiée annuellement sur <a href="https://www.data.gouv.fr/fr/datasets/bases-de-donnees-annuelles-des-accidents-corporels-de-la-circulation-routiere-baac/" target="_blank" rel="noopener">data.gouv.fr</a>.
+    </p>
+    <p><strong>Période couverte</strong> : 2015–2024 (mise à jour automatique dès publication des nouvelles données).</p>
+    <p><strong>Format</strong> : 4 fichiers par année (Caractéristiques, Lieux, Véhicules, Usagers) → agrégés en un dataset unique de 79 variables.</p>
+  </section>
+
+  <!-- Section 4 : Technologies -->
+  <section class="container" style="max-width: 900px; margin: 60px auto; padding: 0 20px;">
+    <h2>Technologies</h2>
+    <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px;">
+      <span class="tech-tag">R / Shiny</span>
+      <span class="tech-tag">Leaflet</span>
+      <span class="tech-tag">Plotly / Highcharter</span>
+      <span class="tech-tag">dplyr / tidyverse</span>
+      <span class="tech-tag">Open Data (BAAC)</span>
+    </div>
+  </section>
+
+  <!-- Section 5 : Accès & Ressources -->
+  <section class="container" style="max-width: 900px; margin: 60px auto; padding: 0 20px; text-align: center;">
+    <h2>Accéder à CrashAlert</h2>
+    <p style="margin: 20px 0;">
+      Explorez les données, générez des insights, et téléchargez vos rapports personnalisés.
+    </p>
+    <a href="https://paguystream.shinyapps.io/CrashCirculation/" target="_blank" rel="noopener" class="btn-primary" style="display: inline-block; padding: 14px 32px; background: #11998e; color: white; font-weight: bold; border-radius: 30px; text-decoration: none; margin: 10px;">
+      🚀 Lancer l’application
+    </a>
+    <p style="margin-top: 30px; font-size: 0.9em; color: #6c757d;">
+      Une documentation complète est disponible directement dans l’application (onglet « À propos »).
+    </p>
+  </section>
+
+  <!-- Pied de page -->
+  <footer style="text-align: center; padding: 40px 20px; color: #6c757d; font-size: 0.9em;">
+    <p>Créé par Emmanuel Bouendo – Université de Tours</p>
+    <p>Contact : <a href="mailto:emmanuel@univ-tours.fr">emmanuel@univ-tours.fr</a></p>
+  </footer>
+
+</body>
+</html>

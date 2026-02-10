@@ -1,0 +1,74 @@
+###############################################
+# BUILD QUARTO
+###############################################
+[build]
+  command = "quarto render"
+  publish = "_site"
+
+###############################################
+# PLUGIN QUARTO
+###############################################
+[[plugins]]
+  package = "netlify-plugin-quarto"
+
+###############################################
+# HEADERS DE SÉCURITÉ (PRO)
+###############################################
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+
+###############################################
+# COMPRESSION AUTOMATIQUE (BROTLI + GZIP)
+###############################################
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Encoding = "br"
+
+###############################################
+# CACHE INTELLIGENT (CSS, JS, IMAGES, MP4)
+###############################################
+[[headers]]
+  for = "/**/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/**/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/**/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/**/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/**/*.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/**/*.mp4"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+###############################################
+# PAGE 404 PERSONNALISÉE
+###############################################
+[[redirects]]
+  from = "/404.html"
+  to = "/404.html"
+  status = 404

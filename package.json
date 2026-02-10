@@ -1,0 +1,22 @@
+{
+  "name": "portfolio-emmanuel",
+  "version": "1.0.0",
+  "description": "Portfolio professionnel - Emmanuel Paguiel BOUENDO",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Paguy-Stream/portfolio"
+  },
+  "scripts": {
+    "dev": "tailwindcss -i ./styles/tailwind-input.css -o ./styles/tailwind.css --watch",
+    "build:css": "tailwindcss -i ./styles/tailwind-input.css -o ./styles/tailwind.css --minify",
+    "start": "quarto preview",
+    "build": "npm run build:css && quarto render"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0",
+    "postcss": "^8.4.35",
+    "autoprefixer": "^10.4.17"
+  },
+  "author": "Emmanuel Paguiel BOUENDO",
+  "license": "MIT"
+}

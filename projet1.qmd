@@ -1,0 +1,185 @@
+---
+title: "Mon Parcours : Économie & Data Science"
+format: 
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 2
+---
+
+<style>
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fafafa;
+  color: #2c3e50;
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  color: #1a202c;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 5px;
+}
+
+a {
+  color: #0a84ff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.logo-etablissement {
+  width: 60px;
+  float: right;
+  margin-left: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.section-block {
+  background-color: #ffffff;
+  border: 1px solid #e5e5e5;
+  padding: 1.5em;
+  border-radius: 12px;
+  margin-bottom: 1.5em;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+blockquote {
+  font-style: italic;
+  color: #555;
+  border-left: 4px solid #0a84ff;
+  padding-left: 1em;
+  margin: 1em 0;
+}
+</style>
+
+# 👋 Qui suis-je ?
+
+<div class="section-block">
+
+Salut ! Je m'appelle Emmanuel Paguiel BOUENDO. Étudiant en Master Économiste d'Entreprise (MÉcEn), je me forme pour devenir le pont entre la data et la stratégie d'entreprise. Ma double compétence en économie et en Machine Learning me permet de donner du sens stratégique aux données et de les transformer en recommandations concrètes pour les décisions.
+
+</div>
+
+## 🎓 Formation
+
+<div class="section-block formation-section">
+
+<img src="image/logo.png" alt="Université de Tours" class="logo-etablissement">
+**Master en Data Science / Économie**  
+*Université de Tours* — 📍 *Tours, France* *(2024–2025)*  
+[🔗 En savoir plus](https://www.univ-tours.fr/formations/master-droit-economie-gestion-mention-economie-de-lentreprise-et-des-marches#presentation)
+
+<img src="image/ut.jpg" alt="Université de Tours" class="logo-etablissement">
+**Licence en Économie de l’entreprise**  
+*Université de Tours* — 📍 *Tours, France* *(2023–2024)*  
+[🔗 En savoir plus](https://www.univ-tours.fr/formations/licence-droit-economie-gestion-mention-economie-parcours-economie-de-lentreprise)
+
+<img src="image/umng.png" alt="Université Marien Ngouabi" class="logo-etablissement">
+**Master Économie et Organisation de l'entreprise**  
+*Université Marien Ngouabi* — 📍 *Brazzaville, Congo* *(2019–2021)*  
+[🔗 En savoir plus](https://www.umng.kube-tech.com/?q=fr/node/77)
+
+**Licence en Économie de l’entreprise**  
+*Université Marien Ngouabi* — 📍 *Brazzaville, Congo* *(2015–2018)*
+
+**Licence professionnelle en Banque, Assurances et Finances**  
+*Chambre de Commerce de Brazzaville* — 📍 *Tours, France* *(2015–2016)*
+
+### 🎖️ Certifications
+
+- [Google Data Analytics](https://www.coursera.org/professional-certificates/google-data-analytics) *(Coursera)*
+- [Machine Learning](https://www.coursera.org/learn/machine-learning) *(Stanford / Coursera)*
+
+</div>
+
+## 💼 Expérience Professionnelle
+
+<div class="section-block">
+
+**Conseiller Clientèle (Consultant)**  
+*Société Générale Congo* *(2019–2022)*  
+→ Gestion et développement d'un portefeuille clients stratégique, contribuant activement à l'atteinte des objectifs de vente lors de campagnes nationales (voir section Succès Clés (*Better Together*, *Objectif Réussi*)
+
+→ Application de techniques de fidélisation pour améliorer la rétention et maximiser la valeur client.
+
+→ Utilisation d'outils CRM pour analyser les données clients et identifier des opportunités de vente croisée.
+
+→ Maîtrise de la communication, de la négociation et de la présentation d'informations complexes à divers interlocuteurs.
+
+→ Collaboration étroite avec les équipes internes pour assurer une expérience client fluide et cohérente.
+
+
+
+**Gestionnaire de Production IARD (Stage)**  
+*Net Conseils, Brazzaville* *(2018–2019)*  
+→ Responsable de la saisie et de la gestion administrative des polices d’assurance (contrats, sinistres), garantissant l'intégrité de l'information.
+
+→ Suivi des dossiers clients, assurant une communication efficace et une résolution rapide des demandes.
+
+→ Participation active aux campagnes de prospection commerciale, contribuant à l'expansion du portefeuille clients.
+
+**Agent de recouvrement (Stage)**  
+*Chambre de Commerce de Brazzaville* *(Mars–Mai 2018)*  
+→ Coordination des opérations de recensement, de relance et de collecte des cotisations.
+
+**Middle Office Risques (Stage)**  
+*La Congolaise de Banque* *(2016–2017)*  
+→ Participation à l'analyse des dossiers de crédit et à l'élaboration de reporting réguliers sur les risques.
+
+→ Suivi des indicateurs de performance des portefeuilles de crédit.
+
+→ Collaboration avec les équipes front office pour assurer la conformité aux politiques de gestion des risques.
+
+→ Utilisation d'outils analytiques pour identifier les tendances et recommander des actions correctives.
+
+
+**Middle Office Clients (Stage)**  
+*Fédération des MUCODEC* *(2016)*  
+→ Assistance aux opérations de guichet et accueil client, développant la capacité d'adaptation et la gestion des priorités.
+
+→ Suivi organisé des dossiers de crédits et des opérations courantes, garantissant la qualité du service client.
+
+→ Participation aux activités de promotion des services financiers, contribuant à l'augmentation de la clientèle.
+
+
+</div>
+
+## 🏆 Réalisations Marquantes
+
+<div class="section-block">
+
+- 🎖️ *Diplôme de succès – Société Générale Congo*  
+  [📄 Voir le certificat](files/DPM.pdf)
+
+- 🥇 *+15% des ouvertures de compte – Better Together*  
+  [📄 Voir le certificat](files/CH.pdf)
+
+- 🚀 *250 ouvertures de compte / trimestre – Objectif Réussi*  
+  [📄 Voir le certificat](files/certificat_objectif_reussi.pdf)
+
+</div>
+
+## 💡 Ma Philosophie
+
+> "Les données racontent des histoires. Mon rôle est de les écouter, les comprendre et les traduire en actions concrètes qui créent de la valeur."
+
+Je crois en une data science :
+- **Humaine** et centrée utilisateur
+- **Éthique et responsable**
+- **Accessibles à tous**
+- **Orientée résultats concrets**
+
+## 🎯 Objectifs
+
+- Concevoir des outils IA innovants pour les PME
+- Partager mes connaissances via conférences et articles
+- Former de futurs talents en data science
+- Contribuer à l’open source à impact social
+
+---
+

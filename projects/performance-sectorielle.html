@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Les déterminants de la Performance Sectorielle en Afrique subsaharienne | Emmanuel Paguiel</title>
+  <meta name="description" content="Analyse économétrique des déterminants de la croissance sectorielle en Afrique subsaharienne (1970–2010).">
+  
+  <!-- Police moderne -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #780000;
+      --primary-light: #b43d3d;
+      --text: #333;
+      --light-gray: #f8f9fa;
+      --gray: #6c757d;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background-color: #fff;
+      padding-bottom: 4rem;
+    }
+    
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+    
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+    
+    .back-link:hover {
+      text-decoration: underline;
+    }
+    
+    header {
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #eee;
+    }
+    
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--gray);
+      font-weight: 400;
+    }
+    
+    .badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      margin-top: 0.75rem;
+    }
+    
+    section {
+      margin-bottom: 2.5rem;
+    }
+    
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 1.25rem 0 0.75rem 0;
+    }
+    
+    p {
+      margin-bottom: 1rem;
+    }
+    
+    .highlight {
+      background-color: #fff8e1;
+      padding: 1.25rem;
+      border-left: 4px solid var(--primary-light);
+      margin: 1.5rem 0;
+      border-radius: 0 4px 4px 0;
+    }
+    
+    .figure-container {
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+    
+    .figure-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    
+    .figure-caption {
+      font-size: 0.95rem;
+      color: var(--gray);
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    
+    .table-container {
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    
+    .table-container table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+    
+    .table-container th,
+    .table-container td {
+      padding: 0.6rem 0.8rem;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .table-container th {
+      background-color: #f9f9f9;
+      font-weight: 600;
+    }
+    
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+    
+    .tech-tag {
+      background: #e9ecef;
+      color: var(--primary);
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    
+    footer {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #eee;
+      font-size: 0.95rem;
+      color: var(--gray);
+    }
+    
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    
+    @media (max-width: 600px) {
+      .container { padding: 1.5rem 1rem; }
+      h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <!-- Lien de retour -->
+    <a href="../index.html" class="back-link">← Accueil</a> • 
+    <a href="../projects.html" class="back-link">Tous les projets</a>
+
+    <header>
+      <h1>Performance Sectorielle en Afrique Subsaharienne</h1>
+      <p class="subtitle">Déterminants de la croissance sectorielle (1970–2010)</p>
+      <div class="badge">Économie · Données de panel · R</div>
+    </header>
+    
+    <section class="pdf-section">
+      <div class="pdf-header">
+        <h2>Rapport complet : Performance sectorielle</h2>
+        <p>Analyse détaillée de la persistance des taux de croissance sectoriels.</p>
+      </div>
+      
+      <!-- Viewer PDF intégré -->
+       <div class="pdf-viewer">
+        <iframe src="../projects/sectoriel.pdf"></iframe>
+      </div>
+      
+      <!-- Bouton de téléchargement -->
+      <div class="download-section">
+        <h3>Télécharger le rapport</h3>
+        <p>Accédez à la version PDF complète du rapport.</p>
+        
+        <a class="download-btn" href="../projects/sectoriel.pdf" target="_blank">
+          <span class="download-icon"></span>
+          Télécharger le PDF
+        </a>
+      </div>
+    </section>
+
+    <!-- Résumé exécutif -->
+    <section>
+      <h2>Résumé</h2>
+      <p>
+        Cette étude examine les déterminants de la performance sectorielle à partir d’un panel couvrant onze pays d’Afrique subsaharienne, douze secteurs économiques et la période 1970–2010. L’analyse met en évidence une forte persistance des niveaux de valeur ajoutée sectorielle (coefficient ≈ 1) et une persistance modérée des taux de croissance (0,09–0,24). Les résultats indiquent que la performance relative d’un secteur et sa part dans l’économie nationale sont associées à sa croissance future.
+      </p>
+      <div class="highlight">
+        🔑 <strong>Observation principale</strong> : Dans cet échantillon, la dynamique de croissance sectorielle semble davantage liée à la réallocation des ressources vers les secteurs les plus productifs qu’à une expansion homogène.
+      </div>
+    </section>
+
+    <!-- Visualisation clé -->
+    <section>
+      <h2>Persistance des taux de croissance sectoriels</h2>
+      <div class="figure-container">
+        <img src="../image/persistance-croissance.png" alt="Persistance de la croissance sectorielle">
+        <div class="figure-caption">
+          Figure : Relation entre la croissance sectorielle à l’année t-1 et à l’année t. Coefficient de régression = 0.2375.
+        </div>
+      </div>
+      <p>
+        Le coefficient de persistance modéré (0.24) suggère que la croissance d’un secteur n’est que faiblement corrélée à sa performance passée. Ce résultat est cohérent avec l’hypothèse d’une transformation économique influencée par des facteurs externes (politiques, allocation des ressources) plutôt que par des dynamiques auto-renforçantes.
+      </p>
+    </section>
+
+    <!-- Résultats clés -->
+    <section>
+      <h2>Résultats principaux</h2>
+      
+      <h3>1. Statistiques descriptives</h3>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr><th>Variable</th><th>Observations</th><th>Moyenne</th><th>Écart-type</th><th>Min</th><th>Max</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Valeur Ajoutée</td><td>4400</td><td>12.34</td><td>5.67</td><td>2.10</td><td>30.50</td></tr>
+            <tr><td>Taux de Croissance</td><td>4400</td><td>0.20</td><td>0.27</td><td>-0.52</td><td>5.82</td></tr>
+            <tr><td>Log VA</td><td>4400</td><td>8.35</td><td>3.33</td><td>6.00</td><td>16.56</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>2. Modèles en différences premières</h3>
+      <p>
+        Estimations par moindres carrés avec effets fixes (fixest). La variable <em>Performance_Relative</em> est significative et positive : les secteurs plus performants que la moyenne nationale tendent à croître plus rapidement. L’effet de la <em>Part_Secteur</em> confirme que les secteurs déjà importants dans l’économie nationale présentent une croissance plus stable.
+      </p>
+
+      <h3>3. Tests de robustesse</h3>
+      <ul>
+        <li>✅ Stationnarité confirmée sur les différences premières (test LLC : p = 0.146)</li>
+        <li>✅ Le test de Hausman ne rejette pas l’hypothèse nulle (χ² = 2,117, p = 0,146), ce qui suggère que le modèle à effets aléatoires est approprié. Néanmoins, les effets fixes ont été conservés pour capter les spécificités pays-secteur non observées.</li>
+        <li>✅ Les modèles en niveaux confirment que les écarts de performance sectorielle sont profondément ancrés dans les structures économiques nationales.</li>
+      </ul>
+    </section>
+
+    <!-- Méthodologie -->
+    <section>
+      <h2>Méthodologie</h2>
+      <div class="tech-tags">
+        <span class="tech-tag">R</span>
+        <span class="tech-tag">fixest</span>
+        <span class="tech-tag">plm</span>
+        <span class="tech-tag">Données de panel</span>
+        <span class="tech-tag">African Sector Database (GGDC)</span>
+      </div>
+      <p>
+        <strong>Données</strong> : Panel de 11 pays × 12 secteurs (1970–2010), source : Groningen Growth and Development Centre.<br>
+        <strong>Modèles</strong> : Régressions en différences premières avec effets fixes pays-secteur, erreurs regroupées.<br>
+        <strong>Tests</strong> : Levin-Lin-Chu (stationnarité), Hausman (FE vs RE), robustesse en niveaux.
+      </p>
+    </section>
+
+    <!-- Conclusion -->
+    <section>
+      <h2>Conclusion</h2>
+      <p>
+        Les résultats suggèrent que, dans les pays étudiés, la transformation économique ne suit pas une trajectoire spontanée. Elle apparaît corrélée à la capacité des économies à réallouer les ressources (capital, travail) vers les secteurs les plus productifs. Ces observations sont cohérentes avec l’hypothèse selon laquelle des politiques industrielles ciblant la productivité sectorielle pourraient soutenir la transformation structurelle.
+      </p>
+      <p>
+        <em>Note : cette analyse se limite aux 11 pays couverts par la base de données du GGDC et ne prétend pas représenter l’ensemble de l’Afrique subsaharienne.</em>
+      </p>
+    </section>
+
+    <!-- Liens -->
+    <footer>
+      <p>
+        📄 <a href="../projects/sectoriel.pdf" target="_blank">Télécharger le rapport complet (PDF)</a><br>
+        💻 <a href="https://github.com/Paguy-Stream/projet-afrique" target="_blank">Code source (GitHub)</a><br>
+        📊 Données : <a href="https://www.rug.nl/ggdc/" target="_blank">Groningen Growth and Development Centre</a>
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

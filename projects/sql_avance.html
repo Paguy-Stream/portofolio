@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bases de Données Avancées - SQL | Emmanuel BOUENDO</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #e94560;
+            --secondary-color: #0f3460;
+            --accent-color: #16213e;
+            --light-bg: #f5f5f5;
+            --white: #ffffff;
+            --text-dark: #2d3748;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #f5f7fa 0%, #e3e9f0 100%);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
+            color: var(--white);
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.03) 10px,
+                rgba(255,255,255,0.03) 20px
+            );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .hero-section h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-section .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            margin-bottom: 2rem;
+        }
+
+        .badge-hero {
+            background: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 0.3rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .action-buttons {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-hero {
+            padding: 0.9rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary-hero {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary-hero:hover {
+            background: #d63651;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(233, 69, 96, 0.4);
+        }
+
+        .btn-secondary-hero {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary-hero:hover {
+            background: white;
+            color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Container */
+        .container-custom {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Section Cards */
+        .section-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--primary-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .section-card h2 {
+            color: var(--secondary-color);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-card h3 {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #ff6b81 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(233, 69, 96, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        .stat-box .number {
+            font-size: 2.8rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-box .label {
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        /* SQL Categories Grid */
+        .sql-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .sql-category {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            border-top: 4px solid var(--primary-color);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .sql-category:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .sql-category h4 {
+            color: var(--secondary-color);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sql-category ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .sql-category ul li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #4a5568;
+        }
+
+        .sql-category ul li:before {
+            content: "▸";
+            color: var(--primary-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Code Block */
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .code-block .keyword { color: #f472b6; }
+        .code-block .function { color: #60a5fa; }
+        .code-block .string { color: #86efac; }
+        .code-block .comment { color: #94a3b8; font-style: italic; }
+
+        /* Schema Diagram */
+        .schema-box {
+            background: linear-gradient(135deg, #e0e7ff 0%, #fce7f3 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 2px dashed var(--primary-color);
+        }
+
+        .schema-box i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .schema-box h4 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Tech Tags */
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
+        }
+
+        .tech-tag {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #ff6b81 100%);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(233, 69, 96, 0.3);
+        }
+
+        /* Question Cards */
+        .question-card {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .question-card .question-number {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .question-card .question-text {
+            color: #2d3748;
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+        }
+
+        .question-card .answer-preview {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #4a5568;
+        }
+
+        /* Lists */
+        ul.custom-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul.custom-list li {
+            padding-left: 1.8rem;
+            margin-bottom: 0.8rem;
+            position: relative;
+            color: #4a5568;
+        }
+
+        ul.custom-list li:before {
+            content: "✓";
+            color: var(--primary-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid var(--secondary-color);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .back-button:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateX(-5px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .hero-section .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .stats-grid,
+            .sql-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-card {
+                padding: 1.5rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn-hero {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1>🗄️ Bases de Données</h1>
+            <p class="subtitle">Vues, CTE, Procédures Stockées & Fonctions SQL</p>
+            <div>
+                <span class="badge-hero">MySQL</span>
+                <span class="badge-hero">Vues</span>
+                <span class="badge-hero">CTE</span>
+                <span class="badge-hero">Procédures</span>
+                <span class="badge-hero">Fonctions</span>
+            </div>
+            <div class="action-buttons">
+                <a href="../files/Devoir1.sql" class="btn-hero btn-primary-hero" download>
+                    <i class="bi bi-download"></i> Télécharger le code SQL
+                </a>
+                <a href="../files/Create_database.sql" class="btn-hero btn-secondary-hero" download>
+                    <i class="bi bi-database"></i> Script de création
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-custom">
+        <a href="../projects.html" class="back-button">
+            <i class="bi bi-arrow-left"></i> Retour aux projets
+        </a>
+
+        <!-- Overview -->
+        <div class="section-card">
+            <h2><i class="bi bi-info-circle"></i> Vue d'ensemble du projet</h2>
+            <p style="font-size: 1.1rem; line-height: 1.8;">
+                Ce projet démontre une maîtrise approfondie de <strong>SQL avancé</strong> à travers l'implémentation de vues, 
+                Common Table Expressions (CTE), procédures stockées et fonctions personnalisées sur une base de données musicale complexe. 
+                Le projet couvre l'analyse de données commerciales, l'agrégation multi-niveaux, et l'optimisation de requêtes pour 
+                l'aide à la décision.
+            </p>
+            
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span class="number">21</span>
+                    <span class="label">Exercices résolus</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number">10</span>
+                    <span class="label">Tables relationnelles</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number">700+</span>
+                    <span class="label">Lignes de code SQL</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number">8</span>
+                    <span class="label">Fonctions/Procédures</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Base de données -->
+        <div class="section-card">
+            <h2><i class="bi bi-diagram-3"></i> Structure de la base de données</h2>
+            
+            <div class="schema-box" style="text-align: center;">
+                <i class="bi bi-database-fill-gear"></i>
+                <h4>Base Chinook - Industrie Musicale</h4>
+                <p style="margin: 0; color: #4a5568;">
+                    Modèle relationnel complet simulant un magasin de musique numérique avec gestion des clients, 
+                    artistes, albums, pistes, factures et employés.
+                </p>
+            </div>
+
+            <h3>📋 Tables principales</h3>
+            <div class="sql-grid">
+                <div class="sql-category">
+                    <h4>🎵 Catalogue musical</h4>
+                    <ul>
+                        <li><strong>Artist</strong> : Artistes musicaux</li>
+                        <li><strong>Album</strong> : Albums discographiques</li>
+                        <li><strong>Track</strong> : Pistes audio</li>
+                        <li><strong>Genre</strong> : Genres musicaux</li>
+                        <li><strong>MediaType</strong> : Formats numériques</li>
+                    </ul>
+                </div>
+                
+                <div class="sql-category">
+                    <h4>💼 Gestion commerciale</h4>
+                    <ul>
+                        <li><strong>Customer</strong> : Clients</li>
+                        <li><strong>Invoice</strong> : Factures</li>
+                        <li><strong>InvoiceLine</strong> : Lignes de facture</li>
+                        <li><strong>Employee</strong> : Employés</li>
+                    </ul>
+                </div>
+                
+                <div class="sql-category">
+                    <h4>📊 Métriques clés</h4>
+                    <ul>
+                        <li>3 503 pistes audio</li>
+                        <li>412 factures</li>
+                        <li>59 clients</li>
+                        <li>347 albums</li>
+                        <li>275 artistes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Partie 1: Vues -->
+        <div class="section-card">
+            <h2><i class="bi bi-window-stack"></i> Partie I : Vues SQL</h2>
+            <p>
+                Les vues permettent d'encapsuler des requêtes complexes et de simplifier l'accès aux données agrégées.
+            </p>
+
+            <div class="question-card">
+                <div class="question-number">Question 1 : Vue AlbumsArtists</div>
+                <div class="question-text">
+                    Créer une vue affichant tous les albums avec leurs artistes associés
+                </div>
+                <div class="answer-preview">
+                    <strong>Résultat :</strong> Vue avec 347 enregistrements joignant les tables Album et Artist
+                </div>
+            </div>
+
+            <div class="code-block">
+<span class="keyword">CREATE OR REPLACE VIEW</span> AlbumsArtists <span class="keyword">AS</span>
+<span class="keyword">SELECT</span> 
+    a.Title <span class="keyword">AS</span> album,
+    ar.Name <span class="keyword">AS</span> artist
+<span class="keyword">FROM</span> Album a
+<span class="keyword">INNER JOIN</span> Artist ar <span class="keyword">ON</span> a.ArtistId = ar.ArtistId;
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">Question 2 : Vue v_billings</div>
+                <div class="question-text">
+                    Vue résumant les factures avec numéro, date et total
+                </div>
+                <div class="answer-preview">
+                    <strong>Résultat :</strong> 412 factures avec montants calculés dynamiquement
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">Question 3 : Vues v_albums & v_albums_2</div>
+                <div class="question-text">
+                    Calcul de la durée totale des albums en minutes, puis en minutes:secondes via fonction personnalisée
+                </div>
+                <div class="answer-preview">
+                    <strong>Résultat :</strong> 346 albums avec durées formatées (ex: "73 minutes 31 secondes")
+                </div>
+            </div>
+        </div>
+
+        <!-- Partie 2: CTE -->
+        <div class="section-card">
+            <h2><i class="bi bi-diagram-2"></i> Partie II : Common Table Expressions (CTE)</h2>
+            <p>
+                Les CTE permettent de créer des requêtes temporaires nommées pour des analyses complexes en plusieurs étapes.
+            </p>
+
+            <div class="question-card">
+                <div class="question-number">CTE Question 1 : Analyse des ventes par pays</div>
+                <div class="question-text">
+                    Identifier les pays avec les ventes les plus importantes (regroupement "Other" pour pays à 1 client)
+                </div>
+                <div class="answer-preview">
+                    <strong>Métriques :</strong> Nombre clients, total ventes, moyenne par client, nombre moyen commandes
+                </div>
+            </div>
+
+            <div class="code-block">
+<span class="keyword">WITH</span> country_sales <span class="keyword">AS</span> (
+    <span class="keyword">SELECT</span> 
+        <span class="keyword">CASE</span> <span class="keyword">WHEN</span> customer_count = 1 <span class="keyword">THEN</span> <span class="string">'Other'</span> 
+             <span class="keyword">ELSE</span> country <span class="keyword">END</span> <span class="keyword">AS</span> country_group,
+        <span class="function">SUM</span>(total_sales) <span class="keyword">AS</span> total,
+        <span class="function">AVG</span>(avg_order) <span class="keyword">AS</span> avg_order_value
+    <span class="keyword">FROM</span> customer_aggregates
+    <span class="keyword">GROUP BY</span> country_group
+)
+<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> country_sales
+<span class="keyword">ORDER BY</span> total <span class="keyword">DESC</span>;
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">CTE Question 2 : Top 10 genres musicaux</div>
+                <div class="question-text">
+                    Identifier les genres les plus populaires (USA, Canada, Brésil, France, Allemagne) avec pourcentages
+                </div>
+                <div class="answer-preview">
+                    <strong>Top 3 :</strong> Rock (35.49%), Latin (18.65%), Metal (12.33%)
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">CTE Question 3 : Panier moyen par pays</div>
+                <div class="question-text">
+                    Calculer la moyenne des paniers moyens par pays, triée en ordre croissant
+                </div>
+                <div class="answer-preview">
+                    <strong>Résultat :</strong> 24 pays analysés, du Chili (6.66€) aux USA (5.75€)
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">CTE Question 4 : Bons clients par trimestre</div>
+                <div class="question-text">
+                    Identifier les clients avec panier moyen ≥ 3€ par année, trimestre et pays
+                </div>
+                <div class="answer-preview">
+                    <strong>Résultat :</strong> 175 enregistrements analysant la qualité client dans le temps
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">CTE Question 5 : Genres USA avec 2 CTE</div>
+                <div class="question-text">
+                    Nombre de pistes vendues par genre aux USA avec calcul de pourcentages
+                </div>
+                <div class="answer-preview">
+                    <strong>Résultat :</strong> 22 genres, Rock dominant avec 32% des ventes
+                </div>
+            </div>
+        </div>
+
+        <!-- Partie 3: Procédures -->
+        <div class="section-card">
+            <h2><i class="bi bi-gear-fill"></i> Partie III : Procédures Stockées</h2>
+            <p>
+                Les procédures stockées encapsulent la logique métier et permettent la réutilisation de code complexe.
+            </p>
+
+            <div class="sql-grid">
+                <div class="sql-category">
+                    <h4><i class="bi bi-1-circle"></i> GetAlbumsByArtist</h4>
+                    <ul>
+                        <li><strong>Input :</strong> Nom d'artiste</li>
+                        <li><strong>Output :</strong> Liste de ses albums</li>
+                        <li><strong>Exemple :</strong> 'Audioslave' → 3 albums</li>
+                    </ul>
+                </div>
+
+                <div class="sql-category">
+                    <h4><i class="bi bi-2-circle"></i> GetTotalTracksCount</h4>
+                    <ul>
+                        <li><strong>Type :</strong> Variable de sortie</li>
+                        <li><strong>Fonction :</strong> Comptage total pistes</li>
+                        <li><strong>Résultat :</strong> 3 503 pistes</li>
+                    </ul>
+                </div>
+
+                <div class="sql-category">
+                    <h4><i class="bi bi-3-circle"></i> GetAlbumDetails</h4>
+                    <ul>
+                        <li><strong>Input :</strong> ID album</li>
+                        <li><strong>Output :</strong> Nom + nb pistes</li>
+                        <li><strong>Variables :</strong> OUT multiples</li>
+                    </ul>
+                </div>
+
+                <div class="sql-category">
+                    <h4><i class="bi bi-4-circle"></i> GetArtistWithMostAlbums</h4>
+                    <ul>
+                        <li><strong>Logique :</strong> Agrégation MAX</li>
+                        <li><strong>Résultat :</strong> Iron Maiden</li>
+                        <li><strong>Utilité :</strong> Analyse catalogue</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="code-block">
+<span class="keyword">DELIMITER</span> $$
+
+<span class="keyword">CREATE PROCEDURE</span> GetAlbumsByArtist(
+    <span class="keyword">IN</span> artist_name <span class="keyword">VARCHAR</span>(120)
+)
+<span class="keyword">BEGIN</span>
+    <span class="keyword">SELECT</span> Title
+    <span class="keyword">FROM</span> Album a
+    <span class="keyword">INNER JOIN</span> Artist ar <span class="keyword">ON</span> a.ArtistId = ar.ArtistId
+    <span class="keyword">WHERE</span> ar.Name = artist_name;
+<span class="keyword">END</span>$$
+
+<span class="keyword">DELIMITER</span> ;
+            </div>
+        </div>
+
+        <!-- Partie 4: Fonctions -->
+        <div class="section-card">
+            <h2><i class="bi bi-cpu"></i> Partie IV : Fonctions Stockées</h2>
+            <p>
+                Les fonctions retournent des valeurs calculées et peuvent être utilisées dans les requêtes SELECT.
+            </p>
+
+            <div class="question-card">
+                <div class="question-number">Fonction 1 : CountAlbums</div>
+                <div class="question-text">
+                    Compter le nombre d'albums d'un artiste par son ID
+                </div>
+                <div class="answer-preview">
+                    <strong>Exemple :</strong> CountAlbums(1) → 2 albums
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">Fonction 2 : ConvertMsToMinutesAndSeconds</div>
+                <div class="question-text">
+                    Convertir millisecondes en format "XX minutes YY secondes"
+                </div>
+                <div class="answer-preview">
+                    <strong>Exemple :</strong> 1234567ms → "20 minutes 34 secondes"
+                </div>
+            </div>
+
+            <div class="code-block">
+<span class="keyword">CREATE FUNCTION</span> ConvertMsToMinutesAndSeconds(
+    milliseconds <span class="keyword">INT</span>
+) 
+<span class="keyword">RETURNS VARCHAR</span>(20)
+<span class="keyword">DETERMINISTIC</span>
+<span class="keyword">BEGIN</span>
+    <span class="keyword">DECLARE</span> total_seconds <span class="keyword">INT</span>;
+    <span class="keyword">DECLARE</span> minutes_part <span class="keyword">INT</span>;
+    <span class="keyword">DECLARE</span> seconds_part <span class="keyword">INT</span>;
+    
+    <span class="keyword">SET</span> total_seconds = <span class="function">FLOOR</span>(milliseconds / 1000);
+    <span class="keyword">SET</span> minutes_part = <span class="function">FLOOR</span>(total_seconds / 60);
+    <span class="keyword">SET</span> seconds_part = total_seconds % 60;
+    
+    <span class="keyword">RETURN</span> <span class="function">CONCAT</span>(minutes_part, <span class="string">'m '</span>, seconds_part, <span class="string">'s'</span>);
+<span class="keyword">END</span>;
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">Fonction 3 : nombre_subordonnes</div>
+                <div class="question-text">
+                    Calculer récursivement le nombre de subordonnés d'un employé
+                </div>
+                <div class="answer-preview">
+                    <strong>Exemple :</strong> nombre_subordonnes(1) → 2 employés
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">Fonction 4 : GetTracksByAlbum</div>
+                <div class="question-text">
+                    Retourner la liste concaténée des pistes d'un album
+                </div>
+                <div class="answer-preview">
+                    <strong>Type :</strong> Fonction retournant TEXT avec GROUP_CONCAT
+                </div>
+            </div>
+        </div>
+
+        <!-- Compétences -->
+        <div class="section-card">
+            <h2><i class="bi bi-award"></i> Compétences démontrées</h2>
+            
+            <div class="sql-grid">
+                <div class="sql-category">
+                    <h4>💾 Modélisation de données</h4>
+                    <ul>
+                        <li>Schéma relationnel normalisé</li>
+                        <li>Clés étrangères et intégrité</li>
+                        <li>Indexation pour performance</li>
+                    </ul>
+                </div>
+                
+                <div class="sql-category">
+                    <h4>🔍 Requêtes avancées</h4>
+                    <ul>
+                        <li>Jointures multiples (INNER, LEFT)</li>
+                        <li>Agrégations complexes (GROUP BY)</li>
+                        <li>Sous-requêtes corrélées</li>
+                    </ul>
+                </div>
+                
+                <div class="sql-category">
+                    <h4>⚡ Optimisation</h4>
+                    <ul>
+                        <li>Vues matérialisées</li>
+                        <li>CTE pour lisibilité</li>
+                        <li>Fonctions déterministes</li>
+                    </ul>
+                </div>
+                
+                <div class="sql-category">
+                    <h4>📊 Business Intelligence</h4>
+                    <ul>
+                        <li>KPI et métriques métier</li>
+                        <li>Analyse de cohortes</li>
+                        <li>Segmentation clients</li>
+                    </ul>
+                </div>
+                
+                <div class="sql-category">
+                    <h4>🛠️ Programmation SQL</h4>
+                    <ul>
+                        <li>Procédures stockées</li>
+                        <li>Fonctions personnalisées</li>
+                        <li>Variables et flux de contrôle</li>
+                    </ul>
+                </div>
+                
+                <div class="sql-category">
+                    <h4>🎯 Cas d'usage métier</h4>
+                    <ul>
+                        <li>Analyse des ventes</li>
+                        <li>Segmentation géographique</li>
+                        <li>Reporting automatisé</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technologies -->
+        <div class="section-card">
+            <h2><i class="bi bi-tools"></i> Technologies et outils</h2>
+            
+            <div class="tech-tags">
+                <span class="tech-tag">MySQL 8.0</span>
+                <span class="tech-tag">Vues SQL</span>
+                <span class="tech-tag">CTE (WITH)</span>
+                <span class="tech-tag">Procédures stockées</span>
+                <span class="tech-tag">Fonctions</span>
+                <span class="tech-tag">Agrégations</span>
+                <span class="tech-tag">Jointures</span>
+                <span class="tech-tag">GROUP_CONCAT</span>
+            </div>
+
+            <h3>🔧 Concepts SQL avancés utilisés</h3>
+            <ul class="custom-list">
+                <li><strong>CREATE VIEW</strong> : Vues pour simplifier les requêtes récurrentes</li>
+                <li><strong>WITH (CTE)</strong> : Expressions temporaires pour requêtes multi-étapes</li>
+                <li><strong>STORED PROCEDURES</strong> : Encapsulation de logique métier</li>
+                <li><strong>FUNCTIONS</strong> : Calculs réutilisables avec RETURNS</li>
+                <li><strong>DELIMITER</strong> : Gestion des délimiteurs pour blocs SQL</li>
+                <li><strong>DETERMINISTIC</strong> : Optimisation des fonctions pures</li>
+                <li><strong>OUT parameters</strong> : Variables de sortie multiples</li>
+                <li><strong>GROUP_CONCAT</strong> : Agrégation de chaînes de caractères</li>
+            </ul>
+        </div>
+
+        <!-- Applications -->
+        <div class="section-card" style="background: linear-gradient(135deg, #fff5f7 0%, #fff1f3 100%); border-left: none;">
+            <h2 style="color: var(--secondary-color);"><i class="bi bi-briefcase"></i> Applications professionnelles</h2>
+            <p style="font-size: 1.05rem; margin-bottom: 1.5rem;">
+                Les techniques SQL avancées de ce projet sont directement applicables dans des contextes professionnels :
+            </p>
+            
+            <div class="sql-grid">
+                <div class="sql-category">
+                    <h4>📈 E-commerce</h4>
+                    <ul>
+                        <li>Analyse panier moyen</li>
+                        <li>Segmentation clients</li>
+                        <li>Churn prediction</li>
+                    </ul>
+                </div>
+                
+                <div class="sql-category">
+                    <h4>💼 Business Intelligence</h4>
+                    <ul>
+                        <li>Tableaux de bord KPI</li>
+                        <li>Reporting automatisé</li>
+                        <li>Analyse de cohortes</li>
+                    </ul>
+                </div>
+                
+                <div class="sql-category">
+                    <h4>🎵 Industrie musicale</h4>
+                    <ul>
+                        <li>Analyse de catalogue</li>
+                        <li>Recommandations</li>
+                        <li>Royalties tracking</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Final -->
+        <div class="section-card" style="text-align: center; background: white; border: 2px solid var(--primary-color);">
+            <h2 style="color: var(--secondary-color);">Explorez le code SQL complet</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem;">
+                Téléchargez les scripts SQL pour voir l'implémentation détaillée de toutes les vues, CTE, procédures et fonctions.
+            </p>
+            <div class="action-buttons">
+                <a href="../files/Devoir1.sql" class="btn-hero btn-primary-hero" download>
+                    <i class="bi bi-download"></i> Code complet (700+ lignes)
+                </a>
+                <a href="mailto:emmanuelpaguiel@gmail.com" class="btn-hero btn-secondary-hero">
+                    <i class="bi bi-envelope"></i> Me Contacter
+                </a>
+            </div>
+        </div>
+
+        <a href="../projects.html" class="back-button">
+            <i class="bi bi-arrow-left"></i> Retour aux projets
+        </a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

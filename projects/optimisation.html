@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimisation de Production - Programmation Linéaire | Emmanuel BOUENDO</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #f093fb;
+            --light-bg: #f5f7fa;
+            --white: #ffffff;
+            --text-dark: #2d3748;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path fill="rgba(255,255,255,0.1)" d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .hero-section h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .hero-section .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            margin-bottom: 2rem;
+        }
+
+        .badge-hero {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 0.3rem;
+            font-size: 0.9rem;
+        }
+
+        .action-buttons {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-hero {
+            padding: 0.9rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary-hero {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .btn-primary-hero:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn-secondary-hero {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary-hero:hover {
+            background: white;
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Container */
+        .container-custom {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Section Cards */
+        .section-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--primary-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .section-card h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-card h3 {
+            color: var(--secondary-color);
+            font-size: 1.4rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        .stat-box .number {
+            font-size: 2.8rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-box .label {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(240, 147, 251, 0.4);
+        }
+
+        .feature-box i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-box h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .feature-box p {
+            font-size: 0.95rem;
+            opacity: 0.95;
+            margin: 0;
+        }
+
+        /* Methodology Boxes */
+        .method-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .method-box {
+            background: var(--light-bg);
+            padding: 1.8rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--secondary-color);
+            transition: all 0.3s ease;
+        }
+
+        .method-box:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .method-box h4 {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .method-box p {
+            color: #4a5568;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        /* Code Preview */
+        .code-preview {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Lists */
+        ul.custom-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul.custom-list li {
+            padding-left: 1.8rem;
+            margin-bottom: 0.8rem;
+            position: relative;
+            color: #4a5568;
+        }
+
+        ul.custom-list li:before {
+            content: "▸";
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Tech Tags */
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
+        }
+
+        .tech-tag {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Image Placeholder */
+        .image-placeholder {
+            background: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 100%);
+            border-radius: 12px;
+            padding: 3rem;
+            text-align: center;
+            margin: 2rem 0;
+            border: 2px dashed var(--primary-color);
+        }
+
+        .image-placeholder i {
+            font-size: 4rem;
+            color: var(--primary-color);
+            opacity: 0.5;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .back-button:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateX(-5px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .hero-section .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .stats-grid,
+            .features-grid,
+            .method-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-card {
+                padding: 1.5rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn-hero {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1>📊 Optimisation de Production</h1>
+            <p class="subtitle">Programmation Linéaire & Maximisation du Bénéfice</p>
+            <div>
+                <span class="badge-hero">Python</span>
+                <span class="badge-hero">Optimisation</span>
+                <span class="badge-hero">SciPy</span>
+                <span class="badge-hero">Visualisation</span>
+                <span class="badge-hero">Recherche Opérationnelle</span>
+            </div>
+            <div class="action-buttons">
+                <a href="../files/Optimisation_Production_Complete.ipynb" class="btn-hero btn-primary-hero" download>
+                    <i class="bi bi-download"></i> Télécharger le Notebook
+                </a>
+                <a href="https://github.com/Paguy-Stream" class="btn-hero btn-secondary-hero" target="_blank">
+                    <i class="bi bi-github"></i> Voir sur GitHub
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-custom">
+        <a href="../projects.html" class="back-button">
+            <i class="bi bi-arrow-left"></i> Retour aux projets
+        </a>
+
+        <!-- Overview -->
+        <div class="section-card">
+            <h2><i class="bi bi-bullseye"></i> Vue d'ensemble du projet</h2>
+            <p style="font-size: 1.1rem; line-height: 1.8;">
+                Ce projet présente une <strong>analyse complète d'optimisation de production</strong> pour une entreprise de fabrication de canapés. 
+                Utilisant la <strong>programmation linéaire</strong>, nous maximisons le bénéfice sous contraintes de temps, matières premières et capacités de marché. 
+                Le notebook complet inclut la modélisation mathématique, la résolution numérique, l'analyse de sensibilité et des visualisations interactives.
+            </p>
+            
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span class="number">2</span>
+                    <span class="label">Modèles de produits</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number">35 000€</span>
+                    <span class="label">Bénéfice maximal</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number">9</span>
+                    <span class="label">Contraintes analysées</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number">6</span>
+                    <span class="label">Visualisations</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Problème -->
+        <div class="section-card">
+            <h2><i class="bi bi-question-circle"></i> Le problème</h2>
+            
+            <h3>🏭 Contexte industriel</h3>
+            <p>
+                Une entreprise de fabrication de meubles produit deux modèles de canapés (A et B) et doit optimiser sa production 
+                pour maximiser son bénéfice mensuel. L'entreprise fait face à plusieurs contraintes de ressources :
+            </p>
+            
+            <div class="method-grid">
+                <div class="method-box">
+                    <h4>Modèle A</h4>
+                    <p><strong>Bénéfice :</strong> 300€/unité<br>
+                    <strong>Temps :</strong> 2 heures<br>
+                    <strong>Limite :</strong> 100 unités/mois</p>
+                </div>
+                
+                <div class="method-box">
+                    <h4>Modèle B</h4>
+                    <p><strong>Bénéfice :</strong> 200€/unité<br>
+                    <strong>Temps :</strong> 1 heure<br>
+                    <strong>Limite :</strong> 100 unités/mois</p>
+                </div>
+                
+                <div class="method-box">
+                    <h4>Contraintes</h4>
+                    <p><strong>Temps disponible :</strong> 200h/mois<br>
+                    <strong>Capacité max :</strong> 150 unités<br>
+                    <strong>7 matières premières</strong></p>
+                </div>
+            </div>
+            
+            <h3>🎯 Question centrale</h3>
+            <div style="background: linear-gradient(135deg, #e0e7ff 0%, #fce7f3 100%); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--primary-color);">
+                <p style="font-size: 1.15rem; margin: 0; font-weight: 500;">
+                    <strong>Combien de canapés de chaque type produire pour maximiser le bénéfice ?</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Méthodologie -->
+        <div class="section-card">
+            <h2><i class="bi bi-tools"></i> Méthodologie</h2>
+            
+            <div class="features-grid">
+                <div class="feature-box">
+                    <i class="bi bi-1-circle"></i>
+                    <h4>Modélisation</h4>
+                    <p>Formulation du problème en programmation linéaire avec fonction objectif et contraintes</p>
+                </div>
+                
+                <div class="feature-box">
+                    <i class="bi bi-2-circle"></i>
+                    <h4>Résolution</h4>
+                    <p>Utilisation de l'algorithme HiGHS (SciPy) pour trouver la solution optimale</p>
+                </div>
+                
+                <div class="feature-box">
+                    <i class="bi bi-3-circle"></i>
+                    <h4>Visualisation</h4>
+                    <p>Représentation graphique de la région réalisable et des courbes iso-profit</p>
+                </div>
+                
+                <div class="feature-box">
+                    <i class="bi bi-4-circle"></i>
+                    <h4>Sensibilité</h4>
+                    <p>Analyse de l'impact des variations de paramètres sur la solution</p>
+                </div>
+                
+                <div class="feature-box">
+                    <i class="bi bi-5-circle"></i>
+                    <h4>Extension</h4>
+                    <p>Ajout de contraintes de matières premières et identification des goulots</p>
+                </div>
+                
+                <div class="feature-box">
+                    <i class="bi bi-6-circle"></i>
+                    <h4>Recommandations</h4>
+                    <p>Synthèse des résultats et propositions stratégiques</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Résultats -->
+        <div class="section-card">
+            <h2><i class="bi bi-trophy"></i> Résultats clés</h2>
+            
+            <h3>📊 Solution optimale</h3>
+            <ul class="custom-list">
+                <li><strong>Production modèle A :</strong> 50 canapés</li>
+                <li><strong>Production modèle B :</strong> 100 canapés</li>
+                <li><strong>Bénéfice total :</strong> 35 000 € par mois</li>
+                <li><strong>Taux d'utilisation du temps :</strong> 100% (200h/200h)</li>
+                <li><strong>Capacité utilisée :</strong> 100% (150 canapés)</li>
+            </ul>
+            
+            <div class="image-placeholder">
+                <i class="bi bi-graph-up"></i>
+                <p style="margin: 0; color: var(--primary-color); font-weight: 600;">
+                    Visualisation de la région réalisable et de la solution optimale<br>
+                    <small>(Disponible dans le notebook complet)</small>
+                </p>
+            </div>
+            
+            <h3>🔍 Analyse de sensibilité</h3>
+            <p>L'étude montre que :</p>
+            <ul class="custom-list">
+                <li>Une augmentation du bénéfice du modèle A modifie la structure de production</li>
+                <li>Les contraintes de <strong>caoutchouc</strong> et de <strong>mousse</strong> sont les plus limitantes</li>
+                <li>Une augmentation de la capacité de production de 10% génère +2500€ de bénéfice</li>
+            </ul>
+        </div>
+
+        <!-- Technologies -->
+        <div class="section-card">
+            <h2><i class="bi bi-code-square"></i> Technologies et outils</h2>
+            
+            <h3>📚 Bibliothèques Python</h3>
+            <div class="tech-tags">
+                <span class="tech-tag">NumPy</span>
+                <span class="tech-tag">SciPy</span>
+                <span class="tech-tag">Matplotlib</span>
+                <span class="tech-tag">Pandas</span>
+                <span class="tech-tag">Jupyter</span>
+            </div>
+            
+            <h3>💡 Méthodes</h3>
+            <ul class="custom-list">
+                <li><strong>Programmation linéaire</strong> : Formulation mathématique du problème</li>
+                <li><strong>Algorithme HiGHS</strong> : Résolution numérique efficace</li>
+                <li><strong>Analyse de sensibilité</strong> : Étude paramétrique</li>
+                <li><strong>Visualisation</strong> : Méthode graphique et courbes iso-profit</li>
+            </ul>
+            
+            <h3>🔢 Exemple de code</h3>
+            <div class="code-preview">
+# Résolution avec scipy.optimize.linprog
+result = so.linprog(
+    c=[-300, -200],  # Coefficients à maximiser
+    A_ub=[[2, 1], [1, 1]],  # Matrice des contraintes
+    b_ub=[200, 150],  # Bornes supérieures
+    bounds=[(0, 100), (0, 100)],  # Limites des variables
+    method='highs'
+)
+
+print(f"Solution optimale : x1={result.x[0]}, x2={result.x[1]}")
+print(f"Bénéfice maximal : {-result.fun}€")
+            </div>
+        </div>
+
+        <!-- Compétences -->
+        <div class="section-card">
+            <h2><i class="bi bi-award"></i> Compétences démontrées</h2>
+            
+            <div class="method-grid">
+                <div class="method-box">
+                    <h4>Modélisation mathématique</h4>
+                    <p>Traduction d'un problème économique en modèle mathématique optimisable</p>
+                </div>
+                
+                <div class="method-box">
+                    <h4>Recherche opérationnelle</h4>
+                    <p>Application des techniques d'optimisation pour l'aide à la décision</p>
+                </div>
+                
+                <div class="method-box">
+                    <h4>Python scientifique</h4>
+                    <p>Maîtrise des bibliothèques NumPy, SciPy, Matplotlib pour l'analyse quantitative</p>
+                </div>
+                
+                <div class="method-box">
+                    <h4>Analyse de données</h4>
+                    <p>Interprétation des résultats et identification des leviers stratégiques</p>
+                </div>
+                
+                <div class="method-box">
+                    <h4>Visualisation</h4>
+                    <p>Création de graphiques professionnels pour communiquer les résultats</p>
+                </div>
+                
+                <div class="method-box">
+                    <h4>Documentation</h4>
+                    <p>Rédaction claire de notebooks avec explications et markdown</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conclusion -->
+        <div class="section-card" style="background: linear-gradient(135deg, #e0e7ff 0%, #fce7f3 100%); border-left: none;">
+            <h2 style="color: var(--primary-color);">💼 Applications pratiques</h2>
+            <p style="font-size: 1.05rem;">
+                Ce type d'analyse d'optimisation est applicable à de nombreux contextes industriels et économiques :
+            </p>
+            <ul class="custom-list">
+                <li><strong>Gestion de production</strong> : Planification optimale des ressources</li>
+                <li><strong>Supply chain</strong> : Optimisation de la chaîne logistique</li>
+                <li><strong>Finance</strong> : Allocation optimale de portefeuille</li>
+                <li><strong>Ressources humaines</strong> : Planification des effectifs</li>
+                <li><strong>Énergie</strong> : Gestion de la production électrique</li>
+            </ul>
+        </div>
+
+        <!-- CTA Final -->
+        <div class="section-card" style="text-align: center; background: white; border: 2px solid var(--primary-color);">
+            <h2 style="color: var(--primary-color);">Découvrez le notebook complet</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem;">
+                Explorez le code Python, les visualisations interactives et l'analyse détaillée dans le Jupyter Notebook.
+            </p>
+            <div class="action-buttons">
+                <a href="../files/Optimisation_Production_Complete.ipynb" class="btn-hero btn-primary-hero" download>
+                    <i class="bi bi-download"></i> Télécharger le Notebook
+                </a>
+                <a href="mailto:emmanuelpaguiel@gmail.com" class="btn-hero btn-secondary-hero">
+                    <i class="bi bi-envelope"></i> Me Contacter
+                </a>
+            </div>
+        </div>
+
+        <a href="../projects.html" class="back-button">
+            <i class="bi bi-arrow-left"></i> Retour aux projets
+        </a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

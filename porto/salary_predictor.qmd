@@ -1,0 +1,173 @@
+---
+title: " Prédicteur de Salaires Data Jobs"
+subtitle: "Application ML pour l'estimation salariale dans les métiers de la Data"
+image: ../image/salary_pred.png
+categories: [Machine Learning, Streamlit, XGBoost, Data Science]
+date: "2026-02-01"
+---
+
+<div class="back-link">
+  ← <a href="../index.html">Retour à l'accueil</a> • 
+  <a href="../projects.html">Tous les projets</a>
+</div>
+
+```{=html}
+<div class="documents-container">
+
+  <!-- Bloc PDF -->
+  <div class="doc-card">
+    <div class="doc-header">
+      <p>Document PDF</p>
+    </div>
+
+    <div class="doc-viewer">
+      <iframe 
+        src="../files/rapport_analyse_data_jobs.pdf"
+        title="Rapport d'analyse des salaires Data Jobs"
+        loading="lazy">
+      </iframe>
+    </div>
+
+    <div class="download-section">
+      <h3>📥 Téléchargement</h3>
+      <a href="../files/rapport_analyse_data_jobs.pdf"
+         class="download-btn"
+         download="Rapport_Analyse_Salaires_Data_Jobs.pdf">
+        Télécharger le rapport PDF
+      </a>
+    </div>
+  </div>
+
+  <!-- Bloc HTML -->
+  <div class="doc-card">
+    <div class="doc-header">
+      <p>Présentation HTML</p>
+    </div>
+
+    <div class="doc-viewer">
+      <iframe 
+        src="../files/presentation_salaires_academique.html"
+        title="Présentation académique des salaires"
+        loading="lazy">
+      </iframe>
+    </div>
+
+    <div class="download-section">
+      <h3>📥 Téléchargement</h3>
+      <a href="../files/presentation_salaires_academique.html"
+         class="download-btn"
+         download="Presentation_Salaires_Academique.html">
+        Télécharger la présentation HTML
+      </a>
+    </div>
+  </div>
+
+</div>
+```
+
+
+
+## Contexte
+
+Ce projet explore les déterminants des salaires dans les métiers de la Data à partir d’un échantillon de 5 868 offres d’emploi HelloWork (janvier 2026).
+Un modèle de machine learning (XGBoost) a été entraîné pour estimer la rémunération en fonction de variables observables (expérience, compétences, localisation, secteur).
+L’application Streamlit qui en découle permet d’explorer les tendances observées, d’interpréter les contributions des variables (via SHAP) et de se positionner relativement à l’échantillon sans prétendre à une estimation définitive.
+
+##  Dataset
+
+- **Source** : HelloWork (janvier 2026)
+- **Taille** : 5 868 offres d'emploi
+- **Échantillon entraînement** : 2 681 offres
+- **Métiers** : Data Analyst, Data Scientist, Data Engineer, BI/Analytics
+- **Zones** : France entière (17 villes principales)
+
+## Modèle ML
+
+**Algorithme** : XGBoost v7
+
+**Performance** :
+
+-  **R² = 0.337** : le modèle explique environ un tiers de la variance observée, ce qui est cohérent avec la complexité des déterminants salariaux (facteurs non observés, négociation individuelle, asymétries d’information, etc.)
+- **MAE** = 5 163 € (erreur moyenne absolue)
+- **RMSE** = 6 969 € (erreur quadratique moyenne)
+- **Précision ±15%** = 73.7% (3 prédictions sur 4 dans la fourchette)
+- **Précision ±10%** = 57.9%
+
+**Features** : 29 variables incluant expérience, localisation, secteur, compétences techniques, télétravail
+
+##  Fonctionnalités
+
+### 1. Estimation personnalisée
+- Formulaire de saisie de profil (11 champs)
+- Estimation salariale basée sur le modèle XGBoost
+- Explication SHAP (contribution des variables)
+-  Positionnement relatif (percentile par rapport à l’échantillon)
+
+### 2.  Analyse du marché
+- Distributions salariales par poste et secteur
+- Comparaisons géographiques
+- Impact des compétences techniques sur la rémunération
+- Filtres dynamiques (ville, secteur, expérience)
+
+### 3.  Feuille de route carrière
+- Analyse du positionnement actuel
+-  Suggestions de compétences associées à des niveaux de rémunération plus élevés
+- Comparaison avec des profils similaires
+- Simulation de transitions de rôle (ex: Data Analyst → Data Scientist)
+
+## ️ Stack technique
+
+```python
+# Frontend
+streamlit==1.31.0
+plotly==5.18.0
+matplotlib==3.8.2
+
+# ML
+xgboost==2.0.3
+scikit-learn==1.3.2
+shap==0.44.0
+
+# Data
+pandas==2.1.4
+numpy==1.26.2
+```
+
+##  Aperçu de l'application
+
+![Page d'accueil](../image/gift_acceuil.gif)
+
+![Prédiction](../image/gift_pred.gif)
+
+![Analyse marché](../image/gift_marche.gif)
+
+![Feuille de route](../image/gift_carriere.gif)
+
+##  Déploiement
+
+L'application est déployée sur **Streamlit Cloud** :
+
+- **Hébergement** : Streamlit Cloud
+- **Backend** : Python 3.13
+- **Versioning** : GitHub
+- **Disponibilité** : En ligne 24/7
+
+##  Défis techniques rencontrés
+
+- **Feature engineering** : extraction et encodage de 29 variables à partir de textes bruts
+- **Gestion des chemins** : Adaptation pour déploiement cloud
+- **Optimisation** : mise en cache des modèles et données via @st.cache_data
+- **Explicabilité** :  intégration de SHAP pour rendre les prédictions interprétables
+
+## 🔗 Liens
+
+- [ Application en ligne](https://projetmachinelearning.streamlit.app/)
+- [ Code source GitHub](https://github.com/Paguy-Stream/Projet_machine_learning)
+- [ Documentation](https://github.com/Paguy-Stream/Projet_machine_learning/blob/main/README.md)
+
+---
+
+<div class="back-link" style="text-align: center; margin-top: 3rem; color: #666;">
+  ← <a href="../index.html">Accueil</a> • 
+  <a href="../projects.html">Tous les projets</a>
+</div>

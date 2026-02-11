@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="presentation_salaires_academique_files/libs/clipboard/clipboard.min.js"></script>
+<script src="presentation_salaires_academique_files/libs/quarto-html/tabby.min.js"></script>
+<script src="presentation_salaires_academique_files/libs/quarto-html/popper.min.js"></script>
+<script src="presentation_salaires_academique_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="presentation_salaires_academique_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="presentation_salaires_academique_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="presentation_salaires_academique_files/libs/quarto-html/quarto-syntax-highlighting-1b3e43c72e8be34557c75123b0b69e0d.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.32">
+
+  <meta name="author" content="Emmanuel Paguiel Bouendo">
+  <meta name="dcterms.date" content="2026-01-01">
+  <title>Prédiction des Salaires dans les Métiers de la Data en France</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="presentation_salaires_academique_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="presentation_salaires_academique_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {  background-color: #f8f8f8; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ef2929; } /* Alert */
+    code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #204a87; } /* Attribute */
+    code span.bn { color: #0000cf; } /* BaseN */
+    code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4e9a06; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #8f5902; font-style: italic; } /* Comment */
+    code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+    code span.dt { color: #204a87; } /* DataType */
+    code span.dv { color: #0000cf; } /* DecVal */
+    code span.er { color: #a40000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #0000cf; } /* Float */
+    code span.fu { color: #204a87; font-weight: bold; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+    code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+    code span.ot { color: #8f5902; } /* Other */
+    code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+    code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+    code span.ss { color: #4e9a06; } /* SpecialString */
+    code span.st { color: #4e9a06; } /* String */
+    code span.va { color: #000000; } /* Variable */
+    code span.vs { color: #4e9a06; } /* VerbatimString */
+    code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="presentation_salaires_academique_files/libs/revealjs/dist/theme/quarto-d50994f938242403a9883eae5f11df45.css">
+  <link href="presentation_salaires_academique_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="presentation_salaires_academique_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="presentation_salaires_academique_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="presentation_salaires_academique_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="presentation_salaires_academique_files/libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="presentation_salaires_academique_files/libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="presentation_salaires_academique_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Prédiction des Salaires dans les Métiers de la Data en France</h1>
+  <p class="subtitle">Approche par Machine Learning et Feature Engineering</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Emmanuel Paguiel Bouendo 
+</div>
+        <p class="quarto-title-affiliation">
+            Master 2 Économiste d’Entreprise — Université de Tours
+          </p>
+    </div>
+</div>
+
+  <p class="date">2026-01-01</p>
+</section><section id="TOC">
+<nav role="doc-toc"> 
+<h2 id="toc-title">Table of contents</h2>
+<ul>
+<li><a href="#/introduction" id="/toc-introduction">Introduction</a></li>
+<li><a href="#/méthodologie" id="/toc-méthodologie">Méthodologie</a></li>
+<li><a href="#/modélisation" id="/toc-modélisation">Modélisation</a></li>
+<li><a href="#/application" id="/toc-application">Application</a></li>
+<li><a href="#/résultats-et-discussion" id="/toc-résultats-et-discussion">Résultats et Discussion</a></li>
+<li><a href="#/conclusion" id="/toc-conclusion">Conclusion</a></li>
+<li><a href="#/annexes" id="/toc-annexes">Annexes</a></li>
+<li><a href="#/fin-de-la-présentation" id="/toc-fin-de-la-présentation">Fin de la Présentation</a></li>
+</ul>
+</nav>
+</section>
+<section>
+<section id="introduction" class="title-slide slide level1 center">
+<h1>Introduction</h1>
+
+</section>
+<section id="contexte-et-problématique" class="slide level2 center">
+<h2>Contexte et Problématique</h2>
+<h3 id="contexte-du-marché-de-lemploi-data">Contexte du marché de l’emploi Data</h3>
+<p><strong>Observations du marché :</strong></p>
+<ul>
+<li>Forte croissance des métiers Data (Data Analyst, Data Scientist, Data Engineer)</li>
+<li>Manque de transparence salariale dans le secteur</li>
+<li>Variabilité importante selon localisation, expérience et compétences</li>
+<li>Difficulté pour les candidats d’estimer leur valeur marchande</li>
+</ul>
+<p><strong>Enjeux économiques :</strong></p>
+<ul>
+<li>Asymétrie d’information employeur/candidat</li>
+<li>Impact sur négociations salariales</li>
+<li>Nécessité d’outils d’aide à la décision basés sur données réelles</li>
+</ul>
+</section>
+<section id="objectifs-de-recherche" class="slide level2 center">
+<h2>Objectifs de Recherche</h2>
+<h3 id="question-de-recherche-principale">Question de recherche principale</h3>
+<p><strong>Peut-on prédire le salaire d’un professionnel Data à partir de caractéristiques observables d’offres d’emploi ?</strong></p>
+<h3 id="objectifs-spécifiques">Objectifs spécifiques</h3>
+<ol type="1">
+<li><strong>Collecte et structuration</strong> : Constituer une base de données d’offres d’emploi réelles</li>
+<li><strong>Modélisation</strong> : Développer un modèle prédictif de salaire</li>
+<li><strong>Analyse factorielle</strong> : Identifier les déterminants principaux des salaires</li>
+<li><strong>Application</strong> : Créer un outil d’aide à la décision accessible</li>
+</ol>
+<h3 id="contributions">Contributions</h3>
+<ul>
+<li>Base de données de 5 868 offres d’emploi Data en France</li>
+<li>Méthodologie reproductible de web scraping et feature engineering</li>
+<li>Analyse empirique des déterminants salariaux</li>
+<li>Application interactive pour exploration des résultats</li>
+</ul>
+</section>
+<section class="slide level2 center">
+
+</section></section>
+<section>
+<section id="méthodologie" class="title-slide slide level1 center">
+<h1>Méthodologie</h1>
+
+</section>
+<section id="architecture-du-projet" class="slide level2 center">
+<h2>Architecture du Projet</h2>
+<h3 id="pipeline-de-données-en-4-phases">Pipeline de données en 4 phases</h3>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {
+    'theme': 'neutral',
+    'themeVariables': {
+        'fontSize': '22px',
+        'fontFamily': 'Arial',
+        'nodeTextColor': '#000',
+        'primaryColor': '#ffffff',
+        'lineColor': '#333',
+        'nodeBorder': '2px'
+    }
+}}%%
+graph LR
+    A["&lt;b&gt;Phase 1&lt;/b&gt;&lt;br/&gt;Collecte&lt;br/&gt;Web Scraping&lt;br/&gt;&lt;b&gt;5868 offres&lt;/b&gt;"] --&gt; B["&lt;b&gt;Phase 2&lt;/b&gt;&lt;br/&gt;Traitement&lt;br/&gt;Feature Engineering&lt;br/&gt;&lt;b&gt;29 variables&lt;/b&gt;"]
+    B --&gt; C["&lt;b&gt;Phase 3&lt;/b&gt;&lt;br/&gt;Modélisation&lt;br/&gt;XGBoost&lt;br/&gt;&lt;b&gt;2681 échantillons&lt;/b&gt;"]
+    C --&gt; D["&lt;b&gt;Phase 4&lt;/b&gt;&lt;br/&gt;Application&lt;br/&gt;Streamlit&lt;br/&gt;&lt;b&gt;4 modules&lt;/b&gt;"]
+
+    style A fill:#e3f2fd,stroke:#1976d2,stroke-width:3px
+    style B fill:#fff3e0,stroke:#f57c00,stroke-width:3px
+    style C fill:#e8f5e9,stroke:#388e3c,stroke-width:3px
+    style D fill:#fce4ec,stroke:#c2185b,stroke-width:3px
+
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p><strong>Approche méthodologique :</strong></p>
+<ul>
+<li>Collecte exhaustive de données publiques</li>
+<li>Preprocessing et feature engineering rigoureux</li>
+<li>Validation croisée et tests statistiques</li>
+<li>Développement d’interface utilisateur</li>
+</ul>
+</section>
+<section id="phase-1-collecte-des-données" class="slide level2 center">
+<h2>Phase 1 : Collecte des Données</h2>
+<h3 id="source-et-périmètre">Source et périmètre</h3>
+<p><strong>Plateforme ciblée :</strong> HelloWork (leader français du recrutement)</p>
+<p><strong>Stratégie de collecte :</strong></p>
+<ul>
+<li><strong>69 mots-clés</strong> couvrant l’écosystème Data :
+<ul>
+<li>Postes : Data Scientist, Data Analyst, Data Engineer, ML Engineer</li>
+<li>Niveaux : Junior, Senior, Lead</li>
+<li>Types : CDI, Stage, Alternance</li>
+</ul></li>
+<li><strong>Couverture géographique :</strong> Nationale + 20 grandes villes françaises</li>
+<li><strong>Période de collecte :</strong> Janvier 2026</li>
+<li><strong>Volume collecté :</strong> 5 868 offres uniques</li>
+</ul>
+<h3 id="technologies-utilisées">Technologies utilisées</h3>
+<p><strong>Botright (Playwright + Anti-détection) :</strong></p>
+<ul>
+<li>Simulation d’un navigateur réel</li>
+<li>Contournement des protections anti-bot (Cloudflare)</li>
+<li>Délais adaptatifs entre requêtes (3-15 secondes)</li>
+</ul>
+</section>
+<section id="phase-1-architecture-du-scraper" class="slide level2 center">
+<h2>Phase 1 : Architecture du Scraper</h2>
+<h3 id="algorithme-de-collecte-à-3-niveaux">Algorithme de collecte à 3 niveaux</h3>
+<p><strong>Niveau 1 : Pages de résultats</strong></p>
+<pre><code>Pour chaque mot-clé (69 variations) :
+    Pour chaque page (jusqu'à 18 max) :
+        Extraire : titre, entreprise, localisation, salaire
+        Collecter les URLs des offres détaillées</code></pre>
+<p><strong>Niveau 2 : Pages détaillées</strong></p>
+<pre><code>Pour chaque offre unique :
+    Extraire : description complète, compétences techniques,
+               expérience requise, formation, télétravail,
+               type de contrat, avantages</code></pre>
+<p><strong>Niveau 3 : Déduplication</strong></p>
+<pre><code>Utilisation de hash MD5 (titre + entreprise + localisation)
+Résultat : 0 doublon sur 5 868 offres</code></pre>
+<p><strong>Robustesse :</strong></p>
+<ul>
+<li>Sauvegarde incrémentale tous les 100 offres</li>
+<li>Gestion des erreurs et reconnexion automatique</li>
+<li>Logs détaillés pour traçabilité</li>
+</ul>
+</section>
+<section id="phase-2-préparation-des-données" class="slide level2 center">
+<h2>Phase 2 : Préparation des Données</h2>
+<h3 id="nettoyage-et-structuration">Nettoyage et structuration</h3>
+<p><strong>Dataset brut :</strong></p>
+<ul>
+<li>5 868 offres collectées</li>
+<li>100 colonnes extraites (informations brutes)</li>
+</ul>
+<p><strong>Filtrage et validation :</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="co"># Critères de sélection</span></span>
+<span id="cb4-2"><a href=""></a><span class="op">-</span> Présence d<span class="st">'information salariale (min ou max)</span></span>
+<span id="cb4-3"><a href=""></a><span class="er">- Type de contrat valide </span>(CDI, CDD, Stage, Alternance)</span>
+<span id="cb4-4"><a href=""></a><span class="op">-</span> Localisation en France métropolitaine</span>
+<span id="cb4-5"><a href=""></a></span>
+<span id="cb4-6"><a href=""></a><span class="co"># Dataset ML final</span></span>
+<span id="cb4-7"><a href=""></a>→ <span class="dv">2</span> <span class="dv">681</span> offres exploitables (<span class="dv">46</span><span class="op">%</span> du total)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Gestion des valeurs manquantes :</strong></p>
+<ul>
+<li>Texte : chaîne vide</li>
+<li>Numérique : 0 ou médiane selon contexte</li>
+<li>Catégoriel : “Non spécifié”</li>
+</ul>
+</section>
+<section id="phase-2-feature-engineering" class="slide level2 center">
+<h2>Phase 2 : Feature Engineering</h2>
+<h3 id="extraction-et-transformation-des-variables">Extraction et transformation des variables</h3>
+<p><strong>Variables numériques :</strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="co"># Expérience</span></span>
+<span id="cb5-2"><a href=""></a><span class="co">"5 ans d'expérience"</span> → <span class="dv">5</span></span>
+<span id="cb5-3"><a href=""></a><span class="co">"Junior"</span> → <span class="dv">1</span>, <span class="st">"Senior"</span> → <span class="dv">5</span></span>
+<span id="cb5-4"><a href=""></a></span>
+<span id="cb5-5"><a href=""></a><span class="co"># Éducation</span></span>
+<span id="cb5-6"><a href=""></a><span class="co">"Bac+5"</span> → <span class="dv">5</span>, <span class="st">"Master"</span> → <span class="dv">5</span>, <span class="st">"Doctorat"</span> → <span class="dv">8</span></span>
+<span id="cb5-7"><a href=""></a></span>
+<span id="cb5-8"><a href=""></a><span class="co"># Salaire (variable cible)</span></span>
+<span id="cb5-9"><a href=""></a><span class="co">"40 000 - 55 000 €/an"</span> </span>
+<span id="cb5-10"><a href=""></a>→ salaire_min_k <span class="op">=</span> <span class="dv">40</span></span>
+<span id="cb5-11"><a href=""></a>→ salaire_max_k <span class="op">=</span> <span class="dv">55</span></span>
+<span id="cb5-12"><a href=""></a>→ salaire_avg_k <span class="op">=</span> <span class="fl">47.5</span> (moyenne)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Variables binaires (compétences techniques) :</strong></p>
+<p>25 variables créées par détection de mots-clés dans descriptions :</p>
+<pre><code>has_python, has_sql, has_r, has_spark,
+has_aws, has_azure, has_gcp, has_docker,
+has_kubernetes, has_tensorflow, has_pytorch,
+has_tableau, has_powerbi, has_excel, ...</code></pre>
+</section>
+<section id="phase-2-variables-composites" class="slide level2 center">
+<h2>Phase 2 : Variables Composites</h2>
+<h3 id="agrégation-et-catégorisation">Agrégation et catégorisation</h3>
+<p><strong>Variables agrégées :</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a><span class="co"># Nombre total de compétences techniques</span></span>
+<span id="cb7-2"><a href=""></a>skills_count <span class="op">=</span> <span class="bu">sum</span>([has_python, has_sql, has_r, ...])</span>
+<span id="cb7-3"><a href=""></a></span>
+<span id="cb7-4"><a href=""></a><span class="co"># Score de séniorité composite</span></span>
+<span id="cb7-5"><a href=""></a>seniority_score <span class="op">=</span> (years_experience <span class="op">*</span> <span class="fl">0.6</span>) <span class="op">+</span> </span>
+<span id="cb7-6"><a href=""></a>                  (education_level <span class="op">*</span> <span class="fl">0.4</span>)</span>
+<span id="cb7-7"><a href=""></a></span>
+<span id="cb7-8"><a href=""></a><span class="co"># Télétravail (3 niveaux)</span></span>
+<span id="cb7-9"><a href=""></a>telework_none <span class="op">=</span> <span class="dv">0</span> (absence de mention)</span>
+<span id="cb7-10"><a href=""></a>telework_partial <span class="op">=</span> <span class="dv">1</span> (hybride, <span class="dv">2</span><span class="op">-</span><span class="dv">3</span> jours<span class="op">/</span>semaine)</span>
+<span id="cb7-11"><a href=""></a>telework_full <span class="op">=</span> <span class="dv">1</span> (<span class="dv">100</span><span class="op">%</span> remote)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Variables catégorielles :</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a><span class="co"># Catégorisation des postes</span></span>
+<span id="cb8-2"><a href=""></a>job_category ∈ {Data Analyst, Data Scientist, </span>
+<span id="cb8-3"><a href=""></a>                Data Engineer, ML Engineer, Other}</span>
+<span id="cb8-4"><a href=""></a></span>
+<span id="cb8-5"><a href=""></a><span class="co"># Taille d'entreprise</span></span>
+<span id="cb8-6"><a href=""></a>company_size ∈ {Startup, PME, ETI, Grand Groupe}</span>
+<span id="cb8-7"><a href=""></a></span>
+<span id="cb8-8"><a href=""></a><span class="co"># Localisation</span></span>
+<span id="cb8-9"><a href=""></a>is_paris <span class="op">=</span> <span class="dv">1</span> <span class="cf">if</span> ville <span class="op">==</span> <span class="st">"Paris"</span></span>
+<span id="cb8-10"><a href=""></a>is_major_city <span class="op">=</span> <span class="dv">1</span> <span class="cf">if</span> ville <span class="kw">in</span> [Lyon, Marseille, ...]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="phase-2-dataset-final" class="slide level2 center">
+<h2>Phase 2 : Dataset Final</h2>
+<h3 id="structure-des-données-pour-modélisation">Structure des données pour modélisation</h3>
+<p><strong>Dimensions :</strong></p>
+<ul>
+<li><strong>Observations</strong> : 2 681 offres</li>
+<li><strong>Features</strong> : 29 variables explicatives</li>
+<li><strong>Target</strong> : salaire_avg_k (salaire moyen annuel en k€)</li>
+</ul>
+<p><strong>Split Train/Test :</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb9-2"><a href=""></a></span>
+<span id="cb9-3"><a href=""></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb9-4"><a href=""></a>    X, y, </span>
+<span id="cb9-5"><a href=""></a>    test_size<span class="op">=</span><span class="fl">0.20</span>,    <span class="co"># 20% pour test</span></span>
+<span id="cb9-6"><a href=""></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb9-7"><a href=""></a>)</span>
+<span id="cb9-8"><a href=""></a></span>
+<span id="cb9-9"><a href=""></a><span class="co"># Résultat</span></span>
+<span id="cb9-10"><a href=""></a>Train : <span class="dv">2</span> <span class="dv">145</span> échantillons (<span class="dv">80</span><span class="op">%</span>)</span>
+<span id="cb9-11"><a href=""></a>Test  :   <span class="dv">536</span> échantillons (<span class="dv">20</span><span class="op">%</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Preprocessing :</strong></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb10-2"><a href=""></a></span>
+<span id="cb10-3"><a href=""></a><span class="co"># Normalisation (μ=0, σ=1)</span></span>
+<span id="cb10-4"><a href=""></a>scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb10-5"><a href=""></a>X_train_scaled <span class="op">=</span> scaler.fit_transform(X_train)</span>
+<span id="cb10-6"><a href=""></a>X_test_scaled <span class="op">=</span> scaler.transform(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2 center">
+
+</section></section>
+<section>
+<section id="modélisation" class="title-slide slide level1 center">
+<h1>Modélisation</h1>
+
+</section>
+<section id="phase-3-approche-machine-learning" class="slide level2 center">
+<h2>Phase 3 : Approche Machine Learning</h2>
+<h3 id="problème-et-métriques">Problème et métriques</h3>
+<p><strong>Type de problème :</strong> Régression supervisée</p>
+<p><strong>Variable cible :</strong> Salaire moyen annuel (salaire_avg_k en k€)</p>
+<p><strong>Métriques d’évaluation :</strong></p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 25%">
+<col style="width: 45%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Métrique</th>
+<th>Formule</th>
+<th>Interprétation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>R² Score</strong></td>
+<td><span class="math inline">\(1 - \frac{\sum(y_i - \hat{y}_i)^2}{\sum(y_i - \bar{y})^2}\)</span></td>
+<td>Part de variance expliquée</td>
+</tr>
+<tr class="even">
+<td><strong>MAE</strong></td>
+<td><span class="math inline">\(\frac{1}{n}\sum\|y_i - \hat{y}_i\|\)</span></td>
+<td>Erreur moyenne absolue (€)</td>
+</tr>
+<tr class="odd">
+<td><strong>RMSE</strong></td>
+<td><span class="math inline">\(\sqrt{\frac{1}{n}\sum(y_i - \hat{y}_i)^2}\)</span></td>
+<td>Erreur quadratique moyenne (€)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Objectifs :</strong></p>
+<ul>
+<li>Maximiser R² (variance expliquée)</li>
+<li>Minimiser MAE et RMSE (précision)</li>
+<li>Équilibrer biais-variance (éviter surapprentissage)</li>
+</ul>
+</section>
+<section id="phase-3-modèles-testés" class="slide level2 center">
+<h2>Phase 3 : Modèles Testés</h2>
+<h3 id="benchmark-de-3-algorithmes">Benchmark de 3 algorithmes</h3>
+<p><strong>1. XGBoost Regressor (sélectionné)</strong></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a><span class="im">from</span> xgboost <span class="im">import</span> XGBRegressor</span>
+<span id="cb11-2"><a href=""></a></span>
+<span id="cb11-3"><a href=""></a>model <span class="op">=</span> XGBRegressor(</span>
+<span id="cb11-4"><a href=""></a>    n_estimators<span class="op">=</span><span class="dv">500</span>,      <span class="co"># Nombre d'arbres</span></span>
+<span id="cb11-5"><a href=""></a>    max_depth<span class="op">=</span><span class="dv">6</span>,           <span class="co"># Profondeur maximale</span></span>
+<span id="cb11-6"><a href=""></a>    learning_rate<span class="op">=</span><span class="fl">0.1</span>,     <span class="co"># Taux d'apprentissage</span></span>
+<span id="cb11-7"><a href=""></a>    subsample<span class="op">=</span><span class="fl">0.8</span>,         <span class="co"># Échantillonnage</span></span>
+<span id="cb11-8"><a href=""></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb11-9"><a href=""></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><em>Avantages :</em> Gestion des interactions non-linéaires, robustesse aux outliers</p>
+<p><strong>2. Gradient Boosting Regressor</strong></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> GradientBoostingRegressor</span>
+<span id="cb12-2"><a href=""></a></span>
+<span id="cb12-3"><a href=""></a>model <span class="op">=</span> GradientBoostingRegressor(</span>
+<span id="cb12-4"><a href=""></a>    n_estimators<span class="op">=</span><span class="dv">100</span>,</span>
+<span id="cb12-5"><a href=""></a>    learning_rate<span class="op">=</span><span class="fl">0.1</span>,</span>
+<span id="cb12-6"><a href=""></a>    max_depth<span class="op">=</span><span class="dv">5</span></span>
+<span id="cb12-7"><a href=""></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>3. Ridge Regression (baseline)</strong></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> Ridge</span>
+<span id="cb13-2"><a href=""></a></span>
+<span id="cb13-3"><a href=""></a>model <span class="op">=</span> Ridge(alpha<span class="op">=</span><span class="fl">1.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="phase-3-résultats-du-modèle" class="slide level2 center">
+<h2>Phase 3 : Résultats du Modèle</h2>
+<h3 id="performances-obtenues---xgboost">Performances obtenues - XGBoost</h3>
+<p><strong>Métriques sur ensemble de test (536 observations) :</strong></p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 23%">
+<col style="width: 47%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Métrique</th>
+<th>Valeur</th>
+<th>Interprétation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>R² Score</strong></td>
+<td><strong>0.337</strong></td>
+<td>Le modèle explique 33.7% de la variance salariale</td>
+</tr>
+<tr class="even">
+<td><strong>MAE</strong></td>
+<td><strong>5 163 €</strong></td>
+<td>Erreur moyenne absolue de ±5 163 €</td>
+</tr>
+<tr class="odd">
+<td><strong>RMSE</strong></td>
+<td><strong>6 969 €</strong></td>
+<td>Erreur quadratique moyenne de 6 969 €</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Analyse de la précision par tolérance :</strong></p>
+<pre><code>Prédictions dans une fourchette de :
+±5%  : 35.6% (191/536 prédictions)
+±10% : 57.9% (310/536 prédictions)
+±15% : 73.7% (395/536 prédictions)
+±20% : 84.1% (451/536 prédictions)</code></pre>
+<p><strong>Interprétation :</strong></p>
+<p>Si le modèle prédit 50 000 €, il y a <strong>73.7% de chances</strong> que le salaire réel soit entre 42 500 € et 57 500 € (fourchette ±15%).</p>
+</section>
+<section id="phase-3-analyse-des-erreurs" class="slide level2 center">
+<h2>Phase 3 : Analyse des Erreurs</h2>
+<h3 id="distribution-et-analyse-par-tranche-salariale">Distribution et analyse par tranche salariale</h3>
+<p><strong>Statistiques des erreurs :</strong></p>
+<pre><code>Erreur moyenne     : +95 € (biais quasi nul)
+Erreur médiane     : 3 489 €
+Écart-type         : 6 969 €</code></pre>
+<p><strong>Erreur par tranche salariale :</strong></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Tranche</th>
+<th>MAE</th>
+<th>Erreur relative</th>
+<th>Observations</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>&lt; 38K€</td>
+<td>7 273 €</td>
+<td>19.1%</td>
+<td>137</td>
+</tr>
+<tr class="even">
+<td>38-49K€</td>
+<td><strong>3 021 €</strong></td>
+<td><strong>6.6%</strong></td>
+<td>133</td>
+</tr>
+<tr class="odd">
+<td>49-62K€</td>
+<td><strong>3 489 €</strong></td>
+<td><strong>6.6%</strong></td>
+<td>135</td>
+</tr>
+<tr class="even">
+<td>&gt; 62K€</td>
+<td>6 845 €</td>
+<td>11.6%</td>
+<td>131</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Conclusion :</strong></p>
+<ul>
+<li>Le modèle est plus précis pour les salaires moyens (38-62K€)</li>
+<li>Erreur plus élevée aux extrêmes (&lt; 38K€ et &gt; 62K€)</li>
+<li>Raison : distribution des échantillons concentrée sur la médiane</li>
+</ul>
+</section>
+<section id="phase-3-importance-des-features" class="slide level2 center">
+<h2>Phase 3 : Importance des Features</h2>
+<h3 id="analyse-shap---top-10-déterminants">Analyse SHAP - Top 10 déterminants</h3>
+
+<img data-src="presentation_salaires_academique_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
+<section id="phase-3-interprétation-économique" class="slide level2 center">
+<h2>Phase 3 : Interprétation Économique</h2>
+<h3 id="déterminants-principaux-des-salaires">Déterminants principaux des salaires</h3>
+<p><strong>1. Localisation (18% d’importance)</strong></p>
+<ul>
+<li>Paris : Prime moyenne de +20% par rapport aux régions</li>
+<li>Effet ville majeure : +8-12% (Lyon, Toulouse, Bordeaux)</li>
+</ul>
+<p><strong>2. Expérience professionnelle (16%)</strong></p>
+<ul>
+<li>Progression quasi-linéaire : +3 000-4 000 € par année d’expérience</li>
+<li>Paliers : Junior (0-2 ans), Confirmé (3-5 ans), Senior (5+ ans)</li>
+</ul>
+<p><strong>3. Secteur d’activité (14%)</strong></p>
+<ul>
+<li>Banque/Finance : +25% par rapport à la médiane</li>
+<li>Tech/Consulting : +15%</li>
+<li>Industrie/Public : médiane</li>
+</ul>
+<p><strong>4. Formation (11%)</strong></p>
+<ul>
+<li>Bac+5 : Niveau de référence</li>
+<li>Bac+8 (Doctorat) : +10-15% en R&amp;D</li>
+</ul>
+<p><strong>5. Compétences techniques (30% cumulé)</strong></p>
+<ul>
+<li>Stack Data : Python + SQL + R (baseline)</li>
+<li>Cloud : +3 500 € (AWS/Azure)</li>
+<li>Big Data : +2 000 € (Spark/Hadoop)</li>
+<li>ML/AI : +1 500 €</li>
+</ul>
+</section>
+<section class="slide level2 center">
+
+</section></section>
+<section>
+<section id="application" class="title-slide slide level1 center">
+<h1>Application</h1>
+
+</section>
+<section id="phase-4-interface-utilisateur" class="slide level2 center">
+<h2>Phase 4 : Interface Utilisateur</h2>
+<h3 id="architecture-de-lapplication-streamlit">Architecture de l’application Streamlit</h3>
+<p><strong>Technologies :</strong></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a><span class="co"># Stack technique</span></span>
+<span id="cb16-2"><a href=""></a>Streamlit <span class="fl">1.31.0</span>    <span class="co"># Framework web</span></span>
+<span id="cb16-3"><a href=""></a>Plotly <span class="fl">5.18.0</span>       <span class="co"># Visualisations interactives</span></span>
+<span id="cb16-4"><a href=""></a>Pandas <span class="fl">2.1.4</span>        <span class="co"># Manipulation de données</span></span>
+<span id="cb16-5"><a href=""></a>XGBoost <span class="fl">2.0.3</span>       <span class="co"># Modèle ML</span></span>
+<span id="cb16-6"><a href=""></a>Scikit<span class="op">-</span>learn <span class="fl">1.4.0</span>  <span class="co"># Preprocessing</span></span>
+<span id="cb16-7"><a href=""></a>SHAP <span class="fl">0.44.0</span>         <span class="co"># Explicabilité</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Structure modulaire (4 modules) :</strong></p>
+<ol type="1">
+<li><strong>Accueil</strong> : Vue d’ensemble du marché</li>
+<li><strong>Prédiction</strong> : Estimation salariale personnalisée</li>
+<li><strong>Marché</strong> : Exploration interactive des données</li>
+<li><strong>Carrière</strong> : Simulation de trajectoires professionnelles</li>
+</ol>
+<p><strong>Déploiement :</strong></p>
+<ul>
+<li>Hébergement : Streamlit Cloud</li>
+<li>URL : projetmachinelearning.streamlit.app</li>
+<li>CI/CD : GitHub Actions</li>
+</ul>
+</section>
+<section id="module-1-accueil" class="slide level2 center">
+<h2>Module 1 : Accueil</h2>
+<h3 id="synthèse-du-marché-de-lemploi-data">Synthèse du marché de l’emploi Data</h3>
+<p><strong>Indicateurs clés (KPIs) :</strong></p>
+<pre><code>┌─────────────────────────────────────┐
+│  Offres analysées    : 5 868        │
+│  Échantillon ML      : 2 681        │
+│  Salaire médian      : 49 450 €    │
+│  Performance modèle  : R²=0.337     │
+│  Précision ±15%      : 73.7%        │
+└─────────────────────────────────────┘</code></pre>
+<p><strong>Visualisations :</strong></p>
+<ol type="1">
+<li>Distribution des salaires (histogramme)</li>
+<li>Top 10 postes les plus demandés</li>
+<li>Répartition géographique (carte de France)</li>
+<li>Compétences les plus recherchées (word cloud)</li>
+</ol>
+<p><strong>Statistiques descriptives :</strong></p>
+<ul>
+<li>Moyenne : 52 300 €</li>
+<li>Médiane : 49 450 €</li>
+<li>Écart-type : 13 500 €</li>
+<li>Q1 (25%) : 41 000 € | Q3 (75%) : 62 000 €</li>
+</ul>
+</section>
+<section id="module-2-prédiction" class="slide level2 center">
+<h2>Module 2 : Prédiction</h2>
+<h3 id="estimation-salariale-personnalisée">Estimation salariale personnalisée</h3>
+<p><strong>Formulaire d’entrée (7 variables) :</strong></p>
+<pre><code>1. Type de poste       : [Data Analyst / Scientist / Engineer / ML Eng]
+2. Expérience          : [0-20 ans]
+3. Localisation        : [Paris, Lyon, Marseille, Toulouse, ...]
+4. Secteur             : [Banque, Tech, Industrie, Santé, ...]
+5. Compétences         : [Python, SQL, R, AWS, Spark, ...]
+6. Éducation           : [Bac+3, Bac+5, Bac+8]
+7. Télétravail souhaité: [Oui / Non / Partiel]</code></pre>
+<p><strong>Résultat fourni :</strong></p>
+<pre><code>Estimation : 52 000 €/an
+
+Fourchette de confiance (±15%) :
+   Min : 44 200 €
+   Max : 59 800 €
+   
+Positionnement marché :
+   Percentile 55 (médiane = 49 450 €)
+   
+Niveau de confiance : 73.7%</code></pre>
+<p><strong>Explicabilité SHAP :</strong></p>
+<ul>
+<li>Contribution de chaque variable à la prédiction</li>
+<li>Graphique waterfall montrant l’impact individuel</li>
+</ul>
+</section>
+<section id="module-3-marché" class="slide level2 center">
+<h2>Module 3 : Marché</h2>
+<h3 id="exploration-interactive-des-données">Exploration interactive des données</h3>
+<p><strong>Filtres disponibles :</strong></p>
+<pre><code>- Type de poste        : Multi-sélection
+- Ville                : Liste déroulante
+- Secteur              : Liste déroulante
+- Plage salariale      : Slider (30K€ - 100K€)
+- Expérience requise   : Slider (0-10+ ans)
+- Compétences          : Checkboxes (Python, SQL, AWS, ...)</code></pre>
+<p><strong>Visualisations interactives (Plotly) :</strong></p>
+<ol type="1">
+<li><strong>Distribution salaires</strong> : Histogramme avec moyenne/médiane</li>
+<li><strong>Salaire vs Expérience</strong> : Scatter plot avec régression linéaire</li>
+<li><strong>Comparaison par poste</strong> : Box plots (Analyst vs Scientist vs Engineer)</li>
+<li><strong>Salaires par ville</strong> : Bar chart (top 15 villes)</li>
+<li><strong>Impact compétences</strong> : Table comparative (salaire avec/sans compétence)</li>
+</ol>
+<p><strong>Export de données :</strong></p>
+<ul>
+<li>Format CSV</li>
+<li>Données filtrées selon critères utilisateur</li>
+<li>Utilisation pour analyses personnelles</li>
+</ul>
+</section>
+<section id="module-4-carrière" class="slide level2 center">
+<h2>Module 4 : Carrière</h2>
+<h3 id="simulation-de-trajectoires-professionnelles">Simulation de trajectoires professionnelles</h3>
+<p><strong>Simulateur d’impact :</strong></p>
+<p>Permet de tester l’effet de décisions de carrière :</p>
+<pre><code>Scénario 1 : Déménagement à Paris
+   Impact estimé : +20% (±10 000 €)
+
+Scénario 2 : Changement de secteur (Tech → Banque)
+   Impact estimé : +25% (±12 000 €)
+
+Scénario 3 : Acquisition compétence Cloud (AWS)
+   Impact estimé : +3 500 €
+
+Scénario 4 : Passage Senior (3 → 5 ans XP)
+   Impact estimé : +15 000 €</code></pre>
+<p><strong>Timeline de progression (0-20 ans) :</strong></p>
+
+<img data-src="presentation_salaires_academique_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2 center">
+
+</section></section>
+<section>
+<section id="résultats-et-discussion" class="title-slide slide level1 center">
+<h1>Résultats et Discussion</h1>
+
+</section>
+<section id="principaux-résultats" class="slide level2 center">
+<h2>Principaux Résultats</h2>
+<h3 id="synthèse-des-contributions">Synthèse des contributions</h3>
+<p><strong>1. Base de données constituée</strong></p>
+<ul>
+<li>5 868 offres d’emploi Data collectées (Janvier 2026)</li>
+<li>2 681 échantillons exploitables après nettoyage</li>
+<li>29 variables explicatives construites par feature engineering</li>
+</ul>
+<p><strong>2. Modèle prédictif développé</strong></p>
+<ul>
+<li>XGBoost Regressor sélectionné après benchmark</li>
+<li>Performance : R² = 0.337, MAE = 5 163 €</li>
+<li>Précision de 73.7% dans une fourchette de ±15%</li>
+</ul>
+<p><strong>3. Analyse factorielle réalisée</strong></p>
+<ul>
+<li><strong>Localisation</strong> : Effet Paris (+20%) dominant</li>
+<li><strong>Expérience</strong> : Progression linéaire (+3-4K€/an)</li>
+<li><strong>Secteur</strong> : Banque/Finance (+25%) et Tech (+15%)</li>
+<li><strong>Compétences</strong> : Impact modeste mais cumulatif (Cloud +3.5K€)</li>
+</ul>
+<p><strong>4. Application opérationnelle</strong></p>
+<ul>
+<li>Interface Streamlit déployée en production</li>
+<li>4 modules couvrant prédiction, exploration, simulation</li>
+<li>Accessible publiquement : projetmachinelearning.streamlit.app</li>
+</ul>
+</section>
+<section id="discussion-limites-du-modèle" class="slide level2 center">
+<h2>Discussion : Limites du Modèle</h2>
+<h3 id="r²-modeste-analyse-critique">R² modeste : Analyse critique</h3>
+<p><strong>R² = 0.337 signifie :</strong></p>
+<ul>
+<li>33.7% de la variance salariale est expliquée par le modèle</li>
+<li><strong>66.3% reste inexpliquée</strong> par les variables observées</li>
+</ul>
+<p><strong>Facteurs non capturés (variance résiduelle) :</strong></p>
+<ol type="1">
+<li><strong>Réputation de l’entreprise</strong> (non mesurable via scraping)</li>
+<li><strong>Capacité de négociation individuelle</strong> (soft skills)</li>
+<li><strong>Réseau professionnel et recommandations</strong></li>
+<li><strong>Contexte économique ponctuel</strong> (pénurie de talents)</li>
+<li><strong>Package total</strong> (stock-options, bonus, avantages non monétaires)</li>
+<li><strong>Qualité du candidat</strong> (projets personnels, contributions open source)</li>
+</ol>
+<p><strong>Comparaison littérature académique :</strong></p>
+<ul>
+<li>Modèles salariaux classiques : R² entre 0.30 et 0.50</li>
+<li>Notre R² = 0.337 est cohérent avec études similaires</li>
+<li>Déterminants principaux alignés (éducation, expérience, localisation)</li>
+</ul>
+</section>
+<section id="discussion-biais-et-validité" class="slide level2 center">
+<h2>Discussion : Biais et Validité</h2>
+<h3 id="limitations-méthodologiques">Limitations méthodologiques</h3>
+<p><strong>1. Biais de source</strong></p>
+<ul>
+<li>Source unique : HelloWork</li>
+<li>Représentativité questionnable (secteurs, tailles d’entreprise)</li>
+<li>Sous-représentation possible de startups ou PME</li>
+</ul>
+<p><strong>2. Biais de sélection</strong></p>
+<ul>
+<li>97% des offres sont en CDI</li>
+<li>Peu de données Stage/Alternance (&lt; 3%)</li>
+<li>Freelance/Consulting non couverts</li>
+</ul>
+<p><strong>3. Biais géographique</strong></p>
+<ul>
+<li>37% des offres à Paris</li>
+<li>Sur-représentation Île-de-France</li>
+<li>Zones rurales et petites villes peu représentées</li>
+</ul>
+<p><strong>4. Biais temporel</strong></p>
+<ul>
+<li>Collecte ponctuelle (Janvier 2026)</li>
+<li>Pas de série temporelle pour analyser tendances</li>
+<li>Effet saisonnalité non étudié</li>
+</ul>
+<p><strong>5. Biais de mesure</strong></p>
+<ul>
+<li>54% des offres n’affichent pas de salaire (données manquantes)</li>
+<li>Salaires affichés peuvent être négociables (imprécision)</li>
+<li>Descriptions textuelles variables (extraction NLP imparfaite)</li>
+</ul>
+</section>
+<section id="discussion-perspectives-damélioration" class="slide level2 center">
+<h2>Discussion : Perspectives d’Amélioration</h2>
+<h3 id="axes-de-développement-méthodologique">Axes de développement méthodologique</h3>
+<p><strong>Données :</strong></p>
+<ol type="1">
+<li><strong>Élargir les sources</strong> : Indeed, LinkedIn, WTTJ (réduire biais de plateforme)</li>
+<li><strong>Données longitudinales</strong> : Collecte mensuelle automatisée (tendances temporelles)</li>
+<li><strong>Enrichissement externe</strong> :
+<ul>
+<li>Données entreprises (CA, effectif, croissance)</li>
+<li>Indices économiques (inflation, taux de chômage)</li>
+</ul></li>
+</ol>
+<p><strong>Modélisation :</strong></p>
+<ol type="1">
+<li><strong>Feature engineering avancé</strong> :
+<ul>
+<li>Analyse sémantique des descriptions (NLP, embeddings)</li>
+<li>Détection de compétences émergentes (GPT, LLM)</li>
+<li>Interactions non-linéaires (expérience × secteur)</li>
+</ul></li>
+<li><strong>Modèles alternatifs</strong> :
+<ul>
+<li>Deep Learning (réseaux de neurones)</li>
+<li>Modèles bayésiens (quantification incertitude)</li>
+<li>Ensemble learning (stacking de modèles)</li>
+</ul></li>
+<li><strong>Validation externe</strong> :
+<ul>
+<li>Comparaison avec enquêtes salariales officielles (INSEE)</li>
+<li>Tests sur données indépendantes (autres plateformes)</li>
+</ul></li>
+</ol>
+</section>
+<section id="discussion-implications-pratiques" class="slide level2 center">
+<h2>Discussion : Implications Pratiques</h2>
+<h3 id="utilisation-responsable-du-modèle">Utilisation responsable du modèle</h3>
+<p><strong>Cas d’usage recommandés :</strong></p>
+<p>✓ <strong>Point de départ pour négociation salariale</strong> - Argument factuel basé sur données marché - Fourchette de confiance à communiquer</p>
+<p>✓ <strong>Aide à la décision de carrière</strong> - Comparer impact de différents choix - Simuler trajectoires professionnelles</p>
+<p>✓ <strong>Analyse comparative du marché</strong> - Benchmark salaires par région/secteur - Identification compétences valorisées</p>
+<p><strong>Usages déconseillés :</strong></p>
+<p>✗ <strong>Vérité absolue sur le salaire</strong> (modèle imparfait) ✗ <strong>Justification d’offre basse</strong> (éthique employeur) ✗ <strong>Décision automatisée sans jugement humain</strong></p>
+<p><strong>Recommandations :</strong></p>
+<ul>
+<li>Toujours croiser avec autres sources (Glassdoor, LinkedIn Salary)</li>
+<li>Considérer le package total (avantages, équilibre vie pro/perso)</li>
+<li>Adapter au contexte individuel (compétences non techniques)</li>
+</ul>
+</section>
+<section class="slide level2 center">
+
+</section></section>
+<section>
+<section id="conclusion" class="title-slide slide level1 center">
+<h1>Conclusion</h1>
+
+</section>
+<section id="bilan-du-projet" class="slide level2 center">
+<h2>Bilan du Projet</h2>
+<h3 id="contributions-académiques">Contributions académiques</h3>
+<p><strong>Méthodologiques :</strong></p>
+<ol type="1">
+<li>Pipeline reproductible de collecte et traitement de données emploi</li>
+<li>Méthodologie de feature engineering pour données textuelles</li>
+<li>Benchmark de modèles ML pour prédiction salariale</li>
+</ol>
+<p><strong>Empiriques :</strong></p>
+<ol type="1">
+<li>Base de données de 5 868 offres Data (Janvier 2026)</li>
+<li>Identification des déterminants principaux des salaires</li>
+<li>Quantification des effets (localisation +20%, secteur Banque +25%)</li>
+</ol>
+<p><strong>Applicatives :</strong></p>
+<ol type="1">
+<li>Outil d’aide à la décision accessible (Streamlit)</li>
+<li>Transparence des limites et incertitudes (R² = 0.337)</li>
+<li>Explicabilité des prédictions (SHAP values)</li>
+</ol>
+</section>
+<section id="perspectives-de-recherche" class="slide level2 center">
+<h2>Perspectives de Recherche</h2>
+<h3 id="extensions-possibles">Extensions possibles</h3>
+<ul>
+<li><p>Élargir à Indeed et LinkedIn (20 000+ offres)</p></li>
+<li><h2 id="ajouter-analyse-sémantique-nlp-des-descriptions">Ajouter analyse sémantique NLP des descriptions</h2></li>
+</ul>
+</section>
+<section id="conclusion-générale" class="slide level2 center">
+<h2>Conclusion Générale</h2>
+<h3 id="enseignements-principaux">Enseignements principaux</h3>
+<p><strong>1. Faisabilité technique démontrée</strong></p>
+<ul>
+<li>Le web scraping permet de constituer des bases de données réelles</li>
+<li>Le machine learning peut prédire les salaires avec précision modeste (R² = 0.337)</li>
+<li>Les applications interactives rendent les résultats accessibles</li>
+</ul>
+<p><strong>2. Déterminants salariaux identifiés</strong></p>
+<ul>
+<li><strong>Localisation</strong> : Effet Paris (+20%) dominant et persistant</li>
+<li><strong>Expérience</strong> : Progression linéaire régulière (+3-4K€/an)</li>
+<li><strong>Secteur</strong> : Banque/Finance et Tech offrent primes significatives</li>
+<li><strong>Compétences</strong> : Impact cumulatif mais individuel modeste</li>
+</ul>
+<p><strong>3. Limites reconnues</strong></p>
+<ul>
+<li>R² modeste (33.7%) reflète complexité du marché</li>
+<li>Biais de source, sélection et mesure présents</li>
+<li>66% de variance inexpliquée (facteurs non observables)</li>
+</ul>
+<p><strong>4. Transparence méthodologique</strong></p>
+<ul>
+<li>Documentation complète du pipeline</li>
+<li>Communication honnête des limitations</li>
+<li>Code source disponible (reproductibilité)</li>
+</ul>
+</section>
+<section id="remerciements" class="slide level2 center">
+<h2>Remerciements</h2>
+<p><strong>Encadrement académique :</strong></p>
+<ul>
+<li>Professeur : Vincent Perrollaz</li>
+<li>Université de Tours - Master 2 Économiste d’Entreprise</li>
+</ul>
+<p><strong>Technologies open source :</strong></p>
+<ul>
+<li>Python : Pandas, Scikit-learn, XGBoost, Streamlit</li>
+<li>Botright : Web automation</li>
+<li>Plotly : Visualisations interactives</li>
+</ul>
+<p><strong>Ressources :</strong></p>
+<ul>
+<li>HelloWork : Source de données</li>
+<li>Communauté Data Science française</li>
+<li>Documentation technique des librairies</li>
+</ul>
+</section>
+<section class="slide level2 center">
+
+</section></section>
+<section>
+<section id="annexes" class="title-slide slide level1 center">
+<h1>Annexes</h1>
+
+</section>
+<section id="annexe-a-statistiques-descriptives" class="slide level2 center">
+<h2>Annexe A : Statistiques Descriptives</h2>
+<h3 id="caractéristiques-de-léchantillon-n2-681">Caractéristiques de l’échantillon (n=2 681)</h3>
+<p><strong>Distribution salariale :</strong></p>
+<pre><code>Moyenne       : 52 300 €
+Médiane       : 49 450 €
+Écart-type    : 13 500 €
+Min           : 28 000 €
+Max           : 98 000 €
+Q1 (25%)      : 41 000 €
+Q3 (75%)      : 62 000 €
+Asymétrie     : +0.42 (légèrement étalée vers droite)
+Aplatissement : -0.15 (distribution quasi-normale)</code></pre>
+<p><strong>Répartition géographique :</strong></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Ville</th>
+<th>Offres</th>
+<th>%</th>
+<th>Salaire médian</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Paris</td>
+<td>992</td>
+<td>37.0%</td>
+<td>56 000 €</td>
+</tr>
+<tr class="even">
+<td>Lyon</td>
+<td>214</td>
+<td>8.0%</td>
+<td>47 000 €</td>
+</tr>
+<tr class="odd">
+<td>Toulouse</td>
+<td>134</td>
+<td>5.0%</td>
+<td>45 500 €</td>
+</tr>
+<tr class="even">
+<td>Marseille</td>
+<td>107</td>
+<td>4.0%</td>
+<td>43 000 €</td>
+</tr>
+<tr class="odd">
+<td>Autres</td>
+<td>1 234</td>
+<td>46.0%</td>
+<td>46 000 €</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="annexe-b-corrélations-entre-variables" class="slide level2 center">
+<h2>Annexe B : Corrélations entre Variables</h2>
+<h3 id="matrice-de-corrélation-top-10-features">Matrice de corrélation (Top 10 features)</h3>
+
+<img data-src="presentation_salaires_academique_files/figure-revealjs/unnamed-chunk-4-1.png" width="768" class="r-stretch"><p><strong>Observations :</strong></p>
+<ul>
+<li>Expérience : corrélation forte avec salaire (r=0.62)</li>
+<li>Localisation Paris : corrélation modérée (r=0.38)</li>
+<li>Compétences techniques : corrélations faibles mais positives</li>
+</ul>
+</section>
+<section id="annexe-c-code-source-et-reproductibilité" class="slide level2 center">
+<h2>Annexe C : Code Source et Reproductibilité</h2>
+<h3 id="accès-aux-ressources-du-projet">Accès aux ressources du projet</h3>
+<p><strong>Dépôt GitHub :</strong></p>
+<pre><code>https://github.com/Paguy-Stream/Projet_machine_learning</code></pre>
+<p><strong>Contenu du repository :</strong></p>
+<pre><code>/
+├── data/
+│   ├── raw/                  # Données brutes (5 868 offres)
+│   └── processed/            # Données nettoyées (2 681 offres)
+├── notebooks/
+│   ├── 01_scraping.ipynb     # Web scraping
+│   ├── 02_preprocessing.ipynb # Nettoyage
+│   ├── 03_modeling.ipynb     # Modélisation
+│   └── 04_analysis.ipynb     # Analyses
+├── src/
+│   ├── scraper.py            # Module scraping
+│   ├── preprocessing.py      # Module preprocessing
+│   └── model.py              # Module modélisation
+├── app/
+│   └── streamlit_app.py      # Application Streamlit
+├── models/
+│   └── xgboost_model.pkl     # Modèle entraîné
+└── requirements.txt          # Dépendances Python</code></pre>
+<p><strong>Application déployée :</strong></p>
+<pre><code>https://projetmachinelearning.streamlit.app</code></pre>
+</section>
+<section id="annexe-d-détails-techniques" class="slide level2 center">
+<h2>Annexe D : Détails Techniques</h2>
+<h3 id="stack-technique-complet">Stack technique complet</h3>
+<p><strong>Environnement de développement :</strong></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href=""></a>Python      : <span class="fl">3.11.7</span></span>
+<span id="cb26-2"><a href=""></a>Jupyter     : <span class="fl">6.5.4</span></span>
+<span id="cb26-3"><a href=""></a>VS Code     : <span class="fl">1.85.0</span></span>
+<span id="cb26-4"><a href=""></a>Git         : <span class="fl">2.42.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Librairies principales :</strong></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href=""></a><span class="co"># Web scraping</span></span>
+<span id="cb27-2"><a href=""></a>botright        : <span class="fl">0.4.1</span></span>
+<span id="cb27-3"><a href=""></a>playwright      : <span class="fl">1.40.0</span></span>
+<span id="cb27-4"><a href=""></a>beautifulsoup4  : <span class="fl">4.12.2</span></span>
+<span id="cb27-5"><a href=""></a></span>
+<span id="cb27-6"><a href=""></a><span class="co"># Data manipulation</span></span>
+<span id="cb27-7"><a href=""></a>pandas          : <span class="fl">2.1.4</span></span>
+<span id="cb27-8"><a href=""></a>numpy           : <span class="fl">1.26.2</span></span>
+<span id="cb27-9"><a href=""></a></span>
+<span id="cb27-10"><a href=""></a><span class="co"># Machine Learning</span></span>
+<span id="cb27-11"><a href=""></a>scikit<span class="op">-</span>learn    : <span class="fl">1.4.0</span></span>
+<span id="cb27-12"><a href=""></a>xgboost         : <span class="fl">2.0.3</span></span>
+<span id="cb27-13"><a href=""></a>shap            : <span class="fl">0.44.0</span></span>
+<span id="cb27-14"><a href=""></a></span>
+<span id="cb27-15"><a href=""></a><span class="co"># Visualisation</span></span>
+<span id="cb27-16"><a href=""></a>matplotlib      : <span class="fl">3.8.2</span></span>
+<span id="cb27-17"><a href=""></a>seaborn         : <span class="fl">0.13.0</span></span>
+<span id="cb27-18"><a href=""></a>plotly          : <span class="fl">5.18.0</span></span>
+<span id="cb27-19"><a href=""></a></span>
+<span id="cb27-20"><a href=""></a><span class="co"># Application</span></span>
+<span id="cb27-21"><a href=""></a>streamlit       : <span class="fl">1.31.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Infrastructure :</strong></p>
+<ul>
+<li>Développement : Local (Windows/macOS/Linux)</li>
+<li>Déploiement : Streamlit Cloud (gratuit)</li>
+<li>CI/CD : GitHub Actions</li>
+<li>Stockage : GitHub (code) + CSV local (données)</li>
+</ul>
+</section>
+<section class="slide level2 center">
+
+</section></section>
+<section>
+<section id="fin-de-la-présentation" class="title-slide slide level1 center">
+<h1>Fin de la Présentation</h1>
+
+</section>
+<section id="contact-et-ressources" class="slide level2 center">
+<h2>Contact et Ressources</h2>
+<p><strong>Auteur :</strong></p>
+<p>Emmanuel Paguiel Bouendo<br>
+Master 2 Économiste d’Entreprise et des Marchés<br>
+Université de Tours</p>
+<p><strong>Email :</strong> emmanuelpaguiel@gmail.com<br>
+<strong>GitHub :</strong> github.com/Paguy-Stream<br>
+<strong>Application :</strong> projetmachinelearning.streamlit.app</p>
+</section>
+<section class="slide level2 center">
+
+<p><strong>Ressources complémentaires :</strong></p>
+<ul>
+<li>Code source complet sur GitHub</li>
+<li>Documentation technique détaillée</li>
+<li>Dataset disponible sur demande (RGPD compliant)</li>
+<li>Résultats reproductibles (random_state=42)</li>
+</ul>
+</section>
+<section class="slide level2 center">
+
+<h3 id="merci-de-votre-attention">Merci de votre attention</h3>
+<p>Questions ?</p>
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="presentation_salaires_academique_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="presentation_salaires_academique_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="presentation_salaires_academique_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="presentation_salaires_academique_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="presentation_salaires_academique_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="presentation_salaires_academique_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="presentation_salaires_academique_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="presentation_salaires_academique_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="presentation_salaires_academique_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="presentation_salaires_academique_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: true,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'convex',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1100,
+
+        height: 1500,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 5.0e-2,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+
+    <script>
+
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+      // slide changes (different for each slide format).
+
+      (function () {
+
+        // dispatch for htmlwidgets
+
+        function fireSlideEnter() {
+
+          const event = window.document.createEvent("Event");
+
+          event.initEvent("slideenter", true, true);
+
+          window.document.dispatchEvent(event);
+
+        }
+
+    
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          fireSlideEnter();
+
+    
+
+          // dispatch for shiny
+
+          if (window.jQuery) {
+
+            if (previousSlide) {
+
+              window.jQuery(previousSlide).trigger("hidden");
+
+            }
+
+            if (currentSlide) {
+
+              window.jQuery(currentSlide).trigger("shown");
+
+            }
+
+          }
+
+        }
+
+    
+
+        // hookup for slidy
+
+        if (window.w3c_slidy) {
+
+          window.w3c_slidy.add_observer(function (slide_num) {
+
+            // slide_num starts at position 1
+
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+          });
+
+        }
+
+    
+
+      })();
+
+    </script>
+
+    
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
+              }
+            }
+            return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+                // target, if specified
+                link.setAttribute("target", "_blank");
+                if (link.getAttribute("rel") === null) {
+                  link.setAttribute("rel", "noopener");
+                }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

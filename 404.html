@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page non trouvée</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Inter", sans-serif;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      overflow: hidden;
+    }
+
+    /* Animation douce du fond */
+    .bg-animation {
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.15), transparent 70%);
+      animation: rotate 20s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 20px;
+      backdrop-filter: blur(8px);
+      background: rgba(255,255,255,0.1);
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      max-width: 600px;
+    }
+
+    h1 {
+      font-size: 6rem;
+      margin: 0;
+      font-weight: 800;
+    }
+
+    p {
+      font-size: 1.3rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 22px;
+      margin: 8px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .btn-primary {
+      background: white;
+      color: #4f46e5;
+    }
+
+    .btn-primary:hover {
+      background: #e5e7eb;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.3);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="bg-animation"></div>
+
+  <div class="container">
+    <h1>404</h1>
+    <p>La page que vous cherchez n’existe pas ou a été déplacée.</p>
+
+    <a href="/index.html" class="btn btn-primary">← Retour à l'accueil</a>
+    <a href="/projects.html" class="btn btn-secondary">Voir les projets</a>
+  </div>
+
+</body>
+</html>

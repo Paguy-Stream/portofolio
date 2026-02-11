@@ -1,0 +1,97 @@
+erDiagram
+    %% Base de données Chinook - Diagramme ERD
+    
+    %% Domaine Catalogue Musical
+    Artist ||--o{ Album : "possède"
+    Album ||--o{ Track : "contient"
+    Genre ||--o{ Track : "catégorise"
+    MediaType ||--o{ Track : "définit"
+    
+    %% Domaine Playlists
+    Playlist ||--o{ PlaylistTrack : "contient"
+    Track ||--o{ PlaylistTrack : "apparaît_dans"
+    
+    %% Domaine Commercial
+    Customer ||--o{ Invoice : "passe"
+    Invoice ||--o{ InvoiceLine : "contient"
+    Track ||--o{ InvoiceLine : "vendu_dans"
+    
+    %% Domaine RH
+    Employee ||--o{ Customer : "supporte"
+    Employee ||--o{ Employee : "rapporte_à"
+    
+    %% Entités avec attributs
+    Artist {
+        int ArtistId PK
+        varchar Name
+    }
+    
+    Album {
+        int AlbumId PK
+        varchar Title
+        int ArtistId FK
+    }
+    
+    Track {
+        int TrackId PK
+        varchar Name
+        int AlbumId FK
+        int MediaTypeId FK
+        int GenreId FK
+        varchar Composer
+        int Milliseconds
+        int Bytes
+        numeric UnitPrice
+    }
+    
+    Genre {
+        int GenreId PK
+        varchar Name
+    }
+    
+    MediaType {
+        int MediaTypeId PK
+        varchar Name
+    }
+    
+    Playlist {
+        int PlaylistId PK
+        varchar Name
+    }
+    
+    PlaylistTrack {
+        int PlaylistId PK_FK
+        int TrackId PK_FK
+    }
+    
+    Customer {
+        int CustomerId PK
+        varchar FirstName
+        varchar LastName
+        varchar Email
+        varchar Country
+        int SupportRepId FK
+    }
+    
+    Employee {
+        int EmployeeId PK
+        varchar FirstName
+        varchar LastName
+        varchar Title
+        int ReportsTo FK
+    }
+    
+    Invoice {
+        int InvoiceId PK
+        int CustomerId FK
+        datetime InvoiceDate
+        numeric Total
+    }
+    
+    InvoiceLine {
+        int InvoiceLineId PK
+        int InvoiceId FK
+        int TrackId FK
+        numeric UnitPrice
+        int Quantity
+    }

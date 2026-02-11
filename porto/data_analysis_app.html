@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>data_analysis_app – Emmanuel Paguiel BOUENDO</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-e31584831b205ffbb2d98406f31c2a5b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Emmanuel Paguiel BOUENDO</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Accueil</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../projects.html"> 
+<span class="menu-text">Projets</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../skills.html"> 
+<span class="menu-text">Compétences</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">Parcours</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/Paguy-Stream"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/emmanuel-paguiel-bouendo/"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:emmanuelpaguiel@gmail.com"> <i class="bi bi-envelope" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#interface-utilisateur" id="toc-interface-utilisateur" class="nav-link active" data-scroll-target="#interface-utilisateur">Interface utilisateur</a></li>
+  <li><a href="#serveur" id="toc-serveur" class="nav-link" data-scroll-target="#serveur">Serveur</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><h1 class="title display-7"></h1></header><div class="quarto-title-block"><div class="quarto-title-tools-only"><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+
+
+
+
+<p>library(shiny)</p>
+<p>library(DT)</p>
+<p>library(plotly)</p>
+<p>library(dplyr)</p>
+<p>library(vroom)</p>
+<section id="interface-utilisateur" class="level1">
+<h1>Interface utilisateur</h1>
+<p>ui &lt;- fluidPage(</p>
+<p>titlePanel(“Analyse Dynamique des Données”),</p>
+<p>sidebarLayout(</p>
+<p>sidebarPanel( width = 3,</p>
+<p>fileInput(“file”, “Importer un fichier CSV”, accept = c(“.csv”)), actionButton(“show_stats”, “Afficher les statistiques”),</p>
+<p>hr(),</p>
+<pre><code>  h4("Analyse KPI"),
+  selectInput("kpi_column", "Variable numérique pour les KPI :", choices = NULL),
+  hr(),
+  
+  h4("Détection d'Anomalies"),
+  checkboxInput("show_anomalies", "Activer la détection d'anomalies", value = FALSE),
+  radioButtons("anomaly_method", "Méthode de détection :", 
+               choices = c("Z-score" = "zscore", "IQR" = "iqr"), 
+               selected = "zscore")
+),
+
+mainPanel(
+  width = 9,
+  fluidRow(
+    column(4, div(class = "custom-value-box blue", 
+                  div(class = "value", textOutput("mean_value")), 
+                  div(class = "subtitle", "Moyenne"))),
+    column(4, div(class = "custom-value-box green", 
+                  div(class = "value", textOutput("median_value")), 
+                  div(class = "subtitle", "Médiane"))),
+    column(4, div(class = "custom-value-box orange", 
+                  div(class = "value", textOutput("total_value")), 
+                  div(class = "subtitle", "Total")))
+  ),
+  
+  div(class = "flex-container",
+      div(class = "flex-item",
+          div(class = "panel panel-info",
+              div(class = "panel-heading", h3("Table des Données Brutes")),
+              div(class = "panel-body", DTOutput("data_table"))
+          )
+      ),
+      div(class = "flex-item",
+          div(class = "panel panel-warning",
+              div(class = "panel-heading", h3("Statistiques Descriptives")),
+              div(class = "panel-body", verbatimTextOutput("stats_output"))
+          )
+      )
+  ),
+  
+  div(class = "graph-container",
+      lapply(1:2, function(i) {
+        div(class = "flex-item",
+            div(class = "panel panel-primary",
+                div(class = "panel-heading", h3(paste("Graphique", i))),
+                div(class = "panel-body",
+                    div(class = "select-flex",
+                        selectInput(paste0("graph_type", i), "Type de graphique :", 
+                                    choices = c("Scatter" = "scatter", "Barres" = "bar", 
+                                                "Ligne" = "line", "Camembert" = "pie", 
+                                                "Histogramme" = "histogram")),
+                        selectInput(paste0("x_var", i), "Variable X :", choices = NULL),
+                        selectInput(paste0("y_var", i), "Variable Y :", choices = NULL)
+                    ),
+                    plotlyOutput(paste0("graph", i), height = "400px")
+                )
+            )
+        )
+      })
+  )
+)</code></pre>
+<p>) )</p>
+</section>
+<section id="serveur" class="level1">
+<h1>Serveur</h1>
+<p>server &lt;- function(input, output, session) { data &lt;- reactiveVal(NULL)</p>
+<p># Observer pour mettre à jour les choix de colonnes observeEvent(data(), { req(data()) numeric_columns &lt;- names(data())[sapply(data(), is.numeric)] updateSelectInput(session, “kpi_column”, choices = numeric_columns)</p>
+<pre><code>for (i in 1:2) {
+  updateSelectInput(session, paste0("x_var", i), choices = names(data()))
+  updateSelectInput(session, paste0("y_var", i), choices = names(data()))
+}</code></pre>
+<p>})</p>
+<p># Importer les données observeEvent(input<span class="math inline">\(file, {
+    req(input\)</span>file) tryCatch({ imported_data &lt;- vroom::vroom(input<span class="math inline">\(file\)</span>datapath, show_col_types = FALSE) data(imported_data) showNotification(“Données importées avec succès.”, type = “message”) }, error = function(e) { showNotification(paste(“Erreur lors de l’importation:”, e$message), type = “error”) }) })</p>
+<p># Afficher les statistiques descriptives observeEvent(input<span class="math inline">\(show_stats, {
+    output\)</span>stats_output &lt;- renderPrint({ req(data()) summary(data()) }) })</p>
+<p># Calculer et afficher les KPI output<span class="math inline">\(mean_value &lt;- renderText({
+    req(data(), input\)</span>kpi_column) column &lt;- data()[[input$kpi_column]] if (is.numeric(column)) { format(round(mean(column, na.rm = TRUE), 2), nsmall = 2) } else { “NA” } })</p>
+<p>output<span class="math inline">\(median_value &lt;- renderText({
+    req(data(), input\)</span>kpi_column) column &lt;- data()[[input$kpi_column]] if (is.numeric(column)) { format(round(median(column, na.rm = TRUE), 2), nsmall = 2) } else { “NA” } })</p>
+<p>output<span class="math inline">\(total_value &lt;- renderText({
+    req(data(), input\)</span>kpi_column) column &lt;- data()[[input$kpi_column]] if (is.numeric(column)) { format(round(sum(column, na.rm = TRUE), 2), nsmall = 2) } else { “NA” } })</p>
+<p># Fonction pour générer les graphiques render_graph_plotly &lt;- function(graph_type_input, x_var_input, y_var_input) { renderPlotly({ req(data(), input[[graph_type_input]], input[[y_var_input]])</p>
+<pre><code>  graph_data &lt;- data()
+  y_var_name &lt;- input[[y_var_input]]
+  x_var_name &lt;- input[[x_var_input]]
+  
+  if (is.null(y_var_name)) return(NULL)
+  
+  tryCatch({
+    p &lt;- NULL
+    if (input[[graph_type_input]] == "scatter") {
+      p &lt;- plot_ly(graph_data, x = ~get(x_var_name), y = ~get(y_var_name), 
+                   type = "scatter", mode = "markers")
+    } else if (input[[graph_type_input]] == "bar") {
+      p &lt;- plot_ly(graph_data, x = ~get(x_var_name), y = ~get(y_var_name), 
+                   type = "bar")
+    } else if (input[[graph_type_input]] == "line") {
+      p &lt;- plot_ly(graph_data, x = ~get(x_var_name), y = ~get(y_var_name), 
+                   type = "scatter", mode = "lines")
+    } else if (input[[graph_type_input]] == "pie") {
+      p &lt;- plot_ly(graph_data, labels = ~get(x_var_name), values = ~get(y_var_name), 
+                   type = "pie")
+    } else if (input[[graph_type_input]] == "histogram") {
+      p &lt;- plot_ly(graph_data, x = ~get(y_var_name), type = "histogram")
+    } else {
+      return(NULL)
+    }
+    
+    # Ajout des anomalies au graphique si activé
+    if (input$show_anomalies &amp;&amp; !is.null(input$kpi_column) &amp;&amp; 
+        input$kpi_column == y_var_name &amp;&amp; is.numeric(graph_data[[y_var_name]])) {
+      anomalies &lt;- detect_anomalies(graph_data[[y_var_name]], method = input$anomaly_method)
+      anomaly_points &lt;- graph_data[anomalies, ]
+      
+      if (nrow(anomaly_points) &gt; 0) {
+        p &lt;- p %&gt;%
+          add_trace(data = anomaly_points,
+                    x = ~get(x_var_name), y = ~get(y_var_name),
+                    type = "scatter", mode = "markers",
+                    marker = list(color = 'red', size = 10, symbol = 'x'),
+                    name = "Anomalies")
+      }
+    }
+    
+    p %&gt;% layout(title = paste(input[[graph_type_input]], "de", y_var_name))
+  }, error = function(e) {
+    showNotification(paste("Erreur dans le graphique:", e$message), type = "error")
+    NULL
+  })
+})</code></pre>
+<p>}</p>
+<p># Initialiser les graphiques output<span class="math inline">\(graph1 &lt;- render_graph_plotly("graph_type1", "x_var1", "y_var1")
+  output\)</span>graph2 &lt;- render_graph_plotly(“graph_type2”, “x_var2”, “y_var2”)</p>
+<p># Fonction de détection d’anomalies detect_anomalies &lt;- function(vec, method = “zscore”, threshold = 3) { if (!is.numeric(vec)) return(rep(FALSE, length(vec)))</p>
+<pre><code>if (method == "zscore") {
+  z_scores &lt;- abs(scale(vec, center = TRUE, scale = TRUE))
+  return(as.vector(z_scores &gt; threshold))
+} else if (method == "iqr") {
+  Q1 &lt;- quantile(vec, 0.25, na.rm = TRUE)
+  Q3 &lt;- quantile(vec, 0.75, na.rm = TRUE)
+  IQR_val &lt;- Q3 - Q1
+  return(vec &lt; (Q1 - 1.5 * IQR_val) | vec &gt; (Q3 + 1.5 * IQR_val))
+} else {
+  return(rep(FALSE, length(vec)))
+}</code></pre>
+<p>}</p>
+<p># Table avec anomalies output$data_table &lt;- renderDT({ req(data()) dat &lt;- data()</p>
+<pre><code>if (input$show_anomalies &amp;&amp; !is.null(input$kpi_column) &amp;&amp; 
+    is.numeric(dat[[input$kpi_column]])) {
+  anomalies &lt;- detect_anomalies(dat[[input$kpi_column]], method = input$anomaly_method)
+  dat$Anomalie &lt;- ifelse(anomalies, "⚠️", "")
+  
+  datatable(dat, options = list(pageLength = 10, scrollX = TRUE)) %&gt;%
+    formatStyle("Anomalie", target = "row",
+                backgroundColor = styleEqual("⚠️", "#ffcccc"))
+} else {
+  datatable(dat, options = list(pageLength = 10, scrollX = TRUE))
+}</code></pre>
+<p>}) }</p>
+<p>shinyApp(ui, server)</p>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<footer class="custom-footer">
+
+  <div class="footer-left">
+
+    © 2025 Emmanuel Paguiel BOUENDO
+
+  </div>
+
+  <div class="footer-right">
+
+    <a href="mailto:emmanuelpaguiel@gmail.com" target="_blank" rel="noopener noreferrer">Contactez-moi</a>
+
+    <a href="about.qmd">À propos</a>
+
+    <a href="../porto/privacy.html">Politique de confidentialité</a> <span class="quarto-credit">Réalisé avec Quarto</span>
+
+    
+
+  </div>
+
+</footer>
+
+
+
+<div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>library(shiny)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>library(DT)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>library(plotly)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>library(dplyr)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>library(vroom)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu"># Interface utilisateur</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>ui <span class="sc">\&lt;</span>- fluidPage(</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>titlePanel("Analyse Dynamique des Données"),</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>sidebarLayout(</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>sidebarPanel( width = 3,</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>fileInput("file", "Importer un fichier CSV", accept = c(".csv")), actionButton("show_stats", "Afficher les statistiques"),</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>hr(),</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="in">```         </span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="in">  h4("Analyse KPI"),</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="in">  selectInput("kpi_column", "Variable numérique pour les KPI :", choices = NULL),</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="in">  hr(),</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="in">  h4("Détection d'Anomalies"),</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="in">  checkboxInput("show_anomalies", "Activer la détection d'anomalies", value = FALSE),</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="in">  radioButtons("anomaly_method", "Méthode de détection :", </span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="in">               choices = c("Z-score" = "zscore", "IQR" = "iqr"), </span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="in">               selected = "zscore")</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="in">),</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="in">mainPanel(</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="in">  width = 9,</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="in">  fluidRow(</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="in">    column(4, div(class = "custom-value-box blue", </span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="in">                  div(class = "value", textOutput("mean_value")), </span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="in">                  div(class = "subtitle", "Moyenne"))),</span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="in">    column(4, div(class = "custom-value-box green", </span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="in">                  div(class = "value", textOutput("median_value")), </span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="in">                  div(class = "subtitle", "Médiane"))),</span></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="in">    column(4, div(class = "custom-value-box orange", </span></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="in">                  div(class = "value", textOutput("total_value")), </span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="in">                  div(class = "subtitle", "Total")))</span></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a><span class="in">  ),</span></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="in">  div(class = "flex-container",</span></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a><span class="in">      div(class = "flex-item",</span></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a><span class="in">          div(class = "panel panel-info",</span></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="in">              div(class = "panel-heading", h3("Table des Données Brutes")),</span></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a><span class="in">              div(class = "panel-body", DTOutput("data_table"))</span></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a><span class="in">          )</span></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="in">      ),</span></span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a><span class="in">      div(class = "flex-item",</span></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a><span class="in">          div(class = "panel panel-warning",</span></span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a><span class="in">              div(class = "panel-heading", h3("Statistiques Descriptives")),</span></span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a><span class="in">              div(class = "panel-body", verbatimTextOutput("stats_output"))</span></span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a><span class="in">          )</span></span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a><span class="in">      )</span></span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a><span class="in">  ),</span></span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a><span class="in">  div(class = "graph-container",</span></span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a><span class="in">      lapply(1:2, function(i) {</span></span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a><span class="in">        div(class = "flex-item",</span></span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a><span class="in">            div(class = "panel panel-primary",</span></span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a><span class="in">                div(class = "panel-heading", h3(paste("Graphique", i))),</span></span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a><span class="in">                div(class = "panel-body",</span></span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a><span class="in">                    div(class = "select-flex",</span></span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a><span class="in">                        selectInput(paste0("graph_type", i), "Type de graphique :", </span></span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a><span class="in">                                    choices = c("Scatter" = "scatter", "Barres" = "bar", </span></span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a><span class="in">                                                "Ligne" = "line", "Camembert" = "pie", </span></span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a><span class="in">                                                "Histogramme" = "histogram")),</span></span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a><span class="in">                        selectInput(paste0("x_var", i), "Variable X :", choices = NULL),</span></span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a><span class="in">                        selectInput(paste0("y_var", i), "Variable Y :", choices = NULL)</span></span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a><span class="in">                    ),</span></span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a><span class="in">                    plotlyOutput(paste0("graph", i), height = "400px")</span></span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a><span class="in">                )</span></span>
+<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a><span class="in">            )</span></span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a><span class="in">        )</span></span>
+<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a><span class="in">      })</span></span>
+<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a>) )</span>
+<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a><span class="fu"># Serveur</span></span>
+<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a>server <span class="sc">\&lt;</span>- function(input, output, session) { data <span class="sc">\&lt;</span>- reactiveVal(NULL)</span>
+<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a><span class="sc">\#</span> Observer pour mettre à jour les choix de colonnes observeEvent(data(), { req(data()) numeric_columns <span class="sc">\&lt;</span>- names(data())<span class="sc">\[</span>sapply(data(), is.numeric)<span class="sc">\]</span> updateSelectInput(session, "kpi_column", choices = numeric_columns)</span>
+<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a><span class="in">```         </span></span>
+<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a><span class="in">for (i in 1:2) {</span></span>
+<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a><span class="in">  updateSelectInput(session, paste0("x_var", i), choices = names(data()))</span></span>
+<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a><span class="in">  updateSelectInput(session, paste0("y_var", i), choices = names(data()))</span></span>
+<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a><span class="sc">\#</span> Importer les données observeEvent(input$file, {</span>
+<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a>    req(input$file) tryCatch({ imported_data <span class="sc">\&lt;</span>- vroom::vroom(input$file$datapath, show_col_types = FALSE) data(imported_data) showNotification("Données importées avec succès.", type = "message") }, error = function(e) { showNotification(paste("Erreur lors de l'importation:", e\$message), type = "error") }) })</span>
+<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a><span class="sc">\#</span> Afficher les statistiques descriptives observeEvent(input$show_stats, {</span>
+<span id="cb6-110"><a href="#cb6-110" aria-hidden="true" tabindex="-1"></a>    output$stats_output <span class="sc">\&lt;</span>- renderPrint({ req(data()) summary(data()) }) })</span>
+<span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a><span class="sc">\#</span> Calculer et afficher les KPI output$mean_value &lt;- renderText({</span>
+<span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a>    req(data(), input$kpi_column) column <span class="sc">\&lt;</span>- data()<span class="sc">\[\[</span>input\$kpi_column<span class="sc">\]\]</span> if (is.numeric(column)) { format(round(mean(column, na.rm = TRUE), 2), nsmall = 2) } else { "NA" } })</span>
+<span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a>output$median_value &lt;- renderText({</span>
+<span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a>    req(data(), input$kpi_column) column <span class="sc">\&lt;</span>- data()<span class="sc">\[\[</span>input\$kpi_column<span class="sc">\]\]</span> if (is.numeric(column)) { format(round(median(column, na.rm = TRUE), 2), nsmall = 2) } else { "NA" } })</span>
+<span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a>output$total_value &lt;- renderText({</span>
+<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a>    req(data(), input$kpi_column) column <span class="sc">\&lt;</span>- data()<span class="sc">\[\[</span>input\$kpi_column<span class="sc">\]\]</span> if (is.numeric(column)) { format(round(sum(column, na.rm = TRUE), 2), nsmall = 2) } else { "NA" } })</span>
+<span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a><span class="sc">\#</span> Fonction pour générer les graphiques render_graph_plotly <span class="sc">\&lt;</span>- function(graph_type_input, x_var_input, y_var_input) { renderPlotly({ req(data(), input<span class="sc">\[\[</span>graph_type_input<span class="sc">\]\]</span>, input<span class="sc">\[\[</span>y_var_input<span class="sc">\]\]</span>)</span>
+<span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a><span class="in">```         </span></span>
+<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a><span class="in">  graph_data &lt;- data()</span></span>
+<span id="cb6-125"><a href="#cb6-125" aria-hidden="true" tabindex="-1"></a><span class="in">  y_var_name &lt;- input[[y_var_input]]</span></span>
+<span id="cb6-126"><a href="#cb6-126" aria-hidden="true" tabindex="-1"></a><span class="in">  x_var_name &lt;- input[[x_var_input]]</span></span>
+<span id="cb6-127"><a href="#cb6-127" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
+<span id="cb6-128"><a href="#cb6-128" aria-hidden="true" tabindex="-1"></a><span class="in">  if (is.null(y_var_name)) return(NULL)</span></span>
+<span id="cb6-129"><a href="#cb6-129" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
+<span id="cb6-130"><a href="#cb6-130" aria-hidden="true" tabindex="-1"></a><span class="in">  tryCatch({</span></span>
+<span id="cb6-131"><a href="#cb6-131" aria-hidden="true" tabindex="-1"></a><span class="in">    p &lt;- NULL</span></span>
+<span id="cb6-132"><a href="#cb6-132" aria-hidden="true" tabindex="-1"></a><span class="in">    if (input[[graph_type_input]] == "scatter") {</span></span>
+<span id="cb6-133"><a href="#cb6-133" aria-hidden="true" tabindex="-1"></a><span class="in">      p &lt;- plot_ly(graph_data, x = ~get(x_var_name), y = ~get(y_var_name), </span></span>
+<span id="cb6-134"><a href="#cb6-134" aria-hidden="true" tabindex="-1"></a><span class="in">                   type = "scatter", mode = "markers")</span></span>
+<span id="cb6-135"><a href="#cb6-135" aria-hidden="true" tabindex="-1"></a><span class="in">    } else if (input[[graph_type_input]] == "bar") {</span></span>
+<span id="cb6-136"><a href="#cb6-136" aria-hidden="true" tabindex="-1"></a><span class="in">      p &lt;- plot_ly(graph_data, x = ~get(x_var_name), y = ~get(y_var_name), </span></span>
+<span id="cb6-137"><a href="#cb6-137" aria-hidden="true" tabindex="-1"></a><span class="in">                   type = "bar")</span></span>
+<span id="cb6-138"><a href="#cb6-138" aria-hidden="true" tabindex="-1"></a><span class="in">    } else if (input[[graph_type_input]] == "line") {</span></span>
+<span id="cb6-139"><a href="#cb6-139" aria-hidden="true" tabindex="-1"></a><span class="in">      p &lt;- plot_ly(graph_data, x = ~get(x_var_name), y = ~get(y_var_name), </span></span>
+<span id="cb6-140"><a href="#cb6-140" aria-hidden="true" tabindex="-1"></a><span class="in">                   type = "scatter", mode = "lines")</span></span>
+<span id="cb6-141"><a href="#cb6-141" aria-hidden="true" tabindex="-1"></a><span class="in">    } else if (input[[graph_type_input]] == "pie") {</span></span>
+<span id="cb6-142"><a href="#cb6-142" aria-hidden="true" tabindex="-1"></a><span class="in">      p &lt;- plot_ly(graph_data, labels = ~get(x_var_name), values = ~get(y_var_name), </span></span>
+<span id="cb6-143"><a href="#cb6-143" aria-hidden="true" tabindex="-1"></a><span class="in">                   type = "pie")</span></span>
+<span id="cb6-144"><a href="#cb6-144" aria-hidden="true" tabindex="-1"></a><span class="in">    } else if (input[[graph_type_input]] == "histogram") {</span></span>
+<span id="cb6-145"><a href="#cb6-145" aria-hidden="true" tabindex="-1"></a><span class="in">      p &lt;- plot_ly(graph_data, x = ~get(y_var_name), type = "histogram")</span></span>
+<span id="cb6-146"><a href="#cb6-146" aria-hidden="true" tabindex="-1"></a><span class="in">    } else {</span></span>
+<span id="cb6-147"><a href="#cb6-147" aria-hidden="true" tabindex="-1"></a><span class="in">      return(NULL)</span></span>
+<span id="cb6-148"><a href="#cb6-148" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb6-149"><a href="#cb6-149" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb6-150"><a href="#cb6-150" aria-hidden="true" tabindex="-1"></a><span class="in">    # Ajout des anomalies au graphique si activé</span></span>
+<span id="cb6-151"><a href="#cb6-151" aria-hidden="true" tabindex="-1"></a><span class="in">    if (input$show_anomalies &amp;&amp; !is.null(input$kpi_column) &amp;&amp; </span></span>
+<span id="cb6-152"><a href="#cb6-152" aria-hidden="true" tabindex="-1"></a><span class="in">        input$kpi_column == y_var_name &amp;&amp; is.numeric(graph_data[[y_var_name]])) {</span></span>
+<span id="cb6-153"><a href="#cb6-153" aria-hidden="true" tabindex="-1"></a><span class="in">      anomalies &lt;- detect_anomalies(graph_data[[y_var_name]], method = input$anomaly_method)</span></span>
+<span id="cb6-154"><a href="#cb6-154" aria-hidden="true" tabindex="-1"></a><span class="in">      anomaly_points &lt;- graph_data[anomalies, ]</span></span>
+<span id="cb6-155"><a href="#cb6-155" aria-hidden="true" tabindex="-1"></a><span class="in">      </span></span>
+<span id="cb6-156"><a href="#cb6-156" aria-hidden="true" tabindex="-1"></a><span class="in">      if (nrow(anomaly_points) &gt; 0) {</span></span>
+<span id="cb6-157"><a href="#cb6-157" aria-hidden="true" tabindex="-1"></a><span class="in">        p &lt;- p %&gt;%</span></span>
+<span id="cb6-158"><a href="#cb6-158" aria-hidden="true" tabindex="-1"></a><span class="in">          add_trace(data = anomaly_points,</span></span>
+<span id="cb6-159"><a href="#cb6-159" aria-hidden="true" tabindex="-1"></a><span class="in">                    x = ~get(x_var_name), y = ~get(y_var_name),</span></span>
+<span id="cb6-160"><a href="#cb6-160" aria-hidden="true" tabindex="-1"></a><span class="in">                    type = "scatter", mode = "markers",</span></span>
+<span id="cb6-161"><a href="#cb6-161" aria-hidden="true" tabindex="-1"></a><span class="in">                    marker = list(color = 'red', size = 10, symbol = 'x'),</span></span>
+<span id="cb6-162"><a href="#cb6-162" aria-hidden="true" tabindex="-1"></a><span class="in">                    name = "Anomalies")</span></span>
+<span id="cb6-163"><a href="#cb6-163" aria-hidden="true" tabindex="-1"></a><span class="in">      }</span></span>
+<span id="cb6-164"><a href="#cb6-164" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb6-165"><a href="#cb6-165" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb6-166"><a href="#cb6-166" aria-hidden="true" tabindex="-1"></a><span class="in">    p %&gt;% layout(title = paste(input[[graph_type_input]], "de", y_var_name))</span></span>
+<span id="cb6-167"><a href="#cb6-167" aria-hidden="true" tabindex="-1"></a><span class="in">  }, error = function(e) {</span></span>
+<span id="cb6-168"><a href="#cb6-168" aria-hidden="true" tabindex="-1"></a><span class="in">    showNotification(paste("Erreur dans le graphique:", e$message), type = "error")</span></span>
+<span id="cb6-169"><a href="#cb6-169" aria-hidden="true" tabindex="-1"></a><span class="in">    NULL</span></span>
+<span id="cb6-170"><a href="#cb6-170" aria-hidden="true" tabindex="-1"></a><span class="in">  })</span></span>
+<span id="cb6-171"><a href="#cb6-171" aria-hidden="true" tabindex="-1"></a><span class="in">})</span></span>
+<span id="cb6-172"><a href="#cb6-172" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-173"><a href="#cb6-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-174"><a href="#cb6-174" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-175"><a href="#cb6-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-176"><a href="#cb6-176" aria-hidden="true" tabindex="-1"></a><span class="sc">\#</span> Initialiser les graphiques output$graph1 &lt;- render_graph_plotly("graph_type1", "x_var1", "y_var1")</span>
+<span id="cb6-177"><a href="#cb6-177" aria-hidden="true" tabindex="-1"></a>  output$graph2 <span class="sc">\&lt;</span>- render_graph_plotly("graph_type2", "x_var2", "y_var2")</span>
+<span id="cb6-178"><a href="#cb6-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-179"><a href="#cb6-179" aria-hidden="true" tabindex="-1"></a><span class="sc">\#</span> Fonction de détection d'anomalies detect_anomalies <span class="sc">\&lt;</span>- function(vec, method = "zscore", threshold = 3) { if (!is.numeric(vec)) return(rep(FALSE, length(vec)))</span>
+<span id="cb6-180"><a href="#cb6-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-181"><a href="#cb6-181" aria-hidden="true" tabindex="-1"></a><span class="in">```         </span></span>
+<span id="cb6-182"><a href="#cb6-182" aria-hidden="true" tabindex="-1"></a><span class="in">if (method == "zscore") {</span></span>
+<span id="cb6-183"><a href="#cb6-183" aria-hidden="true" tabindex="-1"></a><span class="in">  z_scores &lt;- abs(scale(vec, center = TRUE, scale = TRUE))</span></span>
+<span id="cb6-184"><a href="#cb6-184" aria-hidden="true" tabindex="-1"></a><span class="in">  return(as.vector(z_scores &gt; threshold))</span></span>
+<span id="cb6-185"><a href="#cb6-185" aria-hidden="true" tabindex="-1"></a><span class="in">} else if (method == "iqr") {</span></span>
+<span id="cb6-186"><a href="#cb6-186" aria-hidden="true" tabindex="-1"></a><span class="in">  Q1 &lt;- quantile(vec, 0.25, na.rm = TRUE)</span></span>
+<span id="cb6-187"><a href="#cb6-187" aria-hidden="true" tabindex="-1"></a><span class="in">  Q3 &lt;- quantile(vec, 0.75, na.rm = TRUE)</span></span>
+<span id="cb6-188"><a href="#cb6-188" aria-hidden="true" tabindex="-1"></a><span class="in">  IQR_val &lt;- Q3 - Q1</span></span>
+<span id="cb6-189"><a href="#cb6-189" aria-hidden="true" tabindex="-1"></a><span class="in">  return(vec &lt; (Q1 - 1.5 * IQR_val) | vec &gt; (Q3 + 1.5 * IQR_val))</span></span>
+<span id="cb6-190"><a href="#cb6-190" aria-hidden="true" tabindex="-1"></a><span class="in">} else {</span></span>
+<span id="cb6-191"><a href="#cb6-191" aria-hidden="true" tabindex="-1"></a><span class="in">  return(rep(FALSE, length(vec)))</span></span>
+<span id="cb6-192"><a href="#cb6-192" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb6-193"><a href="#cb6-193" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-194"><a href="#cb6-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-195"><a href="#cb6-195" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-196"><a href="#cb6-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-197"><a href="#cb6-197" aria-hidden="true" tabindex="-1"></a><span class="sc">\#</span> Table avec anomalies output\$data_table <span class="sc">\&lt;</span>- renderDT({ req(data()) dat <span class="sc">\&lt;</span>- data()</span>
+<span id="cb6-198"><a href="#cb6-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-199"><a href="#cb6-199" aria-hidden="true" tabindex="-1"></a><span class="in">```         </span></span>
+<span id="cb6-200"><a href="#cb6-200" aria-hidden="true" tabindex="-1"></a><span class="in">if (input$show_anomalies &amp;&amp; !is.null(input$kpi_column) &amp;&amp; </span></span>
+<span id="cb6-201"><a href="#cb6-201" aria-hidden="true" tabindex="-1"></a><span class="in">    is.numeric(dat[[input$kpi_column]])) {</span></span>
+<span id="cb6-202"><a href="#cb6-202" aria-hidden="true" tabindex="-1"></a><span class="in">  anomalies &lt;- detect_anomalies(dat[[input$kpi_column]], method = input$anomaly_method)</span></span>
+<span id="cb6-203"><a href="#cb6-203" aria-hidden="true" tabindex="-1"></a><span class="in">  dat$Anomalie &lt;- ifelse(anomalies, "⚠️", "")</span></span>
+<span id="cb6-204"><a href="#cb6-204" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
+<span id="cb6-205"><a href="#cb6-205" aria-hidden="true" tabindex="-1"></a><span class="in">  datatable(dat, options = list(pageLength = 10, scrollX = TRUE)) %&gt;%</span></span>
+<span id="cb6-206"><a href="#cb6-206" aria-hidden="true" tabindex="-1"></a><span class="in">    formatStyle("Anomalie", target = "row",</span></span>
+<span id="cb6-207"><a href="#cb6-207" aria-hidden="true" tabindex="-1"></a><span class="in">                backgroundColor = styleEqual("⚠️", "#ffcccc"))</span></span>
+<span id="cb6-208"><a href="#cb6-208" aria-hidden="true" tabindex="-1"></a><span class="in">} else {</span></span>
+<span id="cb6-209"><a href="#cb6-209" aria-hidden="true" tabindex="-1"></a><span class="in">  datatable(dat, options = list(pageLength = 10, scrollX = TRUE))</span></span>
+<span id="cb6-210"><a href="#cb6-210" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb6-211"><a href="#cb6-211" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-212"><a href="#cb6-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-213"><a href="#cb6-213" aria-hidden="true" tabindex="-1"></a>}) }</span>
+<span id="cb6-214"><a href="#cb6-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-215"><a href="#cb6-215" aria-hidden="true" tabindex="-1"></a>shinyApp(ui, server)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div><style>
+
+  .custom-footer {
+
+    background-color: #2c3e50; /* Bleu foncé */
+
+    color: #ecf0f1;            /* Blanc cassé */
+
+    padding: 1rem 2rem;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    font-size: 0.9rem;
+
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+
+    position: fixed;
+
+    bottom: 0;
+
+    width: 100%;
+
+    z-index: 999;
+
+  }
+
+
+
+  .custom-footer a {
+
+    color: #3498db; /* Bleu clair */
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    transition: color 0.3s ease;
+
+  }
+
+
+
+  .custom-footer a:hover {
+
+    color: #1abc9c; /* Vert turquoise */
+
+  }
+
+
+
+/* ------------------------------------- */
+
+/* Pied de Page Personnalisé (custom-footer) */
+
+/* ------------------------------------- */
+
+.custom-footer {
+
+  /* Couleurs adaptées à votre thème : */
+
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); /* Reprend le dégradé du hero-banner ou une couleur solide */
+
+  color: var(--white); /* Couleur de texte claire */
+
+  padding: 1.5rem 2.5rem; /* Plus d'espace pour un look moderne */
+
+  display: flex;
+
+  justify-content: space-between; /* Espacement entre gauche et droite */
+
+  align-items: center;
+
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  font-size: 0.95rem; /* Légèrement plus grand pour la lisibilité */
+
+  box-shadow: 0 -3px 10px rgba(0,0,0,0.15); /* Ombre douce vers le haut */
+
+
+
+  /* Si vous voulez un pied de page fixe en bas de l'écran, même sur des pages courtes.
+
+     Soyez prudent, cela peut masquer du contenu sur des écrans petits.
+
+     Sinon, retirez ces lignes pour qu'il soit en bas du contenu. */
+
+  /* position: sticky; */ /* Utiliser sticky plutôt que fixed pour une meilleure intégration au flux */
+
+  /* bottom: 0; */
+
+  /* width: 100%; */
+
+  /* z-index: 999; */ /* Assure qu'il est au-dessus d'autres éléments */
+
+}
+
+
+
+.custom-footer .footer-left {
+
+  flex-shrink: 0; /* Empêche le texte de rétrécir trop */
+
+  margin-right: 1.5rem; /* Espace entre le texte du copyright et les liens */
+
+}
+
+
+
+.custom-footer .footer-right {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 1.5rem; /* Espacement entre les liens */
+
+  flex-wrap: wrap; /* Permet aux liens de passer à la ligne sur petits écrans */
+
+}
+
+
+
+.custom-footer a {
+
+  color: var(--white); /* Couleur par défaut des liens (blanc) */
+
+  text-decoration: none;
+
+  font-weight: 500;
+
+  transition: color 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
+
+  opacity: 0.8; /* Légèrement transparent par défaut */
+
+}
+
+
+
+.custom-footer a:hover {
+
+  color: var(--light-gray); /* Couleur de survol (un gris très clair) */
+
+  text-decoration: underline;
+
+  transform: translateY(-2px); /* Léger soulèvement */
+
+  opacity: 1;
+
+}
+
+
+
+.custom-footer .quarto-credit { /* Style pour le texte "Réalisé avec Quarto" */
+
+  color: rgba(255, 255, 255, 0.7); /* Plus discret */
+
+  font-size: 0.85rem;
+
+}
+
+
+
+/* ------------------------------------- */
+
+/* Mode Sombre pour le pied de page      */
+
+/* ------------------------------------- */
+
+@media (prefers-color-scheme: dark) {
+
+  .custom-footer {
+
+    background: linear-gradient(135deg, #2c3e50 0%, #4ca1af 100%); /* Adaptez ce dégradé pour le mode sombre */
+
+    color: var(--dark-mode-text);
+
+    box-shadow: 0 -3px 10px rgba(0,0,0,0.3);
+
+  }
+
+
+
+  .custom-footer a {
+
+    color: var(--dark-mode-text); /* Couleur des liens en mode sombre */
+
+  }
+
+
+
+  .custom-footer a:hover {
+
+    color: var(--primary-color); /* Couleur de survol en mode sombre */
+
+  }
+
+
+
+  .custom-footer .quarto-credit {
+
+    color: rgba(245, 245, 245, 0.6);
+
+  }
+
+}
+
+
+
+/* ------------------------------------- */
+
+/* Responsive pour le pied de page       */
+
+/* ------------------------------------- */
+
+@media (max-width: 768px) {
+
+  .custom-footer {
+
+    flex-direction: column; /* Empile les sections du pied de page sur mobile */
+
+    text-align: center;
+
+    padding: 1rem;
+
+  }
+
+  .custom-footer .footer-left,
+
+  .custom-footer .footer-right {
+
+    flex-direction: column; /* Empile les liens aussi */
+
+    gap: 0.5rem;
+
+    margin-bottom: 0.5rem; /* Espace entre les sections */
+
+  }
+
+  .custom-footer .footer-right {
+
+    margin-top: 0.5rem; /* Assure un peu d'espace si le left est en haut */
+
+  }
+
+}
+<script id = "quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+</body>
+
+</html>
+</style></div><script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

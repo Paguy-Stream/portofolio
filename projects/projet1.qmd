@@ -1,0 +1,73 @@
+---
+
+title: "Analyse des Ventes E-commerce"
+
+subtitle: "Prédiction des tendances avec Machine Learning"
+
+date: "2024-12-01"
+
+categories: \[Python, Machine Learning, E-commerce\]
+
+image: "images/projet1-preview.png"
+
+---
+
+\## Contexte du Projet
+
+Ce projet vise à analyser les données de vente d'un site e-commerce pour prédire les tendances futures et optimiser les stratégies marketing.
+
+\## Objectifs
+
+\- Analyser les patterns de vente
+
+\- Identifier les produits les plus performants
+
+\- Prédire les ventes futures
+
+\- Recommander des actions marketing
+
+\## Données Utilisées
+
+\- \*\*Source\*\* : Dataset de ventes e-commerce (50k transactions)
+
+\- \*\*Période\*\* : Janvier 2023 - Décembre 2023
+
+\- \*\*Variables\*\* : Date, produit, prix, quantité, client, région
+
+\## Méthodologie
+
+\### 1. Exploration des Données
+
+\`\`\`python
+
+import pandas as pd
+
+import numpy as np
+
+import matplotlib.pyplot as plt
+
+import seaborn as sns
+
+\# Chargement des données
+
+df = pd.read_csv('ventes_ecommerce.csv')
+
+\# Exploration initiale
+
+print(df.head())
+
+print(df.info())
+
+print(df.describe())
+
+2.  Analyse Exploratoire
+
+\`\`\`python
+
+# Évolution des ventes dans le temps
+
+plt.figure(figsize=(12, 6)) df.groupby('date')\['chiffre_affaires'\].sum().plot() plt.title('Évolution du Chiffre d'Affaires') plt.show()
+
+# Top 10 des produits
+
+top_products = df.groupby('produit')\['quantite'\].sum().nlargest(10) plt.figure(figsize=(10, 6)) top_products.plot(kind='bar') plt.title('Top 10 des Produits les Plus Vendus') plt.show()

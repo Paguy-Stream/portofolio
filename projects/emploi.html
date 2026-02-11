@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Déterminants de l'emploi non salarié en France - Emmanuel Paguiel BOUENDO</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #1b4332;
+            --secondary-color: #52b788;
+            --accent-color: #2d6a4f;
+            --light-bg: #d8f3dc;
+            --white: #ffffff;
+            --text-dark: #1e1e1e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path fill="rgba(255,255,255,0.1)" d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .hero-section h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .hero-section .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-section .meta-info {
+            font-size: 1rem;
+            opacity: 0.85;
+            margin-top: 1.5rem;
+        }
+
+        .action-buttons {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-hero {
+            padding: 0.9rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary-hero {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .btn-primary-hero:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn-secondary-hero {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary-hero:hover {
+            background: white;
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Container */
+        .container-custom {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Section Cards */
+        .section-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--secondary-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .section-card h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-card h3 {
+            color: var(--accent-color);
+            font-size: 1.4rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(27, 67, 50, 0.3);
+        }
+
+        .stat-box .number {
+            font-size: 2.8rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-box .label {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* Methodology Grid */
+        .methodology-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .method-box {
+            background: var(--light-bg);
+            padding: 1.8rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--secondary-color);
+            transition: all 0.3s ease;
+        }
+
+        .method-box:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .method-box h4 {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .method-box p {
+            color: #495057;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        /* Key Findings */
+        .key-findings {
+            background: linear-gradient(135deg, #e7f5ec 0%, #d8f3dc 100%);
+            border-left: 5px solid var(--secondary-color);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .key-findings h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+
+        .key-findings ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .key-findings ul li {
+            padding-left: 2rem;
+            margin-bottom: 0.8rem;
+            position: relative;
+            color: #2d3748;
+        }
+
+        .key-findings ul li:before {
+            content: "▸";
+            color: var(--secondary-color);
+            font-weight: bold;
+            font-size: 1.3rem;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Profile Grid */
+        .profiles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .profile-box {
+            background: white;
+            border: 2px solid var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .profile-box:hover {
+            border-color: var(--secondary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .profile-box h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .profile-box p {
+            color: #495057;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Lists */
+        ul.custom-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul.custom-list li {
+            padding-left: 1.8rem;
+            margin-bottom: 0.8rem;
+            position: relative;
+        }
+
+        ul.custom-list li:before {
+            content: "✓";
+            color: var(--secondary-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .back-button:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateX(-5px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .hero-section .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .stats-grid,
+            .methodology-grid,
+            .profiles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-card {
+                padding: 1.5rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn-hero {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Lien de retour -->
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="../index.html" class="back-link">← Accueil</a> • 
+        <a href="../projects.html" class="back-link">Tous les projets</a>
+    </div>
+
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1>Emploi non salarié en France (2015)&nbsp;: choix ou contrainte&nbsp;?</h1>
+            <p class="subtitle">Mémoire de Recherche - Master Économiste de l'Entreprise</p>
+            <p class="meta-info">
+                <strong>Auteur :</strong> Emmanuel Paguiel BOUENDO<br>
+                <strong>Directeur :</strong> M. Yann KOSSI | <strong>Année :</strong> 2024-2025<br>
+                <strong>Université de Tours</strong>
+            </p>
+            <div class="action-buttons">
+                <a href="../files/Emploi.pdf" class="btn-hero btn-secondary-hero" target="_blank">
+                    <i class="bi bi-eye"></i> Voir le PDF
+                </a>
+                <a href="../files/Emploi.pdf" class="btn-hero btn-primary-hero" download>
+                    <i class="bi bi-download"></i> Télécharger le PDF
+                </a>
+                <a href="https://github.com/Paguy-Stream" class="btn-hero btn-secondary-hero" target="_blank">
+                    <i class="bi bi-github"></i> Code Source GitHub
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-custom">
+        <a href="../projects.html" class="back-button">
+            <i class="bi bi-arrow-left"></i> Retour aux projets
+        </a>
+
+        <!-- Résumé -->
+        <div class="section-card">
+            <h2><i class="bi bi-graph-up-arrow"></i> Résumé de la Recherche</h2>
+            <p>
+                Cette étude analyse les déterminants de l'emploi non salarié en France en 2015, une période marquée par le développement du statut d'auto-entrepreneur et les transformations post-crise de 2008. L'objectif est de comprendre si le non-salariat constitue un <strong>choix délibéré d'autonomie</strong> ou une <strong>réponse contrainte</strong> aux difficultés d'insertion dans le salariat.
+            </p>
+            
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span class="number">198 234</span>
+                    <span class="label">Observations analysées</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number">12%</span>
+                    <span class="label">Non-salariés en 2015</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number">18</span>
+                    <span class="label">Variables mobilisées</span>
+                </div>
+                <div class="stat-box">
+                    <span class="number">4</span>
+                    <span class="label">Profils identifiés</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Problématique -->
+        <div class="section-card">
+            <h2><i class="bi bi-question-circle"></i> Problématique</h2>
+            <p>
+                L'emploi non salarié en France a connu une progression de <strong>1,7 point entre 2000 et 2015</strong>, atteignant 9,7% de la population active. Cette évolution s'inscrit dans une reconfiguration du marché du travail marquée par :
+            </p>
+            <ul class="custom-list">
+                <li>La création du statut d'auto-entrepreneur en 2008 (+143% de créations entre 2009 et 2015)</li>
+                <li>L'émergence de l'économie numérique et des plateformes (gig economy)</li>
+                <li>Les difficultés d'insertion post-crise économique de 2008</li>
+                <li>Le décalage entre formations initiales et besoins du marché</li>
+            </ul>
+            
+            <div class="key-findings">
+                <h3>Question centrale</h3>
+                <p style="font-size: 1.1rem; font-style: italic;">
+                    <strong>S'agit-il d'un phénomène structurel</strong> lié à de nouvelles formes d'organisation du travail, ou d'une <strong>adaptation conjoncturelle</strong> aux chocs économiques ?
+                </p>
+            </div>
+        </div>
+
+        <!-- Méthodologie -->
+        <div class="section-card">
+            <h2><i class="bi bi-tools"></i> Méthodologie</h2>
+            <p>L'analyse repose sur une démarche en trois temps combinant approches descriptive, factorielle et économétrique :</p>
+            
+            <div class="methodology-grid">
+                <div class="method-box">
+                    <h4>1. Analyse Descriptive</h4>
+                    <p>Caractérisation des profils socio-démographiques et professionnels selon le statut d'emploi (salariés vs non-salariés)</p>
+                </div>
+                
+                <div class="method-box">
+                    <h4>2. ACM + K-means</h4>
+                    <p>Analyse des Correspondances Multiples et classification pour identifier 4 classes d'insertion professionnelle</p>
+                </div>
+                
+                <div class="method-box">
+                    <h4>3. Modèle Probit</h4>
+                    <p>Quantification des effets marginaux de chaque déterminant sur la probabilité d'être non-salarié</p>
+                </div>
+            </div>
+            
+            <h3>Source des données</h3>
+            <ul class="custom-list">
+                <li><strong>Enquête Emploi en Continu (EEC) 2015</strong> - INSEE</li>
+                <li>Échantillon représentatif des ménages français (taux de réponse : 78%)</li>
+                <li>Focus sur les actifs occupés hors secteur agricole</li>
+                <li>198 234 individus après exclusion des inactifs et chômeurs</li>
+            </ul>
+        </div>
+
+        <!-- Résultats -->
+        <div class="section-card">
+            <h2><i class="bi bi-lightbulb"></i> Principaux Résultats</h2>
+            
+            <h3>🔍 Deux dimensions structurantes</h3>
+            <p>L'Analyse des Correspondances Multiples révèle que les trajectoires professionnelles se répartissent selon :</p>
+            <ul class="custom-list">
+                <li><strong>Axe 1 (13,3% d'inertie) :</strong> Opposition stabilité perçue / instabilité déclarée (recherche d'emploi, souhait de changement, expérience du chômage)</li>
+                <li><strong>Axe 2 (8,3% d'inertie) :</strong> Capital humain et disponibilité individuelle (niveau de diplôme, situation familiale, âge)</li>
+            </ul>
+            
+            <h3>👥 Quatre profils d'insertion identifiés</h3>
+            <div class="profiles-grid">
+                <div class="profile-box">
+                    <h4>Classe 1 : Stabilité qualifiée</h4>
+                    <p>Professions intermédiaires (85,6% hommes), en couple, avec enfants. Faible mobilité déclarée (23,6% souhaitent changer).</p>
+                </div>
+                
+                <div class="profile-box">
+                    <h4>Classe 2 : Cadres flexibles</h4>
+                    <p>30-39 ans, fortement diplômés (33,6% Licence+), célibataires. Aspirent à réduire le temps de travail (99%).</p>
+                </div>
+                
+                <div class="profile-box">
+                    <h4>Classe 3 : Fin de carrière</h4>
+                    <p>60+ ans (20,6%), ouvrières (80,1%), résidence DOM (87,8%). Stabilité ancrée, faible mobilité.</p>
+                </div>
+                
+                <div class="profile-box">
+                    <h4>Classe 4 : Jeunes en insertion</h4>
+                    <p>15-29 ans (35,4%), bac général (85,1%). Forte propension au non-salariat (19,9%) et recherche d'emploi active.</p>
+                </div>
+            </div>
+            
+            <div class="key-findings">
+                <h3>⚡ Effets marginaux significatifs (Modèle Probit)</h3>
+                <ul>
+                    <li><strong>+14,05 points :</strong> Souhait d'emploi supplémentaire → stratégie d'accumulation de revenus</li>
+                    <li><strong>+6,91 points :</strong> Diplôme Licence/Master/Doctorat → capital humain élevé</li>
+                    <li><strong>+4,18 points :</strong> Souhait de moins d'heures → recherche de flexibilité</li>
+                    <li><strong>-3,86 points :</strong> Recherche active d'emploi → orientation vers le salariat</li>
+                    <li><strong>+2,70 points :</strong> Nationalité étrangère → contrainte d'insertion</li>
+                    <li><strong>+2,57 points :</strong> Expérience du chômage → stratégie de repli</li>
+                    <li><strong>+1,22 points :</strong> Résidence DOM → spécificité territoriale</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Contributions -->
+         <div class="section-card">
+            <h2><i class="bi bi-chat-left-quote"></i> Discussion</h2>
+            
+            <h3>Interprétation des résultats</h3>
+            <ul class="custom-list">
+                <li>Met en lumière l’hétérogénéité interne du non-salariat, au-delà de la simple opposition salariat/non-salariat</li>
+                <li>Suggère une dualité : autonomie choisie pour certains, stratégie d’adaptation pour d’autres</li>
+                <li>Indique que l’instabilité perçue (recherche d’emploi, souhait de changement) est plus discriminante que le statut formel</li>
+                <li>Confirme le rôle des aspirations professionnelles comme facteurs associés au statut d’emploi</li>
+            </ul>
+    
+            <h3>Perspectives d’analyse</h3>
+            <p>Ces résultats pourraient nourrir une réflexion sur l’accompagnement professionnel :</p>
+            <ul class="custom-list">
+                <li>Moins centré sur le <strong>statut administratif</strong> (salarié vs non-salarié)</li>
+                <li>Davantage orienté vers la <strong>qualité perçue de l’insertion</strong> et la stabilité économique</li>
+                <li>Adapté aux <strong>ressources individuelles</strong> (capital humain, situation familiale)</li>
+                <li>Différencié selon les profils identifiés (jeunes en insertion, cadres flexibles, etc.)</li>
+            </ul>
+        </div>
+
+        <!-- Structure -->
+        <div class="section-card">
+            <h2><i class="bi bi-book"></i> Structure du Mémoire</h2>
+            <ol style="padding-left: 2rem; font-size: 1.05rem; line-height: 2;">
+                <li><strong>Introduction</strong> - Contexte et problématique</li>
+                <li><strong>Revue de littérature</strong> - Fondements théoriques et études empiriques</li>
+                <li><strong>Données et méthodologie</strong> - EEC 2015, variables mobilisées</li>
+                <li><strong>Analyse descriptive</strong> - Profils socio-démographiques par statut</li>
+                <li><strong>Analyse factorielle (ACM)</strong> - Dimensions structurantes de l'insertion</li>
+                <li><strong>Typologie (K-means)</strong> - Classes d'insertion professionnelle</li>
+                <li><strong>Modélisation économétrique</strong> - Effets marginaux (Probit)</li>
+                <li><strong>Conclusion</strong> - Discussion des résultats et perspectives</li>
+            </ol>
+        </div>
+
+
+
+        <a href="../projects.html" class="back-button">
+            <i class="bi bi-arrow-left"></i> Retour aux projets
+        </a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -43,3 +43,5 @@ yarn.lock
 .vscode/
 
 /.quarto/
+
+**/*.quarto_ipynb

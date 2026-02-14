@@ -573,7 +573,7 @@ format:
   </div>
   
   <div class="pdf-viewer">
-    <iframe src="../files/joie.pdf" title="Rapport d'évaluation des modèles de prédiction du bonheur">
+    <iframe src="/porto/joie.pdf" title="Rapport d'évaluation des modèles de prédiction du bonheur">
       <div class="pdf-fallback">
         <h4>Visualisation PDF non disponible</h4>
         <p>Votre navigateur ne supporte pas la visualisation de PDF intégrés.<br>
@@ -585,7 +585,7 @@ format:
   <div class="download-section">
     <h3>Téléchargement</h3>
     <p>Accédez au rapport complet en format PDF</p>
-    <a href="../files/joie.pdf" class="download-btn" download="Rapport_Modelisation_Bonheur.pdf">
+    <a href="/porto/joie.pdf" class="download-btn" download="Rapport_Modelisation_Bonheur.pdf">
       <span class="download-icon"></span>
       Télécharger le rapport PDF
     </a>

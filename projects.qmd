@@ -455,6 +455,26 @@ format:
   </div>
 </a>
 
+
+<a href="projects/depression_easySHARE.html" class="project-card" data-category="eco">
+  <div class="project-image" style="background: linear-gradient(135deg, #2d6a4f, #52b788);">
+    <span class="project-badge badge-eco">Économétrie</span>
+    <span class="project-status status-complete">✓ Terminé</span>
+  </div>
+  <div class="project-content">
+    <h3 class="project-title">Déterminants de la dépression – easySHARE</h3>
+    <p class="project-desc">Analyse longitudinale des symptômes dépressifs chez 8 408 seniors français (7 vagues, 2004–2017). Six familles de modèles : MPA/Logit/Probit, ZINB, probit bivarié, panel EF/EA.</p>
+    <div class="project-tech">
+      <span class="tech-tag">R</span>
+      <span class="tech-tag">Panel EF</span>
+      <span class="tech-tag">ZINB</span>
+      <span class="tech-tag">Probit bivarié</span>
+      <span class="tech-tag">Quarto</span>
+    </div>
+    <div class="view-more">Voir le projet <span class="arrow">→</span></div>
+  </div>
+</a>
+
   </div>
 
   <div class="cta-section">

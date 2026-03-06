@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Déterminants de la dépression – easySHARE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:       #12110f;
+      --paper:     #f5f0e8;
+      --cream:     #ede8dc;
+      --green:     #2d6a4f;
+      --green-lt:  #52b788;
+      --green-pale:#d8f3dc;
+      --amber:     #d4a017;
+      --rust:      #8b3a2a;
+      --muted:     #6b6558;
+      --border:    #cfc9bb;
+      --mono:      'JetBrains Mono', monospace;
+      --serif:     'Lora', serif;
+      --sans:      'DM Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 92vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(0deg, transparent, transparent 39px, var(--border) 39px, var(--border) 40px),
+        repeating-linear-gradient(90deg, transparent, transparent 39px, var(--border) 39px, var(--border) 40px);
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .hero-left {
+      padding: 4rem 3rem 4rem 5vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--green-pale);
+      color: var(--green);
+      border: 1px solid var(--green-lt);
+      border-radius: 4px;
+      padding: 0.3rem 0.75rem;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      width: fit-content;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 7px; height: 7px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity:1; transform:scale(1); }
+      50% { opacity:.4; transform:scale(.7); }
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--green);
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 420px;
+      margin-bottom: 2.5rem;
+      line-height: 1.65;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .meta-chip {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.35rem 0.8rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--green);
+      color: #fff;
+      border: none;
+      padding: 0.75rem 1.75rem;
+      border-radius: 4px;
+      font-family: var(--sans);
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover { background: #1f4d38; transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--ink);
+      border: 1.5px solid var(--border);
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      font-family: var(--sans);
+      font-size: 0.875rem;
+      font-weight: 400;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-outline:hover { border-color: var(--ink); }
+
+    /* ── HERO RIGHT : stats panel ── */
+    .hero-right {
+      background: var(--ink);
+      padding: 4rem 4vw 4rem 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-right::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(82,183,136,.25), transparent 70%);
+      border-radius: 50%;
+    }
+
+    .stats-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green-lt);
+      margin-bottom: 2rem;
+    }
+
+    .stat-row {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding: 1.15rem 0;
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+    }
+
+    .stat-row:last-child { border-bottom: 1px solid rgba(255,255,255,.08); }
+
+    .stat-num {
+      font-family: var(--serif);
+      font-size: 1.9rem;
+      font-weight: 600;
+      color: #fff;
+      min-width: 90px;
+      letter-spacing: -.02em;
+    }
+
+    .stat-num span {
+      font-size: 1rem;
+      color: var(--green-lt);
+      margin-left: 2px;
+    }
+
+    .stat-desc {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,.5);
+      line-height: 1.4;
+    }
+
+    /* ── LAYOUT ── */
+    .page { max-width: 1040px; margin: 0 auto; padding: 0 2rem; }
+
+    /* ── SECTION TITLE ── */
+    .section { padding: 5rem 0; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-num {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--green);
+      letter-spacing: .1em;
+      min-width: 28px;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── CONTEXTE ── */
+    .context-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .context-block {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.75rem;
+    }
+
+    .context-block h4 {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--ink);
+    }
+
+    .context-block p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .context-block.accent {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff;
+    }
+
+    .context-block.accent h4 { color: #fff; }
+    .context-block.accent p  { color: rgba(255,255,255,.8); }
+
+    /* ── MODÈLES ── */
+    .models-timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .models-timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px; bottom: 8px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--green), var(--amber), var(--rust));
+    }
+
+    .model-group {
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .model-group::before {
+      content: '';
+      position: absolute;
+      left: -2.35rem; top: 6px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--paper);
+      border: 2.5px solid var(--green);
+    }
+
+    .model-group-title {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.75rem;
+    }
+
+    .model-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .model-card {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 0.6rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .model-name {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .model-note {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--muted);
+    }
+
+    .model-card.selected {
+      border-color: var(--green);
+      background: var(--green-pale);
+    }
+
+    .model-card.selected .model-name { color: var(--green); }
+
+    /* ── RÉSULTATS ── */
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .result-card {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+      background: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .result-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: var(--green);
+    }
+
+    .result-card.amber::after { background: var(--amber); }
+    .result-card.rust::after  { background: var(--rust); }
+
+    .result-var {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .result-effect {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.3rem;
+    }
+
+    .result-effect .unit {
+      font-size: 0.85rem;
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    .result-interp {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    /* ── TESTS ── */
+    .tests-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    .tests-table thead tr {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .tests-table th {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .tests-table td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .tests-table tr:nth-child(even) td { background: var(--cream); }
+
+    .tests-table .result-ok {
+      color: var(--green);
+      font-weight: 500;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+    }
+
+    /* ── OUTILS ── */
+    .tools-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .tool-tag {
+      background: var(--ink);
+      color: rgba(255,255,255,.85);
+      border-radius: 4px;
+      padding: 0.35rem 0.75rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: .04em;
+    }
+
+    /* ── PDF VIEWER ── */
+    .pdf-section {
+      background: var(--ink);
+      padding: 5rem 0;
+    }
+
+    .pdf-section .page { color: #fff; }
+
+    .pdf-section .section-title { color: #fff; }
+    .pdf-section .section-line  { background: rgba(255,255,255,.15); }
+    .pdf-section .section-num   { color: var(--green-lt); }
+
+    .pdf-wrapper {
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .pdf-toolbar {
+      background: rgba(255,255,255,.05);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .pdf-toolbar-title {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: rgba(255,255,255,.5);
+      letter-spacing: .06em;
+    }
+
+    .pdf-toolbar a {
+      color: var(--green-lt);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      text-decoration: none;
+      letter-spacing: .06em;
+    }
+
+    .pdf-toolbar a:hover { color: #fff; }
+
+    iframe {
+      display: block;
+      width: 100%;
+      height: 700px;
+      border: none;
+      background: #fff;
+    }
+
+    /* ── FOOTER ── */
+    .back-bar {
+      background: var(--cream);
+      border-top: 1px solid var(--border);
+      padding: 2rem 0;
+    }
+
+    .back-bar .page {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .back-link {
+      color: var(--green);
+      text-decoration: none;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .back-link:hover { color: var(--ink); }
+
+    .back-copy {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-family: var(--mono);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-right { padding: 3rem 2rem; }
+      .context-grid { grid-template-columns: 1fr; }
+      .results-grid { grid-template-columns: 1fr; }
+      iframe { height: 450px; }
+      .hero-left { padding: 3rem 1.5rem; }
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .fade-in.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- ══ HERO ══════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-left">
+    <span class="hero-tag">Économétrie · Panel · M2</span>
+
+    <h1 class="hero-title">
+      Déterminants des<br>
+      <em>symptômes dépressifs</em><br>
+      chez les seniors français
+    </h1>
+
+    <p class="hero-subtitle">
+      Analyse économétrique longitudinale à partir des données
+      easySHARE — panel non cylindré couvrant 8 408 individus
+      sur 7 vagues (2004–2017).
+    </p>
+
+    <div class="hero-meta">
+      <span class="meta-chip">easySHARE · Stata</span>
+      <span class="meta-chip">R · LaTeX · Quarto</span>
+      <span class="meta-chip">6 familles de modèles</span>
+      <span class="meta-chip">M2 MÉcEn · 2025-2026</span>
+    </div>
+
+    <div class="hero-actions">
+      <a href="#rapport" class="btn-primary">
+        📄 Consulter le rapport
+      </a>
+      <a href="#modeles" class="btn-outline">
+        Voir la méthode →
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <p class="stats-label">// Chiffres clés du projet</p>
+
+    <div class="stat-row">
+      <div class="stat-num">8 408<span>ind.</span></div>
+      <div class="stat-desc">individus uniques<br>26 247 obs. totales</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-num">33,6<span>%</span></div>
+      <div class="stat-desc">taux de dépression<br>(EURO-D ≥ 4)</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-num">0,736</div>
+      <div class="stat-desc">AUC — Logit / Probit / MPA<br>convergence parfaite</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-num">0,374<span>***</span></div>
+      <div class="stat-desc">ρ̂ probit bivarié<br>dépression × santé perçue</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-num">1,86</div>
+      <div class="stat-desc">ratio var/moy EURO-D<br>surdispersion confirmée</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTEXTE ══════════════════════════════════════════════ -->
+<div class="page">
+  <section class="section fade-in">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Contexte et données</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="context-grid">
+      <div class="context-block">
+        <h4>Source : enquête SHARE</h4>
+        <p>
+          SHARE (Survey of Health, Ageing and Retirement in Europe)
+          est une étude longitudinale européenne sur la santé et le
+          vieillissement. L'échantillon France couvre 7 vagues de
+          2004 à 2017. Le panel est fortement non cylindré :
+          certains individus n'apparaissent qu'une seule fois,
+          d'autres jusqu'à six.
+        </p>
+      </div>
+      <div class="context-block accent">
+        <h4>Variable dépendante : EURO-D</h4>
+        <p>
+          Score de dépression de 0 à 12 construit à partir de
+          12 items dichotomiques. La variable binaire retient le
+          seuil clinique EURO-D ≥ 4 (33,6 % des observations).
+          Le score brut est utilisé pour les modèles de comptage.
+        </p>
+      </div>
+      <div class="context-block">
+        <h4>Traitement des valeurs manquantes</h4>
+        <p>
+          Les codes négatifs SHARE (-9 filtré, -12 refus, -13 non
+          posé, -15 indisponible, -10 SHARELIFE) sont recodés en NA.
+          La vague 3 (biographique) est exclue du panel.
+          Stratégie de listwise deletion : 18 002 obs. analytiques.
+        </p>
+      </div>
+      <div class="context-block">
+        <h4>Déterminants étudiés</h4>
+        <p>
+          Genre, âge (effet quadratique), éducation, statut marital,
+          taille du ménage, santé perçue (1–5), maladies chroniques,
+          limitations ADLA, activité physique, emploi/retraite,
+          situation financière, localisation urbaine.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ MODÈLES ════════════════════════════════════════════ -->
+  <section class="section fade-in" id="modeles">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Stratégie économétrique</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="models-timeline">
+
+      <div class="model-group">
+        <p class="model-group-title">Choix binaire transversaux</p>
+        <div class="model-cards">
+          <div class="model-card">
+            <span class="model-name">MPA</span>
+            <span class="model-note">MCO · HC3</span>
+          </div>
+          <div class="model-card selected">
+            <span class="model-name">Logit</span>
+            <span class="model-note">AME rapportés</span>
+          </div>
+          <div class="model-card selected">
+            <span class="model-name">Probit</span>
+            <span class="model-note">AME rapportés</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="model-group">
+        <p class="model-group-title">Modèles de comptage — Score EURO-D (0–12)</p>
+        <div class="model-cards">
+          <div class="model-card">
+            <span class="model-name">Poisson</span>
+            <span class="model-note">référence</span>
+          </div>
+          <div class="model-card">
+            <span class="model-name">Neg. Binomiale</span>
+            <span class="model-note">surdispersion</span>
+          </div>
+          <div class="model-card">
+            <span class="model-name">ZIP</span>
+            <span class="model-note">excès de zéros</span>
+          </div>
+          <div class="model-card selected">
+            <span class="model-name">ZINB ✓</span>
+            <span class="model-note">retenu — AIC min.</span>
+          </div>
+          <div class="model-card">
+            <span class="model-name">Hurdle-P</span>
+            <span class="model-note"></span>
+          </div>
+          <div class="model-card">
+            <span class="model-name">Hurdle-NB</span>
+            <span class="model-note"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="model-group">
+        <p class="model-group-title">Probit bivarié</p>
+        <div class="model-cards">
+          <div class="model-card selected">
+            <span class="model-name">Dépression × Santé perçue</span>
+            <span class="model-note">ρ̂ = 0,374*** — mvProbit</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="model-group">
+        <p class="model-group-title">Panel longitudinal (vagues 1–2–4–5–6–7)</p>
+        <div class="model-cards">
+          <div class="model-card">
+            <span class="model-name">Effets Aléatoires</span>
+            <span class="model-note">glmer · bobyqa</span>
+          </div>
+          <div class="model-card selected">
+            <span class="model-name">Effets Fixes ✓</span>
+            <span class="model-note">Hausman p &lt; 0,001</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ RÉSULTATS ═════════════════════════════════════════ -->
+  <section class="section fade-in">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Principaux résultats</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="results-grid">
+      <div class="result-card">
+        <p class="result-var">Genre</p>
+        <p class="result-effect">+15 <span class="unit">pp</span></p>
+        <p class="result-interp">
+          Être une femme accroît la probabilité de dépression de 15 points.
+          Effet le plus fort du modèle — stable dans toutes les spécifications.
+        </p>
+      </div>
+      <div class="result-card">
+        <p class="result-var">Santé perçue</p>
+        <p class="result-effect">+12 <span class="unit">pp / pt</span></p>
+        <p class="result-interp">
+          Chaque point de dégradation sur l'échelle 1–5 augmente la probabilité
+          de dépression de 12 pp. IRR dans le ZINB : ×1,26.
+        </p>
+      </div>
+      <div class="result-card amber">
+        <p class="result-var">Situation financière</p>
+        <p class="result-effect">−4,7 <span class="unit">pp / niv.</span></p>
+        <p class="result-interp">
+          Progresser d'un niveau sur l'échelle de capacité financière
+          réduit la probabilité de 4,7 pp. Coefficient EF panel : −0,440***.
+        </p>
+      </div>
+      <div class="result-card">
+        <p class="result-var">Maladies chroniques</p>
+        <p class="result-effect">+3,9 <span class="unit">pp</span></p>
+        <p class="result-interp">
+          Chaque maladie chronique supplémentaire accroît la probabilité
+          de 3,9 pp. Significatif dans toutes les familles de modèles.
+        </p>
+      </div>
+      <div class="result-card">
+        <p class="result-var">Statut marital</p>
+        <p class="result-effect">−4,5 <span class="unit">pp</span></p>
+        <p class="result-interp">
+          Être marié(e) réduit la probabilité de dépression — effet protecteur
+          confirmé en panel EF (−0,253**).
+        </p>
+      </div>
+      <div class="result-card rust">
+        <p class="result-var">Retraite (panel EF)</p>
+        <p class="result-effect">n.s.</p>
+        <p class="result-interp">
+          Significatif en coupe transversale (−3 pp) mais non significatif
+          en EF : l'effet capte des différences inter-individuelles, pas
+          un choc causal du passage à la retraite.
+        </p>
+      </div>
+    </div>
+
+    <!-- Tests -->
+    <table class="tests-table">
+      <thead>
+        <tr>
+          <th>Test</th>
+          <th>Statistique</th>
+          <th>Décision</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cameron-Trivedi (surdispersion)</td>
+          <td><code>z = 30,5 ; p &lt; 0,001</code></td>
+          <td class="result-ok">→ Poisson invalide</td>
+        </tr>
+        <tr>
+          <td>Vuong — ZIP vs Poisson</td>
+          <td><code>significatif</code></td>
+          <td class="result-ok">→ ZIP supérieur</td>
+        </tr>
+        <tr>
+          <td>Vuong — ZINB vs NB</td>
+          <td><code>significatif</code></td>
+          <td class="result-ok">→ ZINB retenu</td>
+        </tr>
+        <tr>
+          <td>Probit bivarié — ρ̂</td>
+          <td><code>0,374 ; t = 30,0 ; p &lt; 0,001</code></td>
+          <td class="result-ok">→ Corrélation résiduelle</td>
+        </tr>
+        <tr>
+          <td>Hausman (panel EF vs EA)</td>
+          <td><code>χ²(9) = 41,3 ; p &lt; 0,001</code></td>
+          <td class="result-ok">→ EF préféré</td>
+        </tr>
+        <tr>
+          <td>Breusch-Pagan (effets individuels)</td>
+          <td><code>p &lt; 0,001</code></td>
+          <td class="result-ok">→ Effets confirmés</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ══ OUTILS ═════════════════════════════════════════════ -->
+  <section class="section fade-in">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Outils et librairies</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="tools-grid">
+      <span class="tool-tag">R</span>
+      <span class="tool-tag">haven</span>
+      <span class="tool-tag">tidyverse</span>
+      <span class="tool-tag">plm</span>
+      <span class="tool-tag">lmtest</span>
+      <span class="tool-tag">sandwich (HC3)</span>
+      <span class="tool-tag">MASS (glm.nb)</span>
+      <span class="tool-tag">pscl (zeroinfl · hurdle)</span>
+      <span class="tool-tag">mvProbit</span>
+      <span class="tool-tag">lme4 (glmer)</span>
+      <span class="tool-tag">survival (clogit)</span>
+      <span class="tool-tag">margins (AME)</span>
+      <span class="tool-tag">pROC (AUC)</span>
+      <span class="tool-tag">AER (dispersiontest)</span>
+      <span class="tool-tag">stargazer</span>
+      <span class="tool-tag">kableExtra</span>
+      <span class="tool-tag">Quarto</span>
+      <span class="tool-tag">LaTeX</span>
+      <span class="tool-tag">Stata (.dta)</span>
+    </div>
+  </section>
+</div>
+
+<!-- ══ RAPPORT PDF ════════════════════════════════════════════ -->
+<section class="pdf-section" id="rapport">
+  <div class="page">
+    <div class="section-header">
+      <span class="section-num" style="color:var(--green-lt)">05</span>
+      <h2 class="section-title">Rapport complet</h2>
+      <div class="section-line" style="background:rgba(255,255,255,.15)"></div>
+    </div>
+
+    <div class="pdf-wrapper">
+      <div class="pdf-toolbar">
+        <span class="pdf-toolbar-title">depression_easySHARE.pdf</span>
+        <a href="depression_easySHARE.pdf" download>⬇ Télécharger le PDF</a>
+      </div>
+      <iframe
+        src="depression_easySHARE.pdf"
+        title="Rapport Déterminants dépression easySHARE">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BACK BAR ═══════════════════════════════════════════════ -->
+<div class="back-bar">
+  <div class="page">
+    <a href="../projects.html" class="back-link">← Retour au portfolio</a>
+    <span class="back-copy">Emmanuel Paguiel Bouendo · M2 MÉcEn · 2025-2026</span>
+  </div>
+</div>
+
+<script>
+  // Fade-in on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
